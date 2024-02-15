@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 
 	MAB_CORE_WARN("HELLO WORD core logger");
 
-	int a = 5;
+	int a = 10;
 	MAB_INFO("HELLO WORD app logger var={0}", a);
 
 	auto app = MABEngine::CreateApplication(argc, argv);
