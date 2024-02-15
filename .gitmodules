@@ -1,0 +1,3 @@
+[submodule "MABEngine/vendor/spdlog"]
+	path = MABEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog

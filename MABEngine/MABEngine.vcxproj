@@ -57,6 +57,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MABEngine\vendor\spdlog\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -71,6 +73,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MABEngine\vendor\spdlog\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,12 +84,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\MABEngine\Logging\LogSetting.h" />
+    <ClInclude Include="src\MABEngine\Settings.h" />
+    <ClInclude Include="src\MABEngine\Logging\Log.h" />
     <ClInclude Include="src\MABEngine.h" />
     <ClInclude Include="src\MABEngine\Application.h" />
     <ClInclude Include="src\MABEngine\Core.h" />
     <ClInclude Include="src\MABEngine\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp" />
+    <ClCompile Include="src\MABEngine\Settings.cpp" />
+    <ClCompile Include="src\MABEngine\Logging\Log.cpp" />
     <ClCompile Include="src\MABEngine\Application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
