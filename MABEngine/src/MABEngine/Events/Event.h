@@ -2,8 +2,6 @@
 
 #include "MABEngine/Core.h"
 
-#include <string>
-#include <functional>
 
 namespace MABEngine {
 

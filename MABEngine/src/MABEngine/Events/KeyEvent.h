@@ -2,8 +2,6 @@
 
 #include "MABEngine/Events/Event.h"
 
-#include <sstream>
-
 
 namespace MABEngine {
 
