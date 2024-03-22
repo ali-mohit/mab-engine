@@ -4,6 +4,9 @@
     <Filter Include="MABEngine">
       <UniqueIdentifier>{EB01BA79-576C-6EF0-A0AA-1F960C544C45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MABEngine\Events">
+      <UniqueIdentifier>{6FF732F2-5BF0-5144-8422-37C9707A3150}</UniqueIdentifier>
+    </Filter>
     <Filter Include="MABEngine\Logging">
       <UniqueIdentifier>{819D3543-EDB3-33D9-362B-BFFAA2800461}</UniqueIdentifier>
     </Filter>
@@ -19,6 +22,18 @@
     <ClInclude Include="src\MABEngine\EntryPoint.h">
       <Filter>MABEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Events\ApplicationEvent.h">
+      <Filter>MABEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Events\Event.h">
+      <Filter>MABEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Events\KeyEvent.h">
+      <Filter>MABEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Events\MouseEvent.h">
+      <Filter>MABEngine\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Logging\Log.h">
       <Filter>MABEngine\Logging</Filter>
     </ClInclude>
@@ -28,6 +43,7 @@
     <ClInclude Include="src\MABEngine\Settings.h">
       <Filter>MABEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\mabengine_pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp">
@@ -42,5 +58,6 @@
     <ClCompile Include="src\MABEngine\Settings.cpp">
       <Filter>MABEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\mabengine_pch.cpp" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
-#include <format>
+#include "mabengine_pch.h"
 
 #include "LogSetting.h"
+
+#include <format>
 
 namespace MABEngine {
 	namespace Logging {

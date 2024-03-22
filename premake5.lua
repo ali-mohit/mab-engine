@@ -18,13 +18,17 @@ project "MABEngine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}" )
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}" )
 
+	pchheader "mabengine_pch.h"
+	pchsource "MABEngine/src/mabengine_pch.cpp"
+
 	files{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs {
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
 	}
 
 	filter "system:windows"
@@ -69,7 +73,8 @@ project "SandBox"
 
 	includedirs {
 		"MABEngine/vendor/spdlog/include",
-		"MABEngine/src"
+		"MABEngine/src",
+		"%{prj.name}/src",
 	}
 
 	links {

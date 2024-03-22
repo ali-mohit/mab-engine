@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "MABEngine/Events/Event.h"
 
 namespace MABEngine {
 	class MABENGINE_API Application
@@ -8,7 +9,7 @@ namespace MABEngine {
 	public:
 		Application();
 		virtual ~Application();
-
+		
 		void Run();
 	};
 
