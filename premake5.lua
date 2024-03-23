@@ -10,6 +10,12 @@ workspace "MABEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder {solution directory}
+IncludeDir = {}
+IncludeDir["GLFW"] = "MABEngine/vendor/GLFW/GLFW/include"
+
+include "MABEngine/vendor/GLFW/premake5-glfw.lua"
+
 project "MABEngine"
 	location "MABEngine"
 	kind "SharedLib"
@@ -29,6 +35,12 @@ project "MABEngine"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links {
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -39,6 +51,7 @@ project "MABEngine"
 		defines {
 			"MABENGINE_PLATFORM_WINDOWS",
 			"MABENGINE_BUILD_DLL",
+			-- "MAB_ENABLE_ASSERTS",
 		}
 
 		postbuildcommands {

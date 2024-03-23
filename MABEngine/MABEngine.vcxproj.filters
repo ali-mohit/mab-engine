@@ -10,6 +10,12 @@
     <Filter Include="MABEngine\Logging">
       <UniqueIdentifier>{819D3543-EDB3-33D9-362B-BFFAA2800461}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MABEngine.h" />
@@ -43,6 +49,12 @@
     <ClInclude Include="src\MABEngine\Settings.h">
       <Filter>MABEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Window.h">
+      <Filter>MABEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\mabengine_pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +69,9 @@
     </ClCompile>
     <ClCompile Include="src\MABEngine\Settings.cpp">
       <Filter>MABEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\mabengine_pch.cpp" />
   </ItemGroup>
