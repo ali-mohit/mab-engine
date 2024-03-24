@@ -8,6 +8,8 @@ workspace "MABEngine"
 		"Dist"
 	}
 
+	startproject "SandBox"
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder {solution directory}
@@ -15,6 +17,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "MABEngine/vendor/GLFW/GLFW/include"
 
 include "MABEngine/vendor/GLFW/premake5-glfw.lua"
+
 
 project "MABEngine"
 	location "MABEngine"

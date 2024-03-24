@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "MABEngine/Events/Event.h"
+#include "MABEngine/Events/ApplicationEvent.h"
 #include "Window.h"
 
 namespace MABEngine {
@@ -12,6 +13,10 @@ namespace MABEngine {
 		virtual ~Application();
 		
 		void Run();
+
+		void OnEvent(Events::Event& e);
+	private:
+		bool OnWindowClose(Events::WindowCloseEvent& e);
 	private:
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;

@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef MABENGINE_PLATFORM_WINDOWS;
+#ifdef MABENGINE_PLATFORM_WINDOWS
 	#ifdef MABENGINE_BUILD_DLL
 		#define MABENGINE_API __declspec(dllexport)
 	#else

@@ -4,10 +4,19 @@
 #include "MABEngine/Core.h"
 #include "MABEngine/Logging/Log.h"
 
+#include "MABEngine/Events/Event.h"
+#include "MABEngine/Events/ApplicationEvent.h"
+#include "MABEngine/Events/KeyEvent.h"
+#include "MABEngine/Events/MouseEvent.h"
+
 
 namespace MABEngine {
 
 	static bool s_GLFWInitialized = false;
+
+	static void GLFWErrorCallBack(int error, const char* description) {
+		MAB_CORE_ERROR("GLFW Error CallBack: (code: {0} - text: {1})", error, description);
+	}
 
 	Window* Window::Create(const WindowProps& props) {
 		return new WindowsGlfwWindow(props);
@@ -32,7 +41,7 @@ namespace MABEngine {
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			MAB_CORE_ASSERT(success, "Could not initialize GLFW");
-
+			glfwSetErrorCallback(GLFWErrorCallBack);
 			s_GLFWInitialized = true;
 		}
 
@@ -40,6 +49,121 @@ namespace MABEngine {
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
+
+		//Set GLFW callbacks
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) 
+			{
+				WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
+				data.Width = width;
+				data.Height = height;
+
+				Events::WindowResizeEvent event(width, height);
+				data.EventCallBack(event);
+
+			}
+		);
+
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) 
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				Events::WindowCloseEvent event;
+				data.EventCallBack(event);
+			}
+		);
+
+		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				if (focused == GLFW_TRUE) {
+					Events::WindowFocusEvent event(focused);
+					data.EventCallBack(event);
+				}
+				else 
+				{
+					Events::WindowLossFocusEvent event(focused);
+					data.EventCallBack(event);
+
+				}
+			}
+		);
+
+		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xpos, int ypos) 
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				Events::WindowMovedEvent e(xpos, ypos);
+				data.EventCallBack(e);
+			}
+		);
+
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scanCode, int action, int modes) 
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						Events::KeyPressedEvent e(key, 0);
+						data.EventCallBack(e);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						Events::KeyReleasedEvent e(key);
+						data.EventCallBack(e);
+						break;
+					}
+					case GLFW_REPEAT:
+					{
+						Events::KeyPressedEvent e(key, 1);
+						data.EventCallBack(e);
+						break;
+					}
+				}
+			}
+		);
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						Events::MouseButtonPressedEvent e(button);
+						data.EventCallBack(e);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						Events::MouseButtonReleasedEvent e(button);
+						data.EventCallBack(e);
+						break;
+					}
+				}
+			}
+		);
+
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				Events::MouseScrolledEvent event(xOffset, yOffset);
+				data.EventCallBack(event);
+			}
+		);
+
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) 
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				Events::MouseMovedEvent event((float)xPos, (float)yPos);
+				data.EventCallBack(event);
+			}
+		);
+
 	}
 
 	void WindowsGlfwWindow::Shutdown() {

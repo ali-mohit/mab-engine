@@ -49,12 +49,12 @@ namespace MABEngine {
 			template<typename T>
 			using EventFn = std::function<bool(T&)>;
 		public:
-			EventDispatcher(Event& event)
-				: m_event(event){}
+			EventDispatcher(Event& e)
+				: m_Event(e){}
 
 			template<typename T>
 			bool Dispatch(EventFn<T> func) {
-				if (m_event.GetEventType() == T::GetStaticType()) {
+				if (m_Event.GetEventType() == T::GetStaticType()) {
 					m_Event.m_Handled = func(*(T*)&m_Event);
 					return true;
 				}
@@ -63,7 +63,7 @@ namespace MABEngine {
 			}
 
 		private:
-			Event& m_event;
+			Event& m_Event;
 		};
 
 		inline std::ostream& operator<<(std::ostream& os, const Event& e)
