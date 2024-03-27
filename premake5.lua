@@ -64,14 +64,17 @@ project "MABEngine"
 	
 	filter "configurations:Debug"
 		defines "MABENGINE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "MABENGINE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "MABENGINE_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "SandBox"
@@ -109,12 +112,15 @@ project "SandBox"
 	
 	filter "configurations:Debug"
 		defines "MABENGINE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "MABENGINE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "MABENGINE_DIST"
+		buildoptions "/MD"
 		optimize "On"

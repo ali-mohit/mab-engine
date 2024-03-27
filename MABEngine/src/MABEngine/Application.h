@@ -1,9 +1,12 @@
 #pragma once
 
 #include "Core.h"
+
+#include "Window.h"
+#include "MABEngine/Layers/LayerStack.h"
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Events/ApplicationEvent.h"
-#include "Window.h"
+
 
 namespace MABEngine {
 	class MABENGINE_API Application
@@ -15,11 +18,14 @@ namespace MABEngine {
 		void Run();
 
 		void OnEvent(Events::Event& e);
+		void PushLayer(Layers::Layer* layer);
+		void PushOverLayer(Layers::Layer* layer);
 	private:
 		bool OnWindowClose(Events::WindowCloseEvent& e);
 	private:
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		Layers::LayerStack m_LayerStack;
 	};
 
 	// To be defined in Projects that want to use MABEngine

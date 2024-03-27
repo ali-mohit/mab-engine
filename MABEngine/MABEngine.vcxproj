@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -110,6 +111,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -137,6 +139,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -160,6 +163,8 @@
     <ClInclude Include="src\MABEngine\Events\Event.h" />
     <ClInclude Include="src\MABEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\MABEngine\Events\MouseEvent.h" />
+    <ClInclude Include="src\MABEngine\Layers\Layer.h" />
+    <ClInclude Include="src\MABEngine\Layers\LayerStack.h" />
     <ClInclude Include="src\MABEngine\Logging\Log.h" />
     <ClInclude Include="src\MABEngine\Logging\LogSetting.h" />
     <ClInclude Include="src\MABEngine\Settings.h" />
@@ -169,6 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp" />
+    <ClCompile Include="src\MABEngine\Layers\Layer.cpp" />
+    <ClCompile Include="src\MABEngine\Layers\LayerStack.cpp" />
     <ClCompile Include="src\MABEngine\Logging\Log.cpp" />
     <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp" />
     <ClCompile Include="src\MABEngine\Settings.cpp" />
