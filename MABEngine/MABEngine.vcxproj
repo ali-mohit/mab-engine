@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;MABENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -104,7 +104,7 @@
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;MABENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -132,7 +132,7 @@
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;MABENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -163,22 +163,26 @@
     <ClInclude Include="src\MABEngine\Events\Event.h" />
     <ClInclude Include="src\MABEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\MABEngine\Events\MouseEvent.h" />
+    <ClInclude Include="src\MABEngine\Layers\ImGuiLayer.h" />
     <ClInclude Include="src\MABEngine\Layers\Layer.h" />
     <ClInclude Include="src\MABEngine\Layers\LayerStack.h" />
     <ClInclude Include="src\MABEngine\Logging\Log.h" />
     <ClInclude Include="src\MABEngine\Logging\LogSetting.h" />
     <ClInclude Include="src\MABEngine\Settings.h" />
     <ClInclude Include="src\MABEngine\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h" />
     <ClInclude Include="src\mabengine_pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp" />
+    <ClCompile Include="src\MABEngine\Layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\MABEngine\Layers\Layer.cpp" />
     <ClCompile Include="src\MABEngine\Layers\LayerStack.cpp" />
     <ClCompile Include="src\MABEngine\Logging\Log.cpp" />
     <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp" />
     <ClCompile Include="src\MABEngine\Settings.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp" />
     <ClCompile Include="src\mabengine_pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -190,6 +194,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\Glad\Glad.vcxproj">
       <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\ImGUI\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

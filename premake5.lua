@@ -16,9 +16,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "MABEngine/vendor/GLFW/GLFW/include"
 IncludeDir["Glad"] = "MABEngine/vendor/Glad/include"
+IncludeDir["ImGui"] = "MABEngine/vendor/ImGUI/imgui"
+
 
 include "MABEngine/vendor/GLFW/premake5-glfw.lua"
 include "MABEngine/vendor/Glad/premake5-glad.lua"
+include "MABEngine/vendor/ImGUI/premake5-imgui.lua"
 
 
 project "MABEngine"
@@ -41,12 +44,14 @@ project "MABEngine"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links {
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
