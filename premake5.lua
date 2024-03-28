@@ -15,8 +15,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder {solution directory}
 IncludeDir = {}
 IncludeDir["GLFW"] = "MABEngine/vendor/GLFW/GLFW/include"
+IncludeDir["Glad"] = "MABEngine/vendor/Glad/include"
 
 include "MABEngine/vendor/GLFW/premake5-glfw.lua"
+include "MABEngine/vendor/Glad/premake5-glad.lua"
 
 
 project "MABEngine"
@@ -38,11 +40,13 @@ project "MABEngine"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links {
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -54,6 +58,7 @@ project "MABEngine"
 		defines {
 			"MABENGINE_PLATFORM_WINDOWS",
 			"MABENGINE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE",
 			-- "MAB_ENABLE_ASSERTS",
 		}
 

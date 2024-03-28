@@ -2,8 +2,7 @@
 
 #include "MABEngine/Window.h"
 
-#include "GLFW/glfw3.h"
-
+struct GLFWwindow;
 
 namespace MABEngine {
 	class MABENGINE_API WindowsGlfwWindow : public Window
