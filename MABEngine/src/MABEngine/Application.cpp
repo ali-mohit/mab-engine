@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 
 #include "MABEngine/Logging/Log.h"
+#include "MABEngine/Inputs/Input.h"
 
 namespace MABEngine {
 
@@ -31,6 +32,9 @@ namespace MABEngine {
 
 			for (Layers::Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			auto [x, y] = Inputs::Input::GetMousePos();
+			MAB_CORE_TRACE("{0}, {1}", x, y);
 
 			m_Window->OnUpdate();
 		}

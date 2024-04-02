@@ -7,6 +7,9 @@
     <Filter Include="MABEngine\Events">
       <UniqueIdentifier>{6FF732F2-5BF0-5144-8422-37C9707A3150}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MABEngine\Inputs">
+      <UniqueIdentifier>{DDFBFCFA-C9F4-1B4D-F226-01D2DE7EFB58}</UniqueIdentifier>
+    </Filter>
     <Filter Include="MABEngine\Layers">
       <UniqueIdentifier>{4AE21501-36DB-3453-5F0D-1AD84B65145F}</UniqueIdentifier>
     </Filter>
@@ -46,6 +49,21 @@
     <ClInclude Include="src\MABEngine\Events\MouseEvent.h">
       <Filter>MABEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Inputs\Input.h">
+      <Filter>MABEngine\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Inputs\KeyboardCodes.h">
+      <Filter>MABEngine\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Inputs\KeyboardCodesDefine.h">
+      <Filter>MABEngine\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Inputs\MouseButtonCodes.h">
+      <Filter>MABEngine\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Inputs\MouseButtonCodesDefine.h">
+      <Filter>MABEngine\Inputs</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Layers\ImGuiLayer.h">
       <Filter>MABEngine\Layers</Filter>
     </ClInclude>
@@ -69,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h">
       <Filter>Platform\Windows</Filter>
@@ -99,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp">
       <Filter>Platform\Windows</Filter>

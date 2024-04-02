@@ -7,7 +7,6 @@
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Events/ApplicationEvent.h"
 
-
 namespace MABEngine {
 	class MABENGINE_API Application
 	{
