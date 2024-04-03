@@ -27,7 +27,6 @@ public:
 	}
 };
 
-
 MABEngine::Application* MABEngine::CreateApplication(int argc, char** argv) {
 	return new SandBoxApp();
 }

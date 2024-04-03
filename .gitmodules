@@ -7,3 +7,6 @@
 [submodule "MABEngine/vendor/ImGUI/imgui"]
 	path = MABEngine/vendor/ImGUI/imgui
 	url = https://github.com/ocornut/imgui
+[submodule "MABEngine/vendor/glm"]
+	path = MABEngine/vendor/glm
+	url = https://github.com/g-truc/glm

@@ -17,6 +17,8 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "MABEngine/vendor/GLFW/GLFW/include"
 IncludeDir["Glad"] = "MABEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "MABEngine/vendor/ImGUI/imgui"
+IncludeDir["glm"] = "MABEngine/vendor/glm"
+
 
 
 include "MABEngine/vendor/GLFW/premake5-glfw.lua"
@@ -38,6 +40,11 @@ project "MABEngine"
 	files{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+
+		"%{prj.name}/vendor/glm/glm/**.h",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		
 	}
 
 	includedirs {
@@ -45,7 +52,8 @@ project "MABEngine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}",
 	}
 
 	links {
@@ -104,6 +112,7 @@ project "SandBox"
 		"MABEngine/vendor/spdlog/include",
 		"MABEngine/src",
 		"%{prj.name}/src",
+		"%{IncludeDir.glm}",
 	}
 
 	links {
