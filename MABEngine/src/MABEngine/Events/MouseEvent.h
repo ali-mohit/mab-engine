@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MABEngine/Events/Event.h"
+#include "MABEngine/Inputs/MouseButtonCodes.h"
 
 namespace MABEngine {
 	namespace Events {
@@ -51,24 +52,24 @@ namespace MABEngine {
 
 		class MABENGINE_API MouseButtonEvent : public Event {
 		public:
-			inline int GetMouseButton() const { return m_Button; }
+			inline Inputs::MABMouseButton GetMouseButton() const { return m_Button; }
 
 			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 		protected:
-			MouseButtonEvent(int button):
+			MouseButtonEvent(Inputs::MABMouseButton button):
 				m_Button(button) {}
 
-			int m_Button;
+			Inputs::MABMouseButton m_Button;
 		};
 
 		class MABENGINE_API MouseButtonPressedEvent : public MouseButtonEvent {
 		public:
-			MouseButtonPressedEvent(int button)
+			MouseButtonPressedEvent(Inputs::MABMouseButton button)
 				: MouseButtonEvent(button) {}
 
 			std::string ToString() const override {
 				std::stringstream ss;
-				ss << "MouseButtonPressedEvent: " << m_Button;
+				ss << "MouseButtonPressedEvent: " << static_cast<int>(m_Button);
 				return ss.str();
 			}
 
@@ -77,13 +78,13 @@ namespace MABEngine {
 
 		class MABENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent {
 		public:
-			MouseButtonReleasedEvent(int button)
+			MouseButtonReleasedEvent(Inputs::MABMouseButton button)
 				: MouseButtonEvent(button) {}
 			
 			std::string ToString() const override {
 				std::stringstream ss;
 
-				ss << "MouseButtonReleasedEvent: " << m_Button;
+				ss << "MouseButtonReleasedEvent: " << static_cast<int>(m_Button);
 				return ss.str();
 			}
 

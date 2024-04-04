@@ -8,6 +8,8 @@
 #include "MABEngine/Events/ApplicationEvent.h"
 #include "MABEngine/Events/KeyEvent.h"
 #include "MABEngine/Events/MouseEvent.h"
+#include "MABEngine/Inputs/KeyboardCodes.h"
+#include "MABEngine/Inputs/MouseButtonCodes.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -111,19 +113,19 @@ namespace MABEngine {
 				{
 					case GLFW_PRESS:
 					{
-						Events::KeyPressedEvent e(key, 0);
+						Events::KeyPressedEvent e(static_cast<Inputs::MABKeyboardCode>(key), 0);
 						data.EventCallBack(e);
 						break;
 					}
 					case GLFW_RELEASE:
 					{
-						Events::KeyReleasedEvent e(key);
+						Events::KeyReleasedEvent e(static_cast<Inputs::MABKeyboardCode>(key));
 						data.EventCallBack(e);
 						break;
 					}
 					case GLFW_REPEAT:
 					{
-						Events::KeyPressedEvent e(key, 1);
+						Events::KeyPressedEvent e(static_cast<Inputs::MABKeyboardCode>(key), 1);
 						data.EventCallBack(e);
 						break;
 					}
@@ -138,13 +140,13 @@ namespace MABEngine {
 				{
 					case GLFW_PRESS:
 					{
-						Events::MouseButtonPressedEvent e(button);
+						Events::MouseButtonPressedEvent e(static_cast<Inputs::MABMouseButton>(button));
 						data.EventCallBack(e);
 						break;
 					}
 					case GLFW_RELEASE:
 					{
-						Events::MouseButtonReleasedEvent e(button);
+						Events::MouseButtonReleasedEvent e(static_cast<Inputs::MABMouseButton>(button));
 						data.EventCallBack(e);
 						break;
 					}
