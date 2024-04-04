@@ -14,8 +14,8 @@ namespace MABEngine {
 
 			virtual bool IsMouseButtonPressedImp(MABMouseButton buttonCode) override;
 			virtual std::pair<double, double> GetMousePosImp() override;
-			virtual float GetMousePosXImp() override;
-			virtual float GetMousePosYImp() override;
+			virtual double GetMousePosXImp() override;
+			virtual double GetMousePosYImp() override;
 		};
 	}
 }

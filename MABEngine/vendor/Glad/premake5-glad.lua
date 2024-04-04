@@ -24,7 +24,7 @@ project "Glad"
 
     filter "configurations:Debug"
 		runtime "Debug"
-        buildoptions "/MT"
+        buildoptions "/MTd"
 		symbols "on"
 
 	filter "configurations:Release"

@@ -44,13 +44,13 @@ namespace MABEngine {
 			return { xPos, yPos };
 		}
 
-		float WindowsGlfwInput::GetMousePosXImp()
+		double WindowsGlfwInput::GetMousePosXImp()
 		{
 			auto[x,y] = GetMousePosImp();
 			return x;
 		}
 
-		float WindowsGlfwInput::GetMousePosYImp()
+		double WindowsGlfwInput::GetMousePosYImp()
 		{
 			auto[x, y] = GetMousePosImp();
 			return y;

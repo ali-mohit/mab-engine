@@ -29,11 +29,11 @@ namespace MABEngine {
 
 		class MABENGINE_API MouseScrolledEvent : public Event {
 		public:
-			MouseScrolledEvent(float xOffset, float yOffset) 
+			MouseScrolledEvent(double xOffset, double yOffset) 
 				: m_XOffset(xOffset), m_YOffset(yOffset) {}
 
-			inline float GetXOffSet() const { return m_XOffset; }
-			inline float GetYOffSet() const { return m_YOffset; }
+			inline double GetXOffSet() const { return m_XOffset; }
+			inline double GetYOffSet() const { return m_YOffset; }
 
 			std::string ToString() const override {
 				std::stringstream ss;
@@ -45,8 +45,8 @@ namespace MABEngine {
 			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 		private: 
-			float m_XOffset;
-			float m_YOffset;
+			double m_XOffset;
+			double m_YOffset;
 		};
 
 
