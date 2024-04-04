@@ -93,8 +93,8 @@
     <ClInclude Include="src\MABEngine\Inputs\MouseButtonCodesDefine.h">
       <Filter>src\MABEngine\Inputs</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Layers\ImGuiLayer.h">
-      <Filter>src\MABEngine\Layers</Filter>
+    <ClInclude Include="src\MABEngine\Layers\ImGui\ImGuiLayer.h">
+      <Filter>src\MABEngine\Layers\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Layers\Layer.h">
       <Filter>src\MABEngine\Layers</Filter>
@@ -1409,8 +1409,8 @@
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp">
       <Filter>src\MABEngine\Layers\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Layers\ImGuiLayer.cpp">
-      <Filter>src\MABEngine\Layers</Filter>
+    <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiLayer.cpp">
+      <Filter>src\MABEngine\Layers\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Layers\Layer.cpp">
       <Filter>src\MABEngine\Layers</Filter>

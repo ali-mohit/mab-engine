@@ -28,8 +28,10 @@ include "MABEngine/vendor/ImGUI/premake5-imgui.lua"
 
 project "MABEngine"
 	location "MABEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}" )
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}" )
@@ -64,42 +66,38 @@ project "MABEngine"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines {
 			"MABENGINE_PLATFORM_WINDOWS",
-			"MABENGINE_BUILD_DLL",
+			--"INSIDE_MABENGINE_DLL",
+			--"MABENGINE_INCLUDE_AS_DLL",
 			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS",
 			-- "MAB_ENABLE_ASSERTS",
 		}
-
-		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
 	
 	filter "configurations:Debug"
 		defines "MABENGINE_DEBUG"
 		buildoptions "/MDd"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "MABENGINE_RELEASE"
 		buildoptions "/MD"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "MABENGINE_DIST"
 		buildoptions "/MD"
-		optimize "On"
+		optimize "on"
 
 project "SandBox"
 	location "SandBox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}" )
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}" )
@@ -121,26 +119,25 @@ project "SandBox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines {
-			"MABENGINE_PLATFORM_WINDOWS"
+			"MABENGINE_PLATFORM_WINDOWS",
+			--"MABENGINE_INCLUDE_AS_DLL",
 		}
 
 	
 	filter "configurations:Debug"
 		defines "MABENGINE_DEBUG"
 		buildoptions "/MDd"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "MABENGINE_RELEASE"
 		buildoptions "/MD"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "MABENGINE_DIST"
 		buildoptions "/MD"
-		optimize "On"
+		optimize "on"

@@ -1,10 +1,15 @@
 #pragma once
 
 #ifdef MABENGINE_PLATFORM_WINDOWS
-	#ifdef MABENGINE_BUILD_DLL
-		#define MABENGINE_API __declspec(dllexport)
+	#ifdef MABENGINE_INCLUDE_AS_DLL
+		//If we want to include mabengine as DLL we have to define MABENGINE_INCLUDE_AS_DLL precompile variable
+		#ifdef INSIDE_MABENGINE_DLL
+			#define MABENGINE_API __declspec(dllexport)
+		#else
+			#define MABENGINE_API __declspec(dllimport)
+		#endif
 	#else
-		#define MABENGINE_API __declspec(dllimport)
+		#define MABENGINE_API
 	#endif
 #else
 	#error your platform is not defined
