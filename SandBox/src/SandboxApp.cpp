@@ -20,7 +20,6 @@ class SandBoxApp : public MABEngine::Application {
 public:
 	SandBoxApp() {
 		PushLayer(new ExampleLayer());
-		PushOverLayer(new MABEngine::Layers::ImGuiLayer());
 	}
 	~SandBoxApp() {
 

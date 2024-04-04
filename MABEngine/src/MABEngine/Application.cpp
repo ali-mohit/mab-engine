@@ -5,6 +5,7 @@
 
 #include "MABEngine/Logging/Log.h"
 #include "MABEngine/Inputs/Input.h"
+#include "MABEngine/Layers/ImGui/ImGuiLayer.h"
 
 namespace MABEngine {
 
@@ -19,6 +20,9 @@ namespace MABEngine {
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
+
+		m_ImGuiLayer = new Layers::ImGuiLayer("Debug ImGui");
+		PushOverLayer(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -32,6 +36,11 @@ namespace MABEngine {
 
 			for (Layers::Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			m_ImGuiLayer->Begin();
+			for (Layers::Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
 			auto [x, y] = Inputs::Input::GetMousePos();
 			MAB_CORE_TRACE("{0}, {1}", x, y);

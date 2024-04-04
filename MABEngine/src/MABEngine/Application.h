@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include "MABEngine/Layers/LayerStack.h"
+#include "MABEngine/Layers/ImGui/ImGuiLayer.h"
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Events/ApplicationEvent.h"
 
@@ -26,6 +27,8 @@ namespace MABEngine {
 		bool OnWindowClose(Events::WindowCloseEvent& e);
 	private:
 		std::unique_ptr<Window> m_Window;
+		Layers::ImGuiLayer* m_ImGuiLayer;
+
 		bool m_Running = true;
 		Layers::LayerStack m_LayerStack;
 	private:

@@ -79,7 +79,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;MABENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;MABENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -103,7 +103,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;MABENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;MABENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -131,7 +131,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;MABENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;MABENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -168,14 +168,13 @@
     <ClInclude Include="src\MABEngine\Inputs\KeyboardCodesDefine.h" />
     <ClInclude Include="src\MABEngine\Inputs\MouseButtonCodes.h" />
     <ClInclude Include="src\MABEngine\Inputs\MouseButtonCodesDefine.h" />
-    <ClInclude Include="src\MABEngine\Layers\ImGuiLayer.h" />
+    <ClInclude Include="src\MABEngine\Layers\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\MABEngine\Layers\Layer.h" />
     <ClInclude Include="src\MABEngine\Layers\LayerStack.h" />
     <ClInclude Include="src\MABEngine\Logging\Log.h" />
     <ClInclude Include="src\MABEngine\Logging\LogSetting.h" />
     <ClInclude Include="src\MABEngine\Settings.h" />
     <ClInclude Include="src\MABEngine\Window.h" />
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h" />
     <ClInclude Include="src\mabengine_pch.h" />
@@ -608,13 +607,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp" />
-    <ClCompile Include="src\MABEngine\Layers\ImGuiLayer.cpp" />
+    <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp" />
+    <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\MABEngine\Layers\Layer.cpp" />
     <ClCompile Include="src\MABEngine\Layers\LayerStack.cpp" />
     <ClCompile Include="src\MABEngine\Logging\Log.cpp" />
     <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp" />
     <ClCompile Include="src\MABEngine\Settings.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp" />
     <ClCompile Include="src\mabengine_pch.cpp">
