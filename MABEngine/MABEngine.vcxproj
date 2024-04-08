@@ -164,8 +164,10 @@
     <ClInclude Include="src\MABEngine\Layers\LayerStack.h" />
     <ClInclude Include="src\MABEngine\Logging\Log.h" />
     <ClInclude Include="src\MABEngine\Logging\LogSetting.h" />
+    <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h" />
     <ClInclude Include="src\MABEngine\Settings.h" />
     <ClInclude Include="src\MABEngine\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h" />
     <ClInclude Include="src\mabengine_pch.h" />
@@ -605,6 +607,7 @@
     <ClCompile Include="src\MABEngine\Logging\Log.cpp" />
     <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp" />
     <ClCompile Include="src\MABEngine\Settings.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp" />
     <ClCompile Include="src\mabengine_pch.cpp">

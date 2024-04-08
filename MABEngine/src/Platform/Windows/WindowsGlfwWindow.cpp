@@ -1,6 +1,7 @@
 #include "mabengine_pch.h"
 
 #include "WindowsGlfwWindow.h"
+#include "Platform/OpenGL/OpenGLGraphicContext.h"
 
 #include "MABEngine/Core.h"
 #include "MABEngine/Logging/Log.h"
@@ -12,9 +13,7 @@
 #include "MABEngine/Inputs/KeyboardCodes.h"
 #include "MABEngine/Inputs/MouseButtonCodes.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
 
 
 namespace MABEngine {
@@ -53,10 +52,9 @@ namespace MABEngine {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		MAB_CORE_ASSERT(status, "Failed to initialize GLAD (OpenGL)!")
+		
+		m_GraphicContext = new Renderer::OpenGLGraphicContext(m_Window);
+		m_GraphicContext->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -183,7 +181,7 @@ namespace MABEngine {
 
 	void WindowsGlfwWindow::OnUpdate() {
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_GraphicContext->SwapBuffers();
 	}
 
 	void WindowsGlfwWindow::SetVSync(bool enabled) {

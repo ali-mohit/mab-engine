@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MABEngine/Window.h"
+#include "MABEngine/Renderer/GraphicContext.h"
 
 struct GLFWwindow;
 
@@ -28,6 +29,8 @@ namespace MABEngine {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		Renderer::GraphicContext* m_GraphicContext;
+
 		struct WindowData {
 			std::string Title;
 			unsigned int Width;

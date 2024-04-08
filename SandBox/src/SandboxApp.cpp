@@ -8,11 +8,11 @@ public:
 	{}
 
 	void OnUpdate() override {
-		MAB_INFO("EXAMLE LAYER::Update()");
+		
 	}
 
 	void OnEvent(MABEngine::Events::Event& event) override {
-		MAB_TRACE("{0}", event);
+		
 	}
 };
 
