@@ -146,6 +146,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer.h" />
     <ClInclude Include="src\MABEngine.h" />
     <ClInclude Include="src\MABEngine\Application.h" />
     <ClInclude Include="src\MABEngine\Core.h" />
@@ -165,9 +166,14 @@
     <ClInclude Include="src\MABEngine\Logging\Log.h" />
     <ClInclude Include="src\MABEngine\Logging\LogSetting.h" />
     <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h" />
+    <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h" />
+    <ClInclude Include="src\MABEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h" />
     <ClInclude Include="src\MABEngine\Settings.h" />
     <ClInclude Include="src\MABEngine\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h" />
     <ClInclude Include="src\mabengine_pch.h" />
@@ -599,6 +605,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MABEngine\Renderer\EngineRenderer.cpp" />
     <ClCompile Include="src\MABEngine\Application.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiLayer.cpp" />
@@ -606,8 +613,13 @@
     <ClCompile Include="src\MABEngine\Layers\LayerStack.cpp" />
     <ClCompile Include="src\MABEngine\Logging\Log.cpp" />
     <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp" />
     <ClCompile Include="src\MABEngine\Settings.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp" />
     <ClCompile Include="src\mabengine_pch.cpp">
