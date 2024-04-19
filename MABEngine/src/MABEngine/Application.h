@@ -8,6 +8,10 @@
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Events/ApplicationEvent.h"
 
+#include "MABEngine/Renderer/Shader.h"
+#include "MABEngine/Renderer/VertexBuffer.h"
+#include "MABEngine/Renderer/IndexBuffer.h"
+
 namespace MABEngine {
 	class MABENGINE_API Application
 	{
@@ -31,12 +35,14 @@ namespace MABEngine {
 
 		bool m_Running = true;
 		Layers::LayerStack m_LayerStack;
+
+		std::unique_ptr<Renderer::Shader> m_Shader;
+		std::unique_ptr<Renderer::VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<Renderer::IndexBuffer> m_IndexBuffer;
 	private:
 		static Application* s_Instance;
 
 		unsigned int m_VertexArray;
-		unsigned int m_VertexBuffer;
-		unsigned int m_IndexBuffer;
 	};
 
 	// To be defined in Projects that want to use MABEngine
