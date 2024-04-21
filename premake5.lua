@@ -74,7 +74,7 @@ project "MABEngine"
 			--"MABENGINE_INCLUDE_AS_DLL",
 			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS",
-			-- "MAB_ENABLE_ASSERTS",
+			"MAB_ENABLE_ASSERTS",
 		}
 	
 	filter "configurations:Debug"
@@ -109,6 +109,7 @@ project "SandBox"
 
 	includedirs {
 		"MABEngine/vendor/spdlog/include",
+		"MABEngine/vendor/ImGUI/imgui",
 		"MABEngine/src",
 		"%{prj.name}/src",
 		"%{IncludeDir.glm}",
