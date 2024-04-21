@@ -22,8 +22,14 @@
     <Filter Include="src\MABEngine\Logging">
       <UniqueIdentifier>{58E64398-C452-FF92-8D46-97F0F97121FB}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MABEngine\Renderer">
+      <UniqueIdentifier>{A801A138-94FB-C98A-7D68-609B690130F7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -108,11 +114,53 @@
     <ClInclude Include="src\MABEngine\Logging\LogSetting.h">
       <Filter>src\MABEngine\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\BufferElement.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\BufferLayout.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\Shader.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderDataType.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\VertexArray.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Settings.h">
       <Filter>src\MABEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Window.h">
       <Filter>src\MABEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLEngineRenderer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1401,14 +1449,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicContext.h" />
-    <ClInclude Include="src\MABEngine\Renderer\Shader.h" />
-    <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h" />
-    <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h" />
-    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp">
@@ -1432,8 +1472,44 @@
     <ClCompile Include="src\MABEngine\Logging\LogSetting.cpp">
       <Filter>src\MABEngine\Logging</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\BufferElement.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\BufferLayout.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\EngineRenderer.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\Shader.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Settings.cpp">
       <Filter>src\MABEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLEngineRenderer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp">
       <Filter>src\Platform\Windows</Filter>
@@ -1444,12 +1520,5 @@
     <ClCompile Include="src\mabengine_pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicContext.cpp" />
-    <ClCompile Include="src\MABEngine\Renderer\Shader.cpp" />
-    <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp" />
-    <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp" />
-    <ClCompile Include="src\MABEngine\Renderer\EngineRenderer.cpp" />
   </ItemGroup>
 </Project>

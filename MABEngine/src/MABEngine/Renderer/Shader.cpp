@@ -66,7 +66,7 @@ namespace MABEngine {
 				glDeleteShader(fragmentShader);
 				// Either of them. Don't leak shaders.
 				glDeleteShader(vertexShader);
-
+				
 				MAB_CORE_ERROR("{0}", infoLog.data());
 				MAB_CORE_ASSERT(false, "Fragment shader compilation failure!");
 				return;
