@@ -169,6 +169,9 @@
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer.h" />
     <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h" />
     <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RenderAPIType.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\MABEngine\Renderer\Shader.h" />
     <ClInclude Include="src\MABEngine\Renderer\ShaderDataType.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexArray.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLEngineRenderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h" />
@@ -622,6 +626,8 @@
     <ClCompile Include="src\MABEngine\Renderer\BufferLayout.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\EngineRenderer.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\Shader.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp" />
@@ -629,6 +635,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLEngineRenderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp" />

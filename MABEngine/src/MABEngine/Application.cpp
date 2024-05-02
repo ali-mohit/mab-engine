@@ -1,8 +1,6 @@
 #include "mabengine_pch.h"
 #include "Application.h"
 
-#include <glad/glad.h>
-
 #include "MABEngine/Logging/Log.h"
 #include "MABEngine/Inputs/Input.h"
 #include "MABEngine/Layers/ImGui/ImGuiLayer.h"
@@ -10,6 +8,8 @@
 #include "MABEngine/Renderer/BufferLayout.h"
 #include "MABEngine/Renderer/VertexArray.h"
 #include "MABEngine/Renderer/ShaderDataType.h"
+#include "MABEngine/Renderer/EngineRenderer.h"
+#include "MABEngine/Renderer/RenderCommand.h"
 
 namespace MABEngine {
 
@@ -90,12 +90,19 @@ namespace MABEngine {
 
 	void Application::Run() {
 		while (m_Running) {
-			glClearColor(0.2f, 0.2f, 0.2f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			
+			Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
+			Renderer::RenderCommand::Clear();
+
+			
+			Renderer::EngineRenderer::BeginScene();
 
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBufferList()[0]->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::EngineRenderer::Submit(m_VertexArray);
+			
+			Renderer::EngineRenderer::EndScene();
+
+			//Renderer::EngineRenderer::Flush();
 
 			for (Layers::Layer* layer : m_LayerStack)
 				layer->OnUpdate();

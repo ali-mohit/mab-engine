@@ -1,6 +1,7 @@
 #include "mabengine_pch.h"
 
 #include "MABEngine/Logging/Log.h"
+#include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/EngineRenderer.h"
 #include "MABEngine/Renderer/IndexBuffer.h"
 
