@@ -1449,6 +1449,10 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RenderAPIType.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp">
@@ -1520,5 +1524,8 @@
     <ClCompile Include="src\mabengine_pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>

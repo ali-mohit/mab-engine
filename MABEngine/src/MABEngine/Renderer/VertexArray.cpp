@@ -2,6 +2,7 @@
 #include "VertexArray.h"
 #include "MABEngine/Renderer/EngineRenderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
+#include "MABEngine/Renderer/RenderAPIType.h"
 
 namespace MABEngine {
 

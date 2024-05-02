@@ -1,22 +1,24 @@
 #pragma once
 
 #include "MABEngine/Core.h"
+#include "MABEngine/Renderer/RendererAPI.h"
+#include "MABEngine/Renderer/RenderAPIType.h"
+#include "MABEngine/Renderer/VertexArray.h"
+
 
 namespace MABEngine {
 
 	namespace Renderer {
 
-		enum class RendererAPIType {
-			None = 0,
-			OpenGL = 10,
-		};
-
 		class MABENGINE_API EngineRenderer
 		{
 		public:
-			inline static RendererAPIType GetCurrentAPI() { return s_RendererAPI; }
-		private:
-			static RendererAPIType s_RendererAPI;
+			static void BeginScene();
+			static void EndScene();
+
+			static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+			inline static RendererAPIType GetCurrentAPI() { return RendererAPI::GetAPI(); }
 		};
 
 	}
