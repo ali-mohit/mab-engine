@@ -1453,6 +1453,8 @@
     <ClInclude Include="src\MABEngine\Renderer\RenderAPIType.h" />
     <ClInclude Include="src\MABEngine\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\MABEngine\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\MABEngine\Renderer\SceneDataType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp">
@@ -1527,5 +1529,6 @@
     <ClCompile Include="src\MABEngine\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\OrthographicCamera.cpp" />
   </ItemGroup>
 </Project>
