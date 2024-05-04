@@ -10,6 +10,7 @@
 #include "MABEngine/Renderer/ShaderDataType.h"
 #include "MABEngine/Renderer/EngineRenderer.h"
 #include "MABEngine/Renderer/RenderCommand.h"
+#include "MABEngine/Renderer/OrthographicCamera.h"
 
 namespace MABEngine {
 
@@ -18,6 +19,7 @@ namespace MABEngine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
+		:m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
 	{
 		MAB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
@@ -57,13 +59,15 @@ namespace MABEngine {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform	mat4 u_ViewProjection;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
 			void main() {
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -89,16 +93,18 @@ namespace MABEngine {
 	}
 
 	void Application::Run() {
+		float degree = 0;
 		while (m_Running) {
 			
+			degree += 1;
+			m_Camera.SetRotationZ(degree);
+
 			Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
 			Renderer::RenderCommand::Clear();
-
 			
-			Renderer::EngineRenderer::BeginScene();
+			Renderer::EngineRenderer::BeginScene(m_Camera);
 
-			m_Shader->Bind();
-			Renderer::EngineRenderer::Submit(m_VertexArray);
+			Renderer::EngineRenderer::Submit(m_Shader, m_VertexArray);
 			
 			Renderer::EngineRenderer::EndScene();
 

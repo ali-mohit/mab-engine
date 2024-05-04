@@ -13,6 +13,8 @@
 #include "MABEngine/Renderer/IndexBuffer.h"
 #include "MABEngine/Renderer/VertexArray.h"
 
+#include "MABEngine/Renderer/OrthographicCamera.h"
+
 namespace MABEngine {
 	class MABENGINE_API Application
 	{
@@ -39,6 +41,8 @@ namespace MABEngine {
 
 		std::shared_ptr<Renderer::Shader> m_Shader;
 		std::shared_ptr<Renderer::VertexArray> m_VertexArray;
+
+		Renderer::OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};
