@@ -1,16 +1,12 @@
 #include "mabengine_pch.h"
 #include "Application.h"
 
+#include "MABEngine/Core/EngineTime.h"
+
 #include "MABEngine/Logging/Log.h"
 #include "MABEngine/Inputs/Input.h"
 #include "MABEngine/Layers/ImGui/ImGuiLayer.h"
-#include "MABEngine/Renderer/VertexBuffer.h"
-#include "MABEngine/Renderer/BufferLayout.h"
-#include "MABEngine/Renderer/VertexArray.h"
-#include "MABEngine/Renderer/ShaderDataType.h"
-#include "MABEngine/Renderer/EngineRenderer.h"
-#include "MABEngine/Renderer/RenderCommand.h"
-#include "MABEngine/Renderer/OrthographicCamera.h"
+
 
 namespace MABEngine {
 
@@ -19,7 +15,6 @@ namespace MABEngine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
-		:m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
 	{
 		MAB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
@@ -30,62 +25,7 @@ namespace MABEngine {
 		m_ImGuiLayer = new Layers::ImGuiLayer("Debug ImGui");
 		PushOverLayer(m_ImGuiLayer);
 
-		m_VertexArray.reset(Renderer::VertexArray::Create());
-
-		float vertices[3 * 7] = {
-			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.2f, 0.1f, 0.8f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f, 
-		};
-
-		std::shared_ptr<Renderer::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
-		Renderer::BufferLayout layout = {
-			{ Renderer::ShaderDataType::Float3, "a_Position"},
-			{ Renderer::ShaderDataType::Float4, "a_Color"},
-		};
-		vertexBuffer->SetLayout(layout);
-		m_VertexArray->AddVertexBuffer(vertexBuffer);
-
-		// Index Buffer
-		unsigned int indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Renderer::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-		m_VertexArray->AddIndexBuffer(indexBuffer);
-
-		std::string vertextSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform	mat4 u_ViewProjection;
-
-			out vec3 v_Position;
-			out vec4 v_Color;
-
-			void main() {
-				v_Position = a_Position;
-				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
-			}
-		)";
-
-		std::string fragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-			
-			in vec3 v_Position;
-			in vec4 v_Color;
-
-			void main() {
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
-			}
-		)";
-
-		m_Shader.reset(new Renderer::Shader(vertextSrc, fragmentSrc));
+		EngineTimeObj = std::unique_ptr<Core::EngineTime>(Core::EngineTime::Create());
 	}
 
 	Application::~Application()
@@ -93,25 +33,14 @@ namespace MABEngine {
 	}
 
 	void Application::Run() {
-		float degree = 0;
 		while (m_Running) {
-			
-			degree += 1;
-			m_Camera.SetRotationZ(degree);
 
-			Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
-			Renderer::RenderCommand::Clear();
-			
-			Renderer::EngineRenderer::BeginScene(m_Camera);
-
-			Renderer::EngineRenderer::Submit(m_Shader, m_VertexArray);
-			
-			Renderer::EngineRenderer::EndScene();
-
-			//Renderer::EngineRenderer::Flush();
+			float time = (float)EngineTimeObj->GetTime();
+			Core::EngineTimeStep timeStep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 
 			for (Layers::Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(timeStep);
 
 			m_ImGuiLayer->Begin();
 			for (Layers::Layer* layer : m_LayerStack)

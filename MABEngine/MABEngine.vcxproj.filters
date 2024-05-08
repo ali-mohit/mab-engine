@@ -1455,6 +1455,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\MABEngine\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\MABEngine\Renderer\SceneDataType.h" />
+    <ClInclude Include="src\MABEngine\Core\TimeStep.h" />
+    <ClInclude Include="src\MABEngine\Core\EngineTime.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsGlfwTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp">
@@ -1530,5 +1533,7 @@
     <ClCompile Include="src\MABEngine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsGlfwTime.cpp" />
+    <ClCompile Include="src\MABEngine\Core\EngineTime.cpp" />
   </ItemGroup>
 </Project>

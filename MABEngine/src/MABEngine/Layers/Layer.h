@@ -1,7 +1,10 @@
 #pragma once
 
 #include "MABEngine/Core.h"
+#include "MABEngine/Core/TimeStep.h"
+
 #include "MABEngine/Events/Event.h"
+
 
 namespace MABEngine {
 	namespace Layers {
@@ -14,7 +17,7 @@ namespace MABEngine {
 
 			virtual void OnAttach() {}
 			virtual void OnDetach() {}
-			virtual void OnUpdate() {}
+			virtual void OnUpdate(MABEngine::Core::EngineTimeStep ts) {}
 			virtual void OnImGuiRender() {}
 			virtual void OnEvent(Events::Event& event) {}
 
