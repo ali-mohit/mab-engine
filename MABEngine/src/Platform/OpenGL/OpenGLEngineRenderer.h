@@ -24,6 +24,8 @@ namespace MABEngine {
 			case ShaderDataType::Bool3:		return GL_BOOL;
 			case ShaderDataType::Bool4:		return GL_BOOL;
 			}
+
+			return GL_INVALID_ENUM;
 		}
 	}
 }

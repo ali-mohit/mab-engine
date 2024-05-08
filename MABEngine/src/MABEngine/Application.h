@@ -3,17 +3,15 @@
 #include "Core.h"
 
 #include "Window.h"
+
+#include "MABEngine/Core/TimeStep.h"
+#include "MABEngine/Core/EngineTime.h"
+
 #include "MABEngine/Layers/LayerStack.h"
 #include "MABEngine/Layers/ImGui/ImGuiLayer.h"
+
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Events/ApplicationEvent.h"
-
-#include "MABEngine/Renderer/Shader.h"
-#include "MABEngine/Renderer/VertexBuffer.h"
-#include "MABEngine/Renderer/IndexBuffer.h"
-#include "MABEngine/Renderer/VertexArray.h"
-
-#include "MABEngine/Renderer/OrthographicCamera.h"
 
 namespace MABEngine {
 	class MABENGINE_API Application
@@ -38,11 +36,10 @@ namespace MABEngine {
 
 		bool m_Running = true;
 		Layers::LayerStack m_LayerStack;
+		
+		double m_LastFrameTime = 0.0f;
+		std::unique_ptr<Core::EngineTime> EngineTimeObj;
 
-		std::shared_ptr<Renderer::Shader> m_Shader;
-		std::shared_ptr<Renderer::VertexArray> m_VertexArray;
-
-		Renderer::OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};

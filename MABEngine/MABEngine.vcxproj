@@ -149,6 +149,8 @@
     <ClInclude Include="src\MABEngine.h" />
     <ClInclude Include="src\MABEngine\Application.h" />
     <ClInclude Include="src\MABEngine\Core.h" />
+    <ClInclude Include="src\MABEngine\Core\EngineTime.h" />
+    <ClInclude Include="src\MABEngine\Core\TimeStep.h" />
     <ClInclude Include="src\MABEngine\EntryPoint.h" />
     <ClInclude Include="src\MABEngine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\MABEngine\Events\Event.h" />
@@ -187,6 +189,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsGlfwTime.h" />
     <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h" />
     <ClInclude Include="src\mabengine_pch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -618,6 +621,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp" />
+    <ClCompile Include="src\MABEngine\Core\EngineTime.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\MABEngine\Layers\Layer.cpp" />
@@ -642,6 +646,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsGlfwTime.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp" />
     <ClCompile Include="src\mabengine_pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
