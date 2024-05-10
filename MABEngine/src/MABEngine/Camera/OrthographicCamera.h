@@ -1,13 +1,12 @@
 #pragma once
+#include "MABEngine/Core.h"
 
 #include <glm/glm.hpp>
-
-#include "MABEngine/Core.h"
 
 
 namespace MABEngine {
 
-	namespace Renderer {
+	namespace Camera {
 		class MABENGINE_API OrthographicCamera {
 		public:
 			OrthographicCamera(float left, float right, float bottom, float top);
@@ -19,10 +18,11 @@ namespace MABEngine {
 			float GetRotationZ() { return m_RotationZ; }
 			void SetRotationZ(float rotation) { m_RotationZ = rotation; RecalculateViewMatrix(); }
 
-			const glm::mat4& getProjectionMatrix() const { return m_ProjectionMatrix; }
-			const glm::mat4& getViewMatrix() const { return m_ViewMatrix; }
-			const glm::mat4& getViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+			const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
+			const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+			const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
+		private:
 			void RecalculateViewMatrix();
 		private:
 			glm::mat4 m_ProjectionMatrix;

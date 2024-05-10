@@ -31,14 +31,14 @@ namespace MABEngine {
 	private:
 		bool OnWindowClose(Events::WindowCloseEvent& e);
 	private:
-		std::unique_ptr<Window> m_Window;
+		Scope<Window> m_Window;
 		Layers::ImGuiLayer* m_ImGuiLayer;
 
 		bool m_Running = true;
 		Layers::LayerStack m_LayerStack;
 		
 		double m_LastFrameTime = 0.0f;
-		std::unique_ptr<Core::EngineTime> EngineTimeObj;
+		Scope<Core::EngineTime> EngineTimeObj;
 
 	private:
 		static Application* s_Instance;

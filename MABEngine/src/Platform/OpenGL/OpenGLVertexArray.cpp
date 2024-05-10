@@ -28,7 +28,7 @@ namespace MABEngine {
 			glBindVertexArray(0);
 		}
 		
-		void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
+		void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 		{
 			MAB_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
@@ -52,7 +52,7 @@ namespace MABEngine {
 			m_VertexBufferList.push_back(vertexBuffer);
 		}
 		
-		void OpenGLVertexArray::AddIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+		void OpenGLVertexArray::AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 		{
 			glBindVertexArray(m_RendererId);
 			indexBuffer->Bind();

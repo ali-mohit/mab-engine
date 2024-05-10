@@ -5,12 +5,14 @@
 #include <imgui.h>
 
 #include "ExampleLayer.h"
+#include "StdViewport.h"
 
 
 class SandBoxApp : public MABEngine::Application {
 public:
 	SandBoxApp() {
 		PushLayer(new ExampleLayer());
+		PushLayer(new StdViewPort());
 	}
 	~SandBoxApp() {
 

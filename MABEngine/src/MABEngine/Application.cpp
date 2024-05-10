@@ -19,13 +19,13 @@ namespace MABEngine {
 		MAB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = Scope<Window>(Window::Create());
 		m_Window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
 
 		m_ImGuiLayer = new Layers::ImGuiLayer("Debug ImGui");
 		PushOverLayer(m_ImGuiLayer);
 
-		EngineTimeObj = std::unique_ptr<Core::EngineTime>(Core::EngineTime::Create());
+		EngineTimeObj = Scope<Core::EngineTime>(Core::EngineTime::Create());
 	}
 
 	Application::~Application()
@@ -46,7 +46,6 @@ namespace MABEngine {
 			for (Layers::Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
-
 
 			m_Window->OnUpdate();
 		}

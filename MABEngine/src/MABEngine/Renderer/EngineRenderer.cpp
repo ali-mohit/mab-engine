@@ -2,8 +2,10 @@
 #include "EngineRenderer.h"
 #include "RenderCommand.h"
 
-#include "OrthographicCamera.h"
 #include "MABEngine/Renderer/Shader.h"
+#include "MABEngine/Camera/OrthographicCamera.h"
+
+#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace MABEngine {
 
@@ -11,19 +13,23 @@ namespace MABEngine {
 
 		SceneDataType* EngineRenderer::m_SceneData = new SceneDataType();
 
-		void EngineRenderer::BeginScene(OrthographicCamera& camera)
+		void EngineRenderer::BeginScene(Camera::OrthographicCamera& camera)
 		{
-			m_SceneData->ViewProjectionMatrix = camera.getViewProjectionMatrix();
+			m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 		}
 
 		void EngineRenderer::EndScene()
 		{
 		}
 
-		void EngineRenderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray)
+		void EngineRenderer::Submit(
+			const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
 		{
 			shader->Bind();
-			shader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+
+			//TODO: Must be removed
+			std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+			std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
 			vertexArray->Bind();
 			RenderCommand::DrawIndexed(vertexArray);

@@ -25,5 +25,6 @@
 #include "MABEngine/Renderer/IndexBuffer.h"
 #include "MABEngine/Renderer/VertexArray.h"
 
-#include "MABEngine/Renderer/OrthographicCamera.h"
+#include "MABEngine/Camera/OrthographicCamera.h"
+#include "MABEngine/Camera/PerspectiveFreeCamera.h"
 

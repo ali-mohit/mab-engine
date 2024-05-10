@@ -1,20 +1,14 @@
 #pragma once
 
-#include <imgui.h>
-#include "MABEngine.h"
+#include <MABEngine/Core.h>
+#include <MABEngine.h>
 
-#include "MABEngine/Core/TimeStep.h"
-
-
-class ExampleLayer : public MABEngine::Layers::Layer {
+class MABENGINE_API StdViewPort : public MABEngine::Layers::Layer {
 public:
-	ExampleLayer();
+	StdViewPort();
+	~StdViewPort();
 
-	void OnUpdate(MABEngine::Core::EngineTimeStep ts) override;
-
-	void OnImGuiRender() override;
-
-	void OnEvent(MABEngine::Events::Event& event) override;
+	virtual void OnImGuiRender() override;
 private:
 	float m_Degree = 0;
 	float m_CameraRotationZSpeed = 180.0f;
