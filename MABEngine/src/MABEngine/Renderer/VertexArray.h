@@ -17,11 +17,11 @@ namespace MABEngine {
 			virtual void Bind() const = 0;
 			virtual void UnBind() const = 0;
 
-			virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) = 0;
-			virtual void AddIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) = 0;
+			virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) = 0;
+			virtual void AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer) = 0;
 
-			virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBufferList() const = 0;
-			virtual const std::vector<std::shared_ptr<IndexBuffer>>& GetIndexBufferList() const = 0;
+			virtual const std::vector<Ref<VertexBuffer>>& GetVertexBufferList() const = 0;
+			virtual const std::vector<Ref<IndexBuffer>>& GetIndexBufferList() const = 0;
 
 
 			static VertexArray* Create();

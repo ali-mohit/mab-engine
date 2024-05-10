@@ -21,9 +21,15 @@
     <ClCompile Include="src\ExampleLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\StdViewport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExampleLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StdViewport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

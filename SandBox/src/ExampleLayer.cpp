@@ -4,6 +4,9 @@
 #include "ExampleLayer.h"
 #include "MABEngine/Core/TimeStep.h"
 
+// TODO: Must be removed
+#include "Platform/OpenGL/OpenGLShader.h"
+
 
 ExampleLayer::ExampleLayer()
 	:Layer("Example"), m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
@@ -16,7 +19,7 @@ ExampleLayer::ExampleLayer()
 		 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 	};
 
-	std::shared_ptr<MABEngine::Renderer::VertexBuffer> vertexBuffer;
+	MABEngine::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
 	vertexBuffer.reset(MABEngine::Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
 	MABEngine::Renderer::BufferLayout layout = {
 		{ MABEngine::Renderer::ShaderDataType::Float3, "a_Position"},
@@ -27,7 +30,7 @@ ExampleLayer::ExampleLayer()
 
 	// Index Buffer
 	unsigned int indices[3] = { 0, 1, 2 };
-	std::shared_ptr<MABEngine::Renderer::IndexBuffer> indexBuffer;
+	MABEngine::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 	m_VertexArray->AddIndexBuffer(indexBuffer);
 
@@ -38,14 +41,13 @@ ExampleLayer::ExampleLayer()
 			layout(location = 1) in vec4 a_Color;
 
 			uniform	mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
-			out vec4 v_Color;
 
 			void main() {
 				v_Position = a_Position;
-				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -55,15 +57,15 @@ ExampleLayer::ExampleLayer()
 			layout(location = 0) out vec4 color;
 			
 			in vec3 v_Position;
-			in vec4 v_Color;
+			
+			uniform vec4 u_Color;
 
 			void main() {
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
+				color = u_Color;
 			}
 		)";
 
-	m_Shader.reset(new MABEngine::Renderer::Shader(vertextSrc, fragmentSrc));
+	m_Shader.reset(MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc));
 }
 
 void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
@@ -98,6 +100,9 @@ void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 
 	MABEngine::Renderer::EngineRenderer::BeginScene(m_Camera);
 
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_Shader)->UploadUniformFloat4(
+		"u_Color", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
+	);
 	MABEngine::Renderer::EngineRenderer::Submit(m_Shader, m_VertexArray);
 
 	MABEngine::Renderer::EngineRenderer::EndScene();

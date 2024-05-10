@@ -15,7 +15,7 @@ namespace MABEngine {
 			virtual void SetClearColor(const glm::vec4& color) = 0;
 			virtual void Clear() = 0;
 
-			virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertextArray) = 0;
+			virtual void DrawIndexed(const Ref<VertexArray>& vertextArray) = 0;
 
 			inline static RendererAPIType GetAPI() { return s_APIType; }
 		private:

@@ -4,9 +4,10 @@
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/VertexArray.h"
-#include "MABEngine/Renderer/OrthographicCamera.h"
 #include "MABEngine/Renderer/SceneDataType.h"
 #include "MABEngine/Renderer/Shader.h"
+
+#include "MABEngine/Camera/OrthographicCamera.h"
 
 namespace MABEngine {
 
@@ -15,10 +16,14 @@ namespace MABEngine {
 		class MABENGINE_API EngineRenderer
 		{
 		public:
-			static void BeginScene(OrthographicCamera& camera);
+			static void BeginScene(Camera::OrthographicCamera& camera);
 			static void EndScene();
 
-			static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
+			static void Submit(
+				const Ref<Shader>& shader,
+				const Ref<VertexArray>& vertexArray, 
+				const glm::mat4& transform= glm::mat4(1.0f)
+			);
 
 			inline static RendererAPIType GetCurrentAPI() { return RendererAPI::GetAPI(); }
 		private:
