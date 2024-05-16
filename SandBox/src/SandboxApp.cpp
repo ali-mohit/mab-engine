@@ -11,8 +11,12 @@
 class SandBoxApp : public MABEngine::Application {
 public:
 	SandBoxApp() {
-		PushLayer(new ExampleLayer());
-		PushLayer(new StdViewPort());
+		
+		uint32_t w = GetWindow().GetWidth();
+		uint32_t h = GetWindow().GetHeight();
+
+		PushLayer(new ExampleLayer(w, h));
+		PushLayer(new StdViewPort(w, h));
 	}
 	~SandBoxApp() {
 

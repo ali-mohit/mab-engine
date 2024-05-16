@@ -8,7 +8,7 @@
 
 class ExampleLayer : public MABEngine::Layers::Layer {
 public:
-	ExampleLayer();
+	ExampleLayer(uint32_t width, uint32_t height);
 
 	void OnUpdate(MABEngine::Core::EngineTimeStep ts) override;
 
@@ -16,14 +16,18 @@ public:
 
 	void OnEvent(MABEngine::Events::Event& event) override;
 private:
-	float m_Degree = 0;
-	float m_CameraRotationZSpeed = 180.0f;
+	void CreateRectangleObject();
+	void CreateTrianleObject();
+private:
+	uint32_t m_Width;
+	uint32_t m_Height;
 
-	glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
-	float m_CameraSpeed = 10.0f;
 
 	MABEngine::Ref<MABEngine::Renderer::Shader> m_Shader;
 	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_VertexArray;
 
-	MABEngine::Camera::OrthographicCamera m_Camera;
+	MABEngine::Ref<MABEngine::Renderer::Shader> m_BlueShader;
+	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
+
+	MABEngine::Camera::OrthographicCameraController m_CameraController;
 };

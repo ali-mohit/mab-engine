@@ -30,11 +30,13 @@ namespace MABEngine {
 		inline Window& GetWindow() { return *m_Window; }
 	private:
 		bool OnWindowClose(Events::WindowCloseEvent& e);
+		bool OnWindowResize(Events::WindowResizeEvent& e);
 	private:
 		Scope<Window> m_Window;
 		Layers::ImGuiLayer* m_ImGuiLayer;
 
 		bool m_Running = true;
+		bool m_Minimize = false;
 		Layers::LayerStack m_LayerStack;
 		
 		double m_LastFrameTime = 0.0f;

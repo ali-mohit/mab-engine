@@ -5,8 +5,8 @@
 #include "StdViewport.h"
 
 
-StdViewPort::StdViewPort()
-	:Layer("ViewPort"), m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
+StdViewPort::StdViewPort(uint32_t width, uint32_t height)
+	:Layer("ViewPort"), m_Width(width), m_Height(height), m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
 {
 	m_VertexArray.reset(MABEngine::Renderer::VertexArray::Create());
 

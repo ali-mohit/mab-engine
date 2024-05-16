@@ -6,6 +6,7 @@
 #include "MABEngine/Logging/Log.h"
 #include "MABEngine/Inputs/Input.h"
 #include "MABEngine/Layers/ImGui/ImGuiLayer.h"
+#include "MABEngine/Renderer/EngineRenderer.h"
 
 
 namespace MABEngine {
@@ -39,15 +40,19 @@ namespace MABEngine {
 			Core::EngineTimeStep timeStep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			for (Layers::Layer* layer : m_LayerStack)
-				layer->OnUpdate(timeStep);
+			if (!m_Minimize) {
+				for (Layers::Layer* layer : m_LayerStack)
+					layer->OnUpdate(timeStep);
+			}
 
 			m_ImGuiLayer->Begin();
 			for (Layers::Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
 
+
 			m_Window->OnUpdate();
+			
 		}
 	}
 
@@ -55,6 +60,7 @@ namespace MABEngine {
 	{
 		Events::EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<Events::WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<Events::WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ) {
 			(*--it)->OnEvent(e);
@@ -80,5 +86,18 @@ namespace MABEngine {
 		m_Running = false;
 
 		return true;
+	}
+
+	bool Application::OnWindowResize(Events::WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
+			m_Minimize = true;
+
+			return false;
+		}
+		m_Minimize = false;
+		Renderer::EngineRenderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 }
