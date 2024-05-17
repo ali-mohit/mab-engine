@@ -8,6 +8,7 @@
 
 // TODO: Must be removed
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/Textures/OpenGLTexture2D.h"
 
 
 ExampleLayer::ExampleLayer(uint32_t width, uint32_t height)
@@ -35,7 +36,9 @@ void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_BlueShader)->UploadUniformFloat4(
 		"u_Color", glm::vec4(0.3f, 0.2f, 0.8f, 1.0f)
 	);
-	glm::mat4 texture_transform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
+	glm::mat4 texture_transform = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
+
+	m_Texture->Bind();
 	MABEngine::Renderer::EngineRenderer::Submit(m_BlueShader, m_RectangleVertexArray, texture_transform);
 
 	//Submit Triangle
@@ -62,7 +65,7 @@ void ExampleLayer::OnEvent(MABEngine::Events::Event& event)
 
 void ExampleLayer::CreateTrianleObject()
 {
-	m_VertexArray.reset(MABEngine::Renderer::VertexArray::Create());
+	m_VertexArray = MABEngine::Renderer::VertexArray::Create();
 
 	float vertices[3 * 7] = {
 		-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -121,18 +124,19 @@ void ExampleLayer::CreateTrianleObject()
 
 void ExampleLayer::CreateRectangleObject()
 {
-	m_RectangleVertexArray.reset(MABEngine::Renderer::VertexArray::Create());
-	float vertices[3 * 4] = {
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
+	m_RectangleVertexArray = MABEngine::Renderer::VertexArray::Create();
+	float vertices[5 * 4] = {
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 	};
 
 	MABEngine::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
 	vertexBuffer.reset(MABEngine::Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
 	MABEngine::Renderer::BufferLayout layout = {
 		{ MABEngine::Renderer::ShaderDataType::Float3, "a_Position"},
+		{ MABEngine::Renderer::ShaderDataType::Float2, "a_TexCoord"},
 	};
 	vertexBuffer->SetLayout(layout);
 	m_RectangleVertexArray->AddVertexBuffer(vertexBuffer);
@@ -147,14 +151,17 @@ void ExampleLayer::CreateRectangleObject()
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
 
 			uniform	mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
+			out vec2 v_TexCoord;
 
 			void main() {
 				v_Position = a_Position;
+				v_TexCoord = a_TexCoord;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
@@ -165,14 +172,22 @@ void ExampleLayer::CreateRectangleObject()
 			layout(location = 0) out vec4 color;
 			
 			in vec3 v_Position;
+			in vec2 v_TexCoord;
 			
-			uniform vec4 u_Color;
+			uniform sampler2D u_Texture;
 
 			void main() {
-				color = u_Color;
+				//color = u_Color;
 				//color = vec4(v_Position, 1.0f);
+				//color = vec4(v_TexCoord, 0.0f, 1.0f);
+				color = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
 	m_BlueShader.reset(MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc));
+
+	m_Texture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_BlueShader)->Bind();
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_BlueShader)->UploadUniformInt("u_Texture", 0);
+
 }

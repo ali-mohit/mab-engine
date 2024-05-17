@@ -6,7 +6,7 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
-#include "LogSetting.h"
+#include "MABEngine/Logging/LogSetting.h"
 
 namespace MABEngine {
 	namespace Logging {

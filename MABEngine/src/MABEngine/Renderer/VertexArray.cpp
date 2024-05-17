@@ -1,5 +1,7 @@
 #include "mabengine_pch.h"
-#include "VertexArray.h"
+
+#include "MABEngine/Core.h"
+#include "MABEngine/Renderer/VertexArray.h"
 #include "MABEngine/Renderer/EngineRenderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
@@ -7,7 +9,7 @@
 namespace MABEngine {
 
 	namespace Renderer {
-		VertexArray* VertexArray::Create()
+		Ref<VertexArray> VertexArray::Create()
 		{
 
 			switch (EngineRenderer::GetCurrentAPI())
@@ -16,7 +18,7 @@ namespace MABEngine {
 				MAB_CORE_ASSERT(false, "RendererAPIType::None is not support. There is not any VertexArray.");
 				break;
 			case RendererAPIType::OpenGL:
-				return new OpenGLVertexArray();
+				return CreateRef<OpenGLVertexArray>();
 				break;
 			}
 

@@ -24,7 +24,7 @@ namespace MABEngine {
 			virtual const std::vector<Ref<IndexBuffer>>& GetIndexBufferList() const = 0;
 
 
-			static VertexArray* Create();
+			static Ref<VertexArray> Create();
 		};
 
 	}

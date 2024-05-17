@@ -8,7 +8,7 @@
 StdViewPort::StdViewPort(uint32_t width, uint32_t height)
 	:Layer("ViewPort"), m_Width(width), m_Height(height), m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
 {
-	m_VertexArray.reset(MABEngine::Renderer::VertexArray::Create());
+	m_VertexArray = MABEngine::Renderer::VertexArray::Create();
 
 	float vertices[3 * 7] = {
 		-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,

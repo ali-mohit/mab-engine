@@ -26,6 +26,8 @@ private:
 	MABEngine::Ref<MABEngine::Renderer::Shader> m_Shader;
 	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_VertexArray;
 
+	MABEngine::Ref<MABEngine::Textures::Texture2D> m_Texture;
+
 	MABEngine::Ref<MABEngine::Renderer::Shader> m_BlueShader;
 	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
 
