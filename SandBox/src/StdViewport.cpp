@@ -63,7 +63,7 @@ StdViewPort::StdViewPort(uint32_t width, uint32_t height)
 			}
 		)";
 
-	m_Shader.reset(MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc));
+	m_Shader = MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc);
 }
 
 StdViewPort::~StdViewPort()

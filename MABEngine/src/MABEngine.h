@@ -20,6 +20,9 @@
 #include "MABEngine/Renderer/EngineRenderer.h"
 
 #include "MABEngine/Renderer/Shader.h"
+#include "MABEngine/Renderer/ShaderDataType.h"
+#include "MABEngine/Renderer/ShaderFileType.h"
+#include "MABEngine/Renderer/ShaderPackageFile.h"
 #include "MABEngine/Renderer/BufferElement.h"
 #include "MABEngine/Renderer/BufferLayout.h"
 #include "MABEngine/Renderer/IndexBuffer.h"

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MABEngine/Core.h"
+#include "MABEngine/Renderer/ShaderPackageFile.h"
 
 #include <string>
 
@@ -15,7 +16,8 @@ namespace MABEngine {
 			virtual void Bind() const = 0;
 			virtual void UnBind() const = 0;
 
-			static Shader* Create(const std::string& vertexSource, const std::string fragmentSource);
+			static Ref<Shader> Create(const ShaderPackageFile& packageInfo);
+			static Ref<Shader> Create(const std::string& vertexSource, const std::string& fragmentSource);
 		};
 
 	}

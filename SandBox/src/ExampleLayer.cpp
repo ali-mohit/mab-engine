@@ -19,7 +19,7 @@ ExampleLayer::ExampleLayer(uint32_t width, uint32_t height)
 {
 	m_CameraController.SetZRotationEnabled(true);
 
-	CreateTrianleObject();
+	CreateTriangleObject();
 	CreateRectangleObject();
 }
 
@@ -33,20 +33,27 @@ void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	MABEngine::Renderer::EngineRenderer::BeginScene(m_CameraController.GetCamera());
 
 	
-	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_BlueShader)->UploadUniformFloat4(
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_TextureShader)->UploadUniformFloat4(
 		"u_Color", glm::vec4(0.3f, 0.2f, 0.8f, 1.0f)
 	);
-	glm::mat4 texture_transform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
+	glm::mat4 textureCheckerBoardtransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
+	glm::mat4 texturelogotransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
 
-	m_Texture->Bind();
-	MABEngine::Renderer::EngineRenderer::Submit(m_BlueShader, m_RectangleVertexArray, texture_transform);
+	m_TextureCheckerBoard->Bind();
+	MABEngine::Renderer::EngineRenderer::Submit(m_TextureShader, m_RectangleVertexArray, textureCheckerBoardtransform);
+
+
+	m_TextureMabLogo->Bind();
+	MABEngine::Renderer::EngineRenderer::Submit(m_TextureShader, m_RectangleVertexArray, texturelogotransform);
+
 
 	//Submit Triangle
-	//std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_Shader)->UploadUniformFloat4(
-	//	"u_Color", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
-	//);
-	//glm::mat4 transform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
-	//MABEngine::Renderer::EngineRenderer::Submit(m_Shader, m_VertexArray, transform);
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_SolidColorShader)->UploadUniformFloat4(
+		"u_UniqueColor", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
+	);
+	glm::mat4 triangleTransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
+	triangleTransform = glm::translate(triangleTransform, glm::vec3(1.0, 1.0, 0));
+	MABEngine::Renderer::EngineRenderer::Submit(m_SolidColorShader, m_TriangleVertexArray, triangleTransform);
 
 	MABEngine::Renderer::EngineRenderer::EndScene();
 
@@ -63,9 +70,9 @@ void ExampleLayer::OnEvent(MABEngine::Events::Event& event)
 	m_CameraController.OnEvent(event);
 }
 
-void ExampleLayer::CreateTrianleObject()
+void ExampleLayer::CreateTriangleObject()
 {
-	m_VertexArray = MABEngine::Renderer::VertexArray::Create();
+	m_TriangleVertexArray = MABEngine::Renderer::VertexArray::Create();
 
 	float vertices[3 * 7] = {
 		-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -80,13 +87,13 @@ void ExampleLayer::CreateTrianleObject()
 		{ MABEngine::Renderer::ShaderDataType::Float4, "a_Color"},
 	};
 	vertexBuffer->SetLayout(layout);
-	m_VertexArray->AddVertexBuffer(vertexBuffer);
+	m_TriangleVertexArray->AddVertexBuffer(vertexBuffer);
 
 	// Index Buffer
 	unsigned int indices[3] = { 0, 1, 2 };
 	MABEngine::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-	m_VertexArray->AddIndexBuffer(indexBuffer);
+	m_TriangleVertexArray->AddIndexBuffer(indexBuffer);
 
 	std::string vertextSrc = R"(
 			#version 330 core
@@ -112,14 +119,14 @@ void ExampleLayer::CreateTrianleObject()
 			
 			in vec3 v_Position;
 			
-			uniform vec4 u_Color;
+			uniform vec4 u_UniqueColor;
 
 			void main() {
-				color = u_Color;
+				color = u_UniqueColor;
 			}
 		)";
 
-	m_Shader.reset(MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc));
+	m_SolidColorShader = MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc);
 }
 
 void ExampleLayer::CreateRectangleObject()
@@ -184,10 +191,12 @@ void ExampleLayer::CreateRectangleObject()
 			}
 		)";
 
-	m_BlueShader.reset(MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc));
+	m_TextureShader = MABEngine::Renderer::Shader::Create(vertextSrc, fragmentSrc);
 
-	m_Texture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
-	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_BlueShader)->Bind();
-	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_BlueShader)->UploadUniformInt("u_Texture", 0);
+	m_TextureCheckerBoard = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
+	m_TextureMabLogo = MABEngine::Textures::Texture2D::Create("assets/textures/MabLogo_1080_Color.png");
+
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_TextureShader)->Bind();
+	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 
 }

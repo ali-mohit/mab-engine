@@ -9,6 +9,5 @@ namespace MABEngine {
 			None = 0,
 			OpenGL = 10,
 		};
-
 	}
 }
