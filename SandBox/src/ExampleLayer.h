@@ -17,18 +17,18 @@ public:
 	void OnEvent(MABEngine::Events::Event& event) override;
 private:
 	void CreateRectangleObject();
-	void CreateTrianleObject();
+	void CreateTriangleObject();
 private:
 	uint32_t m_Width;
 	uint32_t m_Height;
 
+	MABEngine::Ref<MABEngine::Textures::Texture2D> m_TextureCheckerBoard;
+	MABEngine::Ref<MABEngine::Textures::Texture2D> m_TextureMabLogo;
 
-	MABEngine::Ref<MABEngine::Renderer::Shader> m_Shader;
-	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_VertexArray;
+	MABEngine::Ref<MABEngine::Renderer::Shader> m_SolidColorShader;
+	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_TriangleVertexArray;
 
-	MABEngine::Ref<MABEngine::Textures::Texture2D> m_Texture;
-
-	MABEngine::Ref<MABEngine::Renderer::Shader> m_BlueShader;
+	MABEngine::Ref<MABEngine::Renderer::Shader> m_TextureShader;
 	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
 
 	MABEngine::Camera::OrthographicCameraController m_CameraController;

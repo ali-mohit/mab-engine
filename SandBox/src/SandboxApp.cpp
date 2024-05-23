@@ -16,7 +16,7 @@ public:
 		uint32_t h = GetWindow().GetHeight();
 
 		PushLayer(new ExampleLayer(w, h));
-		PushLayer(new StdViewPort(w, h));
+		//PushLayer(new StdViewPort(w, h));
 	}
 	~SandBoxApp() {
 

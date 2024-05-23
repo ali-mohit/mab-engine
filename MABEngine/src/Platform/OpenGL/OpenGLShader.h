@@ -1,6 +1,8 @@
 #pragma once
 #include "MABEngine/Core.h"
 #include "MABEngine/Renderer/Shader.h"
+#include "MABEngine/Renderer/ShaderPackageFile.h"
+#include "MABEngine/Renderer/ShaderFileType.h"
 
 #include <string>
 #include <glm/glm.hpp>
@@ -12,7 +14,8 @@ namespace MABEngine {
 
 		class MABENGINE_API OpenGLShader : public Shader {
 		public:
-			OpenGLShader(const std::string& vertextSource, const std::string fragmentSource);
+			OpenGLShader(const std::string& vertextSource, const std::string& fragmentSource);
+			OpenGLShader(const ShaderPackageFile& packageInfo);
 			~OpenGLShader();
 
 			virtual void Bind() const override;
@@ -33,7 +36,10 @@ namespace MABEngine {
 
 			void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
 			void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
-
+		private:
+			std::string ReadFileContent(const std::string& filePath);
+			unsigned int ConvertShaderFileTypeToGLenum(ShaderFileType fileType);
+			void Compile(const std::unordered_map<ShaderFileType, std::string>& shadersContent);
 		private:
 			uint32_t m_RendererId = 0;
 		};

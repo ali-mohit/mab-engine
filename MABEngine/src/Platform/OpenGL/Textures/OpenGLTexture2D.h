@@ -18,6 +18,11 @@ namespace MABEngine {
 			virtual uint32_t GetChannels() const override { return m_Channels; };
 
 			virtual void Bind(uint32_t slot = 0) override;
+
+		private:
+			//GLenum getGLFormat() const;
+			unsigned int getInternalGLFormat() const;
+			unsigned int getDataGLFormat() const;
 		private:
 			std::string m_Path;
 			uint32_t m_Width;

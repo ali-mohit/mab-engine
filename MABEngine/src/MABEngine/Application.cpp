@@ -23,6 +23,8 @@ namespace MABEngine {
 		m_Window = Scope<Window>(Window::Create());
 		m_Window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
 
+		Renderer::EngineRenderer::Init();
+
 		m_ImGuiLayer = new Layers::ImGuiLayer("Debug ImGui");
 		PushOverLayer(m_ImGuiLayer);
 
