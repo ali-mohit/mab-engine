@@ -24,10 +24,10 @@ namespace MABEngine {
 			inline const std::string& GetPrefix() const { return m_Prefix; }
 			inline void SetPrefix(const std::string& prefix) { m_Prefix = prefix; }
 
-			const std::string& GetShaderFilePath(ShaderFileType fileType) const;
+			std::string GetShaderFilePath(ShaderFileType fileType) const;
+
 			static std::string GetShaderFileTypeName(ShaderFileType fileType);
-		private:
-			const std::string& GetShaderFilePostFix() const;
+			static std::string GetShaderFilePostFix();
 		private:
 			std::string m_Name;
 			std::string m_Path;

@@ -17,7 +17,7 @@ namespace MABEngine {
 
 		ShaderPackageFile::~ShaderPackageFile(){}
 		
-		const std::string& ShaderPackageFile::GetShaderFilePath(ShaderFileType fileType) const
+		std::string ShaderPackageFile::GetShaderFilePath(ShaderFileType fileType) const
 		{
 			std::string path = m_Path;
 			if (!path.empty() && path.back() != '/') {
@@ -27,10 +27,10 @@ namespace MABEngine {
 			std::string postFix = GetShaderFilePostFix();
 			std::string shaderTypeStr = GetShaderFileTypeName(fileType);
 
-			return path + "/" + m_Prefix + "." + shaderTypeStr + "." + postFix;
+			return path + m_Prefix + shaderTypeStr + postFix;
 		}
 
-		const std::string& ShaderPackageFile::GetShaderFilePostFix() const
+		std::string ShaderPackageFile::GetShaderFilePostFix()
 		{
 			switch (EngineRenderer::GetCurrentAPI())
 			{
@@ -53,7 +53,7 @@ namespace MABEngine {
 			case MABEngine::Renderer::ShaderFileType::None:
 				return "none";
 			case MABEngine::Renderer::ShaderFileType::VertexShader:
-				return "vertext-shader";
+				return "vertex-shader";
 			case MABEngine::Renderer::ShaderFileType::FragmentSahder:
 				return "fragment-shader";
 			default:

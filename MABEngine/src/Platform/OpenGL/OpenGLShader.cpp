@@ -41,12 +41,12 @@ namespace MABEngine {
 
 			if (!std::filesystem::exists(fragmentShaderPath)) {
 				MAB_CORE_ERROR("Fragment shader path: {0} not found!", fragmentShaderPath);
-				MAB_CORE_ASSERT(false, "Fertext shader is not in the package!");
+				MAB_CORE_ASSERT(false, "Fragment shader is not in the package!");
 			}
 
 			std::unordered_map<ShaderFileType, std::string> shaderContents;
-			shaderContents[ShaderFileType::VertexShader] = vertexShaderPath;
-			shaderContents[ShaderFileType::FragmentSahder] = fragmentShaderPath;
+			shaderContents[ShaderFileType::VertexShader] = ReadFileContent(vertexShaderPath);
+			shaderContents[ShaderFileType::FragmentSahder] = ReadFileContent(fragmentShaderPath);
 
 			Compile(shaderContents);
 		}
@@ -172,7 +172,7 @@ namespace MABEngine {
 			// Get a program object.
 			GLuint program = glCreateProgram();
 
-			std::vector<GLuint> glShaderIDs(shadersContent.size());
+			std::vector<GLuint> glShaderIDs;
 
 			for (auto& kv : shadersContent) {
 
