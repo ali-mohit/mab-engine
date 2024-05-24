@@ -14,7 +14,7 @@ namespace MABEngine {
 
 		class MABENGINE_API OpenGLShader : public Shader {
 		public:
-			OpenGLShader(const std::string& vertextSource, const std::string& fragmentSource);
+			OpenGLShader(const std::string& name, const std::string& vertextSource, const std::string& fragmentSource);
 			OpenGLShader(const ShaderPackageFile& packageInfo);
 			~OpenGLShader();
 
@@ -23,6 +23,7 @@ namespace MABEngine {
 
 			uint32_t GetRendererId() { return m_RendererId; }
 
+			virtual const std::string& GetName() const override { return m_Name; }
 			void UploadUniformInt(const std::string& name, int value);
 			void UploadUniformInt2(const std::string& name, const glm::ivec2& value);
 			void UploadUniformInt3(const std::string& name, const glm::ivec3& value);
@@ -44,6 +45,7 @@ namespace MABEngine {
 		
 		private:
 			uint32_t m_RendererId = 0;
+			std::string m_Name = "";
 		};
 
 	}

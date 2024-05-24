@@ -18,8 +18,8 @@ namespace MABEngine {
 
 	namespace Renderer {
 
-		OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
-			:m_RendererId(0)
+		OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+			:m_RendererId(0), m_Name(name)
 		{
 			std::unordered_map<ShaderFileType, std::string> shaderContents;
 			shaderContents[ShaderFileType::VertexShader] = vertexSource;
@@ -29,7 +29,7 @@ namespace MABEngine {
 		}
 		
 		OpenGLShader::OpenGLShader(const ShaderPackageFile& packageInfo)
-			:m_RendererId(0)
+			:m_RendererId(0), m_Name(packageInfo.GetName())
 		{
 			std::string vertexShaderPath = packageInfo.GetShaderFilePath(ShaderFileType::VertexShader);
 			std::string fragmentShaderPath = packageInfo.GetShaderFilePath(ShaderFileType::FragmentSahder);
