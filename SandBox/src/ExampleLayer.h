@@ -22,13 +22,14 @@ private:
 	uint32_t m_Width;
 	uint32_t m_Height;
 
+	MABEngine::Renderer::ShaderLibrary m_ShaderLib;
+
 	MABEngine::Ref<MABEngine::Textures::Texture2D> m_TextureCheckerBoard;
 	MABEngine::Ref<MABEngine::Textures::Texture2D> m_TextureMabLogo;
 
 	MABEngine::Ref<MABEngine::Renderer::Shader> m_SolidColorShader;
 	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_TriangleVertexArray;
 
-	MABEngine::Ref<MABEngine::Renderer::Shader> m_TextureShader;
 	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
 
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
