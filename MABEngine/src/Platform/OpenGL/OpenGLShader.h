@@ -36,10 +36,12 @@ namespace MABEngine {
 
 			void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
 			void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+		
 		private:
 			std::string ReadFileContent(const std::string& filePath);
 			unsigned int ConvertShaderFileTypeToGLenum(ShaderFileType fileType);
 			void Compile(const std::unordered_map<ShaderFileType, std::string>& shadersContent);
+		
 		private:
 			uint32_t m_RendererId = 0;
 		};

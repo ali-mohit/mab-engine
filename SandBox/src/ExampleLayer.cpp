@@ -34,7 +34,7 @@ void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 
 	//Submit Triangle
 	glm::mat4 triangleTransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
-	triangleTransform = glm::translate(triangleTransform, glm::vec3(1.0, 1.0, -1.0));
+	triangleTransform = glm::translate(triangleTransform, glm::vec3(1.5, 0.0, -1.0));
 	MABEngine::Renderer::EngineRenderer::Submit(m_SolidColorShader, m_TriangleVertexArray, triangleTransform);
 	std::dynamic_pointer_cast<MABEngine::Renderer::OpenGLShader>(m_SolidColorShader)->UploadUniformFloat4(
 		"u_UniqueColor", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
