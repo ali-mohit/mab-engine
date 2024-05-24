@@ -25,14 +25,14 @@ namespace MABEngine {
 			return nullptr;
 		}
 
-		Ref<Shader> Shader::Create(const std::string& vertexSource, const std::string& fragmentSource) {
+		Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource) {
 			switch (EngineRenderer::GetCurrentAPI())
 			{
 			case RendererAPIType::None:
 				MAB_CORE_ASSERT(false, "RendererAPIType::None is not support. There is not any Shader.");
 				break;
 			case RendererAPIType::OpenGL:
-				return CreateRef<OpenGLShader>(vertexSource, fragmentSource);
+				return CreateRef<OpenGLShader>(name, vertexSource, fragmentSource);
 				break;
 			}
 

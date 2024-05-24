@@ -5,7 +5,6 @@
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
 
-#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace MABEngine {
 
@@ -36,10 +35,8 @@ namespace MABEngine {
 			const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
 		{
 			shader->Bind();
-
-			//TODO: Must be removed
-			std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-			std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+			shader->SetMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+			shader->SetMat4("u_Transform", transform);
 
 			vertexArray->Bind();
 			RenderCommand::DrawIndexed(vertexArray);

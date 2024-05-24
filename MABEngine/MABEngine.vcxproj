@@ -181,6 +181,7 @@
     <ClInclude Include="src\MABEngine\Renderer\Shader.h" />
     <ClInclude Include="src\MABEngine\Renderer\ShaderDataType.h" />
     <ClInclude Include="src\MABEngine\Renderer\ShaderFileType.h" />
+    <ClInclude Include="src\MABEngine\Renderer\ShaderLibrary.h" />
     <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexArray.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h" />
@@ -647,6 +648,7 @@
     <ClCompile Include="src\MABEngine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\ShaderLibrary.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp" />
