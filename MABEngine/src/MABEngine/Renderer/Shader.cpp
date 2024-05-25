@@ -5,19 +5,19 @@
 #include "MABEngine/Renderer/EngineRenderer.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
 
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/Renderer/OpenGLShader.h"
 
 namespace MABEngine {
 
 	namespace Renderer {
-		Ref<Shader> Shader::Create(const ShaderPackageFile& packageInfo) {
+		Core::Ref<Shader> Shader::Create(const ShaderPackageFile& packageInfo) {
 			switch (EngineRenderer::GetCurrentAPI())
 			{
 			case RendererAPIType::None:
 				MAB_CORE_ASSERT(false, "RendererAPIType::None is not support. There is not any Shader.");
 				break;
 			case RendererAPIType::OpenGL:
-				return CreateRef<OpenGLShader>(packageInfo);
+				return Core::CreateRef<OpenGLShader>(packageInfo);
 				break;
 			}
 
@@ -25,14 +25,14 @@ namespace MABEngine {
 			return nullptr;
 		}
 
-		Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource) {
+		Core::Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource) {
 			switch (EngineRenderer::GetCurrentAPI())
 			{
 			case RendererAPIType::None:
 				MAB_CORE_ASSERT(false, "RendererAPIType::None is not support. There is not any Shader.");
 				break;
 			case RendererAPIType::OpenGL:
-				return CreateRef<OpenGLShader>(name, vertexSource, fragmentSource);
+				return Core::CreateRef<OpenGLShader>(name, vertexSource, fragmentSource);
 				break;
 			}
 

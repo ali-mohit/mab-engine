@@ -1,6 +1,6 @@
 #include <mabengine_pch.h>
 #include <MABEngine.h>
-#include <MABEngine/EntryPoint.h>
+#include <MABEngine/Core/EntryPoint.h>
 #include <MABEngine/Layers/ImGui/ImGuiLayer.h>
 #include <imgui.h>
 
@@ -8,7 +8,7 @@
 #include "StdViewport.h"
 
 
-class SandBoxApp : public MABEngine::Application {
+class SandBoxApp : public MABEngine::Core::Application {
 public:
 	SandBoxApp() {
 		
@@ -23,6 +23,6 @@ public:
 	}
 };
 
-MABEngine::Application* MABEngine::CreateApplication(int argc, char** argv) {
+MABEngine::Core::Application* MABEngine::Core::CreateApplication(int argc, char** argv) {
 	return new SandBoxApp();
 }

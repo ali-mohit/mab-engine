@@ -177,6 +177,15 @@
     <ClInclude Include="src\MABEngine\Renderer\ShaderDataType.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderFileType.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderLibrary.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\VertexArray.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
@@ -1512,8 +1521,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Renderer\ShaderFileType.h" />
-    <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Application.cpp">
@@ -1570,6 +1577,12 @@
     <ClCompile Include="src\MABEngine\Renderer\Shader.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\ShaderLibrary.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
@@ -1621,6 +1634,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp" />
   </ItemGroup>
 </Project>

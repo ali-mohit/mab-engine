@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/VertexArray.h"
 
@@ -19,7 +19,7 @@ namespace MABEngine {
 
 			virtual void Clear() = 0;
 
-			virtual void DrawIndexed(const Ref<VertexArray>& vertextArray) = 0;
+			virtual void DrawIndexed(const Core::Ref<VertexArray>& vertextArray) = 0;
 
 			inline static RendererAPIType GetAPI() { return s_APIType; }
 		private:

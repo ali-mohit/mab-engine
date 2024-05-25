@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 
 namespace MABEngine {
@@ -13,7 +13,7 @@ namespace MABEngine {
 			virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) override;
 			virtual void Clear() override;
 
-			virtual void DrawIndexed(const Ref<VertexArray>& vertextArray) override;
+			virtual void DrawIndexed(const Core::Ref<VertexArray>& vertextArray) override;
 		};
 	}
 }

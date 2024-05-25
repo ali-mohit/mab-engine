@@ -3,9 +3,9 @@
 // For use MABEngine Applications
 
 #include "MABEngine/Core/TimeStep.h"
+#include "MABEngine/Core/Application.h"
+#include "MABEngine/Core/Settings.h"
 
-#include "MABEngine/Application.h"
-#include "MABEngine/Settings.h"
 #include "MABEngine/Layers/Layer.h"
 #include "MABEngine/Layers/ImGui/ImGuiLayer.h"
 #include "MABEngine/Logging/Log.h"

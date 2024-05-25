@@ -32,7 +32,7 @@ namespace MABEngine {
 		}
 
 		void EngineRenderer::Submit(
-			const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+			const Core::Ref<Shader>& shader, const Core::Ref<VertexArray>& vertexArray, const glm::mat4& transform)
 		{
 			shader->Bind();
 			shader->SetMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);

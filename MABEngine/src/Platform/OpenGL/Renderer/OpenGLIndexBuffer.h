@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MABEngine/Renderer/IndexBuffer.h"
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 
 namespace MABEngine {
 	namespace Renderer {

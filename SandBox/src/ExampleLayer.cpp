@@ -76,7 +76,7 @@ void ExampleLayer::CreateTriangleObject()
 		 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 	};
 
-	MABEngine::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
 	vertexBuffer.reset(MABEngine::Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
 	MABEngine::Renderer::BufferLayout layout = {
 		{ MABEngine::Renderer::ShaderDataType::Float3, "a_Position"},
@@ -87,7 +87,7 @@ void ExampleLayer::CreateTriangleObject()
 
 	// Index Buffer
 	unsigned int indices[3] = { 0, 1, 2 };
-	MABEngine::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 	m_TriangleVertexArray->AddIndexBuffer(indexBuffer);
 
@@ -109,7 +109,7 @@ void ExampleLayer::CreateRectangleObject()
 		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 	};
 
-	MABEngine::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
 	vertexBuffer.reset(MABEngine::Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
 	MABEngine::Renderer::BufferLayout layout = {
 		{ MABEngine::Renderer::ShaderDataType::Float3, "a_Position"},
@@ -120,7 +120,7 @@ void ExampleLayer::CreateRectangleObject()
 
 	// Index Buffer
 	unsigned int indices[6] = { 0, 1, 2, 0, 2, 3 };
-	MABEngine::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 	m_RectangleVertexArray->AddIndexBuffer(indexBuffer);
 

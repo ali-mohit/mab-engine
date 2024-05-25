@@ -24,13 +24,13 @@ private:
 
 	MABEngine::Renderer::ShaderLibrary m_ShaderLib;
 
-	MABEngine::Ref<MABEngine::Textures::Texture2D> m_TextureCheckerBoard;
-	MABEngine::Ref<MABEngine::Textures::Texture2D> m_TextureMabLogo;
+	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_TextureCheckerBoard;
+	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_TextureMabLogo;
 
-	MABEngine::Ref<MABEngine::Renderer::Shader> m_SolidColorShader;
-	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_TriangleVertexArray;
+	MABEngine::Core::Ref<MABEngine::Renderer::Shader> m_SolidColorShader;
+	MABEngine::Core::Ref<MABEngine::Renderer::VertexArray> m_TriangleVertexArray;
 
-	MABEngine::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
+	MABEngine::Core::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
 
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
 };

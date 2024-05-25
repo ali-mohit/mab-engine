@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Inputs/KeyboardCodes.h"
 #include "MABEngine/Inputs/MouseButtonCodes.h"
 

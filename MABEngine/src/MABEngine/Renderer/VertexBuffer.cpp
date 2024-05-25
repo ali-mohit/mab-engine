@@ -5,7 +5,7 @@
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/VertexBuffer.h"
 
-#include "Platform/OpenGL/OpenGLVertexBuffer.h"
+#include "Platform/OpenGL/Renderer/OpenGLVertexBuffer.h"
 
 namespace MABEngine {
 	namespace Renderer {

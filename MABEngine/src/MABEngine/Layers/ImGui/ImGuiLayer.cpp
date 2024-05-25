@@ -10,7 +10,7 @@
 #include <glad/glad.h>
 
 
-#include "MABEngine/Application.h"
+#include "MABEngine/Core/Application.h"
 #include "MABEngine/Events/Event.h"
 
 
@@ -56,7 +56,7 @@ namespace MABEngine {
                 style.Colors[ImGuiCol_WindowBg].w = 1.0f;
             }
 
-            Application& app = Application::Get();
+            Core::Application& app = Core::Application::Get();
             GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
             //Setup Platform/Renderer bindings
@@ -91,7 +91,7 @@ namespace MABEngine {
 
         void ImGuiLayer::End() {
             ImGuiIO& io = ImGui::GetIO();
-            Application& app = Application::Get();
+            Core::Application& app = Core::Application::Get();
             io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(),(float)app.GetWindow().GetHeight());
 
             ImGui::Render();

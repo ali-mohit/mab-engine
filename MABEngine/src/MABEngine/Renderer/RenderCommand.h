@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 
@@ -26,7 +26,7 @@ namespace MABEngine {
 				s_RendererAPI->Clear();
 			}
 
-			inline static void DrawIndexed(const Ref<VertexArray>& vertexArray) {
+			inline static void DrawIndexed(const Core::Ref<VertexArray>& vertexArray) {
 				s_RendererAPI->DrawIndexed(vertexArray);
 			}
 		private:

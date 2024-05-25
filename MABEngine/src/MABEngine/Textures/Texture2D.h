@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Textures/Texture.h"
 
 #include <string>
@@ -15,7 +15,7 @@ namespace MABEngine {
 			virtual uint32_t GetRendererId() const = 0;
 			virtual uint32_t GetChannels() const = 0;
 
-			static Ref<Texture2D> Create(const std::string& path);
+			static Core::Ref<Texture2D> Create(const std::string& path);
 		};
 
 	}

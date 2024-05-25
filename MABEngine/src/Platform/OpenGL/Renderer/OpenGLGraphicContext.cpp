@@ -1,7 +1,7 @@
 #include "mabengine_pch.h"
 
-#include "MABEngine/Core.h"
-#include "Platform/OpenGL/OpenGLGraphicContext.h"
+#include "MABEngine/Core/Base.h"
+#include "Platform/OpenGL/Renderer/OpenGLGraphicContext.h"
 #include "MABEngine/Logging/Log.h"
 
 #include <GLFW/glfw3.h>
