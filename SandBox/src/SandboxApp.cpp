@@ -16,8 +16,8 @@ public:
 		uint32_t w = GetWindow().GetWidth();
 		uint32_t h = GetWindow().GetHeight();
 
-		PushLayer(new SandBox3DLayer(w, h));
-		//PushLayer(new SandBox2DLayer(w, h));
+		//PushLayer(new SandBox3DLayer(w, h));
+		PushLayer(new SandBox2DLayer(w, h));
 	}
 	~SandBoxApp() {
 

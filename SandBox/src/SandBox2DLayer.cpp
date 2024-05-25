@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <imgui.h>
 
 #include "SandBox2DLayer.h"
 
@@ -40,7 +42,12 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 
 void SandBox2DLayer::OnImGuiRender()
 {
-
+	ImGui::Begin("Settings");
+	if (ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SolidColor)))
+	{
+		SetRectangleColor();
+	}
+	ImGui::End();
 }
 
 void SandBox2DLayer::OnEvent(MABEngine::Events::Event& event)
@@ -81,9 +88,22 @@ void SandBox2DLayer::CreateRectangleObject()
 
 	solidShader->Bind();
 	solidShader->SetFloat4(
-		"u_UniqueColor", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
+		"u_UniqueColor", glm::vec4(m_SolidColor, 1.0f)
 	);
 	solidShader->UnBind();
 
+}
+
+void SandBox2DLayer::SetRectangleColor()
+{
+	if (!m_ShaderLib.ShaderExists("solid"))
+		return;
+
+	auto solidShader = m_ShaderLib.GetShader("solid");
+	solidShader->Bind();
+	solidShader->SetFloat4(
+		"u_UniqueColor", glm::vec4(m_SolidColor, 1.0f)
+	);
+	solidShader->UnBind();
 }
 
