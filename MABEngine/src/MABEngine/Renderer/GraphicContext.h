@@ -11,6 +11,7 @@ namespace MABEngine {
 
 			virtual std::string GetGraphicCardVendor() = 0;
 			virtual std::string GetGraphicCardRenderer() = 0;
+			virtual uint32_t GetMaxNumberOfTextureImageUnit() = 0;
 		};
 	}
 }

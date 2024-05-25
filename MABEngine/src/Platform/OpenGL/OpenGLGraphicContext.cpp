@@ -23,9 +23,10 @@ namespace MABEngine {
 			MAB_CORE_ASSERT(status, "Failed to initialize GLAD (OpenGL)!");
 
 			MAB_CORE_INFO("OPENGL info:");
-			MAB_CORE_INFO(" Vendor:   {0}", GetGraphicCardVendor());
-			MAB_CORE_INFO(" Renderer: {0}", GetGraphicCardRenderer());
-			MAB_CORE_INFO(" Version:  {0}", GetOpenGLVersion());
+			MAB_CORE_INFO(" Vendor:			{0}", GetGraphicCardVendor());
+			MAB_CORE_INFO(" Renderer:		{0}", GetGraphicCardRenderer());
+			MAB_CORE_INFO(" Version:		{0}", GetOpenGLVersion());
+			MAB_CORE_INFO(" No. of Texture Units:	{0}", std::to_string(GetMaxNumberOfTextureImageUnit()).c_str());
 
 		}
 
@@ -61,6 +62,13 @@ namespace MABEngine {
 			}
 
 			return m_GraphicCardRenderer;
+		}
+
+		uint32_t OpenGLGraphicContext::GetMaxNumberOfTextureImageUnit()
+		{
+			GLint maxTextureUnit = 0;
+			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnit);
+			return maxTextureUnit;
 		}
 
 		std::string OpenGLGraphicContext::GetOpenGLVersion()
