@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/VertexArray.h"
@@ -23,8 +23,8 @@ namespace MABEngine {
 			static void EndScene();
 
 			static void Submit(
-				const Ref<Shader>& shader,
-				const Ref<VertexArray>& vertexArray, 
+				const Core::Ref<Shader>& shader,
+				const Core::Ref<VertexArray>& vertexArray, 
 				const glm::mat4& transform= glm::mat4(1.0f)
 			);
 

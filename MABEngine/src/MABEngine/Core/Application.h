@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core.h"
+#include "MABEngine/Core/Base.h"
 
-#include "Window.h"
+#include "MABEngine/Core/Window.h"
 
 #include "MABEngine/Core/TimeStep.h"
 #include "MABEngine/Core/EngineTime.h"
@@ -14,6 +14,7 @@
 #include "MABEngine/Events/ApplicationEvent.h"
 
 namespace MABEngine {
+	namespace Core {
 	class MABENGINE_API Application
 	{
 	public:
@@ -48,4 +49,5 @@ namespace MABEngine {
 
 	// To be defined in Projects that want to use MABEngine
 	Application* CreateApplication(int argc, char** argv);
+	}
 }

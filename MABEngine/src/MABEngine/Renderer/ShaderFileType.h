@@ -1,5 +1,5 @@
 #pragma once
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Logging/Log.h"
 
 namespace MABEngine {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 
 namespace MABEngine {
 	namespace Renderer {
@@ -11,6 +11,7 @@ namespace MABEngine {
 
 			virtual std::string GetGraphicCardVendor() = 0;
 			virtual std::string GetGraphicCardRenderer() = 0;
+			virtual uint32_t GetMaxNumberOfTextureImageUnit() = 0;
 		};
 	}
 }

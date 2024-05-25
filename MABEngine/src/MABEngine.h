@@ -2,12 +2,15 @@
 
 // For use MABEngine Applications
 
-#include "MABEngine/Core/TimeStep.h"
+#include "MABEngine/Core/Base.h"
 
-#include "MABEngine/Application.h"
-#include "MABEngine/Settings.h"
+#include "MABEngine/Core/TimeStep.h"
+#include "MABEngine/Core/Application.h"
+#include "MABEngine/Core/Settings.h"
+
 #include "MABEngine/Layers/Layer.h"
 #include "MABEngine/Layers/ImGui/ImGuiLayer.h"
+
 #include "MABEngine/Logging/Log.h"
 
 #include "MABEngine/Inputs/Input.h"
@@ -18,7 +21,6 @@
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Renderer/RenderCommand.h"
 #include "MABEngine/Renderer/EngineRenderer.h"
-
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/ShaderDataType.h"
 #include "MABEngine/Renderer/ShaderFileType.h"

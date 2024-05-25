@@ -40,11 +40,20 @@
     <Filter Include="src\Platform\OpenGL">
       <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Platform\OpenGL\Renderer">
+      <UniqueIdentifier>{7B73C80F-672E-B8BB-10E6-3006FC7F024C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform\OpenGL\Textures">
       <UniqueIdentifier>{A801CA00-94BC-B9AC-3D74-32F7290E043D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\Windows\Core">
+      <UniqueIdentifier>{93BAEE36-FF7C-22C1-482D-B14DB42EFB9E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\Windows\Inputs">
+      <UniqueIdentifier>{4DC173BB-B9CE-A1A1-42B5-9D8CAEC16D58}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -78,9 +87,6 @@
     <ClInclude Include="src\MABEngine.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Application.h">
-      <Filter>src\MABEngine</Filter>
-    </ClInclude>
     <ClInclude Include="src\MABEngine\Camera\OrthographicCamera.h">
       <Filter>src\MABEngine\Camera</Filter>
     </ClInclude>
@@ -90,17 +96,29 @@
     <ClInclude Include="src\MABEngine\Camera\PerspectiveFreeCamera.h">
       <Filter>src\MABEngine\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Core.h">
-      <Filter>src\MABEngine</Filter>
+    <ClInclude Include="src\MABEngine\Core\Application.h">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Core\Base.h">
+      <Filter>src\MABEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Core\EngineTime.h">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Core\EntryPoint.h">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Core\PlatformDetection.h">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Core\Settings.h">
       <Filter>src\MABEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Core\TimeStep.h">
       <Filter>src\MABEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\EntryPoint.h">
-      <Filter>src\MABEngine</Filter>
+    <ClInclude Include="src\MABEngine\Core\Window.h">
+      <Filter>src\MABEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Events\ApplicationEvent.h">
       <Filter>src\MABEngine\Events</Filter>
@@ -177,14 +195,20 @@
     <ClInclude Include="src\MABEngine\Renderer\ShaderDataType.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderFileType.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderLibrary.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\VertexArray.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h">
       <Filter>src\MABEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MABEngine\Settings.h">
-      <Filter>src\MABEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Textures\Texture.h">
       <Filter>src\MABEngine\Textures</Filter>
@@ -192,41 +216,38 @@
     <ClInclude Include="src\MABEngine\Textures\Texture2D.h">
       <Filter>src\MABEngine\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Window.h">
-      <Filter>src\MABEngine</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLEngineRenderer.h">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicContext.h">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLIndexBuffer.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLVertexBuffer.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\Textures\OpenGLTexture2D.h">
       <Filter>src\Platform\OpenGL\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsGlfwInput.h">
-      <Filter>src\Platform\Windows</Filter>
+    <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwTime.h">
+      <Filter>src\Platform\Windows\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsGlfwTime.h">
-      <Filter>src\Platform\Windows</Filter>
+    <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwWindow.h">
+      <Filter>src\Platform\Windows\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsGlfwWindow.h">
-      <Filter>src\Platform\Windows</Filter>
+    <ClInclude Include="src\Platform\Windows\Inputs\WindowsGlfwInput.h">
+      <Filter>src\Platform\Windows\Inputs</Filter>
     </ClInclude>
     <ClInclude Include="src\mabengine_pch.h">
       <Filter>src</Filter>
@@ -1512,13 +1533,8 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Renderer\ShaderFileType.h" />
-    <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MABEngine\Application.cpp">
-      <Filter>src\MABEngine</Filter>
-    </ClCompile>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
       <Filter>src\MABEngine\Camera</Filter>
     </ClCompile>
@@ -1528,7 +1544,13 @@
     <ClCompile Include="src\MABEngine\Camera\PerspectiveFreeCamera.cpp">
       <Filter>src\MABEngine\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Core\Application.cpp">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Core\EngineTime.cpp">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Core\Settings.cpp">
       <Filter>src\MABEngine\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp">
@@ -1570,50 +1592,53 @@
     <ClCompile Include="src\MABEngine\Renderer\Shader.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\ShaderLibrary.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Settings.cpp">
-      <Filter>src\MABEngine</Filter>
-    </ClCompile>
     <ClCompile Include="src\MABEngine\Textures\Texture2D.cpp">
       <Filter>src\MABEngine\Textures</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLEngineRenderer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicContext.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLIndexBuffer.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLVertexBuffer.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\Textures\OpenGLTexture2D.cpp">
       <Filter>src\Platform\OpenGL\Textures</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsGlfwInput.cpp">
-      <Filter>src\Platform\Windows</Filter>
+    <ClCompile Include="src\Platform\Windows\Core\WindowsGlfwTime.cpp">
+      <Filter>src\Platform\Windows\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsGlfwTime.cpp">
-      <Filter>src\Platform\Windows</Filter>
+    <ClCompile Include="src\Platform\Windows\Core\WindowsGlfwWindow.cpp">
+      <Filter>src\Platform\Windows\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsGlfwWindow.cpp">
-      <Filter>src\Platform\Windows</Filter>
+    <ClCompile Include="src\Platform\Windows\Inputs\WindowsGlfwInput.cpp">
+      <Filter>src\Platform\Windows\Inputs</Filter>
     </ClCompile>
     <ClCompile Include="src\mabengine_pch.cpp">
       <Filter>src</Filter>
@@ -1621,6 +1646,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "mabengine_pch.h"
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Logging/Log.h"
 #include "Platform/OpenGL/Textures/OpenGLTexture2D.h"
 

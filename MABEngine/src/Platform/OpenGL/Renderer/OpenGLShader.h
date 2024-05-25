@@ -1,5 +1,5 @@
 #pragma once
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/ShaderPackageFile.h"
 #include "MABEngine/Renderer/ShaderFileType.h"

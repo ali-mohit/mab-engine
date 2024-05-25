@@ -26,7 +26,7 @@ namespace MABEngine {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertextArray)
+		void OpenGLRendererAPI::DrawIndexed(const Core::Ref<VertexArray>& vertextArray)
 		{
 			glDrawElements(GL_TRIANGLES, vertextArray->GetIndexBufferList()[0]->GetCount(), GL_UNSIGNED_INT, nullptr);
 		}

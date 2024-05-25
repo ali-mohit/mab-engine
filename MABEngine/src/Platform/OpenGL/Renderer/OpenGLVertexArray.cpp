@@ -1,5 +1,5 @@
 #include "mabengine_pch.h"
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "OpenGLVertexArray.h"
 #include "OpenGLEngineRenderer.h"
 
@@ -28,7 +28,7 @@ namespace MABEngine {
 			glBindVertexArray(0);
 		}
 		
-		void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
+		void OpenGLVertexArray::AddVertexBuffer(const Core::Ref<VertexBuffer>& vertexBuffer)
 		{
 			MAB_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
@@ -52,7 +52,7 @@ namespace MABEngine {
 			m_VertexBufferList.push_back(vertexBuffer);
 		}
 		
-		void OpenGLVertexArray::AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
+		void OpenGLVertexArray::AddIndexBuffer(const Core::Ref<IndexBuffer>& indexBuffer)
 		{
 			glBindVertexArray(m_RendererId);
 			indexBuffer->Bind();

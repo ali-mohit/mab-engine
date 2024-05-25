@@ -73,7 +73,7 @@ project "MABEngine"
 		systemversion "latest"
 
 		defines {
-			"MABENGINE_PLATFORM_WINDOWS",
+			--"MABENGINE_PLATFORM_WINDOWS",
 			--"INSIDE_MABENGINE_DLL",
 			--"MABENGINE_INCLUDE_AS_DLL",
 			"GLFW_INCLUDE_NONE",
@@ -127,7 +127,7 @@ project "SandBox"
 		systemversion "latest"
 
 		defines {
-			"MABENGINE_PLATFORM_WINDOWS",
+			--"MABENGINE_PLATFORM_WINDOWS",
 			--"MABENGINE_INCLUDE_AS_DLL",
 		}
 

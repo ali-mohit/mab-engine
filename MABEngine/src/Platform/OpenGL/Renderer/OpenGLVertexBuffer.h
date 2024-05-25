@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/VertexBuffer.h"
 #include "MABEngine/Renderer/BufferLayout.h"
 

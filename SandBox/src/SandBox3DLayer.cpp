@@ -1,12 +1,14 @@
 #include <mabengine_pch.h>
 #include <MABEngine.h>
-
-#include "ExampleLayer.h"
 #include <MABEngine/Core/TimeStep.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-ExampleLayer::ExampleLayer(uint32_t width, uint32_t height)
+
+#include "SandBox3DLayer.h"
+
+
+SandBox3DLayer::SandBox3DLayer(uint32_t width, uint32_t height)
 	:Layer("Example"),
 	m_Width(width), 
 	m_Height(height), 
@@ -18,7 +20,7 @@ ExampleLayer::ExampleLayer(uint32_t width, uint32_t height)
 	CreateRectangleObject();
 }
 
-void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
+void SandBox3DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 {
 	auto textureShader = m_ShaderLib.GetShader("basic-texture");
 
@@ -33,15 +35,12 @@ void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	glm::mat4 triangleTransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
 	triangleTransform = glm::translate(triangleTransform, glm::vec3(1.5, 0.0, -1.0));
 	MABEngine::Renderer::EngineRenderer::Submit(m_SolidColorShader, m_TriangleVertexArray, triangleTransform);
-	m_SolidColorShader->SetFloat4(
-		"u_UniqueColor", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
-	);
+	
 
 	//Submit Rectangle
 	glm::mat4 textureCheckerBoardtransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
 	glm::mat4 texturelogotransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
 
-	
 	m_TextureCheckerBoard->Bind();
 	MABEngine::Renderer::EngineRenderer::Submit(textureShader, m_RectangleVertexArray, textureCheckerBoardtransform);
 	textureShader->SetFloat4(
@@ -56,17 +55,17 @@ void ExampleLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	//Renderer::EngineRenderer::Flush();
 }
 
-void ExampleLayer::OnImGuiRender()
+void SandBox3DLayer::OnImGuiRender()
 {
 
 }
 
-void ExampleLayer::OnEvent(MABEngine::Events::Event& event)
+void SandBox3DLayer::OnEvent(MABEngine::Events::Event& event)
 {
 	m_CameraController.OnEvent(event);
 }
 
-void ExampleLayer::CreateTriangleObject()
+void SandBox3DLayer::CreateTriangleObject()
 {
 	m_TriangleVertexArray = MABEngine::Renderer::VertexArray::Create();
 
@@ -76,7 +75,7 @@ void ExampleLayer::CreateTriangleObject()
 		 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 	};
 
-	MABEngine::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
 	vertexBuffer.reset(MABEngine::Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
 	MABEngine::Renderer::BufferLayout layout = {
 		{ MABEngine::Renderer::ShaderDataType::Float3, "a_Position"},
@@ -87,7 +86,7 @@ void ExampleLayer::CreateTriangleObject()
 
 	// Index Buffer
 	unsigned int indices[3] = { 0, 1, 2 };
-	MABEngine::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 	m_TriangleVertexArray->AddIndexBuffer(indexBuffer);
 
@@ -97,9 +96,15 @@ void ExampleLayer::CreateTriangleObject()
 		"solid."
 	);
 	m_SolidColorShader = MABEngine::Renderer::Shader::Create(packageInfo);
+
+	m_SolidColorShader->Bind();
+	m_SolidColorShader->SetFloat4(
+		"u_UniqueColor", glm::vec4(0.8f, 0.2f, 0.3f, 1.0f)
+	);
+	m_SolidColorShader->UnBind();
 }
 
-void ExampleLayer::CreateRectangleObject()
+void SandBox3DLayer::CreateRectangleObject()
 {
 	m_RectangleVertexArray = MABEngine::Renderer::VertexArray::Create();
 	float vertices[5 * 4] = {
@@ -109,7 +114,7 @@ void ExampleLayer::CreateRectangleObject()
 		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 	};
 
-	MABEngine::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::VertexBuffer> vertexBuffer;
 	vertexBuffer.reset(MABEngine::Renderer::VertexBuffer::Create(vertices, sizeof(vertices)));
 	MABEngine::Renderer::BufferLayout layout = {
 		{ MABEngine::Renderer::ShaderDataType::Float3, "a_Position"},
@@ -120,7 +125,7 @@ void ExampleLayer::CreateRectangleObject()
 
 	// Index Buffer
 	unsigned int indices[6] = { 0, 1, 2, 0, 2, 3 };
-	MABEngine::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
+	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 	m_RectangleVertexArray->AddIndexBuffer(indexBuffer);
 

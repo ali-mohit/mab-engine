@@ -5,7 +5,7 @@
 #include "MABEngine/Renderer/EngineRenderer.h"
 #include "MABEngine/Renderer/IndexBuffer.h"
 
-#include "Platform/OpenGL/OpenGLIndexBuffer.h"
+#include "Platform/OpenGL/Renderer/OpenGLIndexBuffer.h"
 
 namespace MABEngine {
 	namespace Renderer {

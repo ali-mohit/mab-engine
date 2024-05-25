@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "spdlog/spdlog.h"
 
 #define MABENGINE_LOG_LEVEL_TRACE 0

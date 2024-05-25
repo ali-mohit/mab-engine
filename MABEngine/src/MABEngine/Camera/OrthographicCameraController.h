@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Core/TimeStep.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
 #include "MABEngine/Events/Event.h"

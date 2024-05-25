@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MABEngine/Core.h"
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/GraphicContext.h"
 
 struct GLFWwindow;
@@ -17,6 +17,7 @@ namespace MABEngine {
 
 			virtual std::string GetGraphicCardVendor() override;
 			virtual std::string GetGraphicCardRenderer() override;
+			virtual uint32_t GetMaxNumberOfTextureImageUnit() override;
 			std::string GetOpenGLVersion();
 		private:
 			GLFWwindow* m_WindowHandle;

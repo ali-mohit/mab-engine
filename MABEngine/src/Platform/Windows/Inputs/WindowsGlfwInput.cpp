@@ -2,7 +2,7 @@
 #include "GLFW/glfw3.h"
 
 #include "WindowsGlfwInput.h"
-#include "MABEngine/Application.h"
+#include "MABEngine/Core/Application.h"
 
 namespace MABEngine {
 	namespace Inputs {
@@ -11,7 +11,7 @@ namespace MABEngine {
 
 		bool WindowsGlfwInput::IsKeyPressedImp(MABKeyboardCode keyCode)
 		{
-			auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			auto state = glfwGetKey(window, (int)keyCode);
 
 			return state == GLFW_PRESS || state == GLFW_REPEAT;
@@ -19,7 +19,7 @@ namespace MABEngine {
 
 		bool WindowsGlfwInput::IsKeyRepeatImp(MABKeyboardCode keyCode)
 		{
-			auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			auto state = glfwGetKey(window, (int)keyCode);
 
 			return state == GLFW_REPEAT;
@@ -27,7 +27,7 @@ namespace MABEngine {
 
 		bool WindowsGlfwInput::IsMouseButtonPressedImp(MABMouseButton buttonCode)
 		{
-			auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			auto state = glfwGetMouseButton(window, (int)buttonCode);
 
 			return state == GLFW_PRESS;
@@ -35,7 +35,7 @@ namespace MABEngine {
 
 		std::pair<double, double> WindowsGlfwInput::GetMousePosImp()
 		{
-			auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			
 			double xPos;
 			double yPos;
