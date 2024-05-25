@@ -78,7 +78,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MABEngine\vendor\spdlog\include;..\MABEngine\vendor\ImGUI\imgui;..\MABEngine\src;src;..\MABEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -96,7 +96,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MABEngine\vendor\spdlog\include;..\MABEngine\vendor\ImGUI\imgui;..\MABEngine\src;src;..\MABEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -118,7 +118,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_PLATFORM_WINDOWS;MABENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MABEngine\vendor\spdlog\include;..\MABEngine\vendor\ImGUI\imgui;..\MABEngine\src;src;..\MABEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -137,11 +137,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\ExampleLayer.h" />
+    <ClInclude Include="src\SandBox3DLayer.h" />
+    <ClInclude Include="src\SandBox2DLayer.h" />
     <ClInclude Include="src\StdViewport.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ExampleLayer.cpp" />
+    <ClCompile Include="src\SandBox3DLayer.cpp" />
+    <ClCompile Include="src\SandBox2DLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\StdViewport.cpp" />
   </ItemGroup>

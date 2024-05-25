@@ -1,7 +1,23 @@
 #pragma once
 
+#include "MABEngine/Core/PlatformDetection.h"
+
 #include <memory>
 
+
+#ifdef MABENGINE_DEBUG
+	#if defined(MABENGINE_PLATFORM_WINDOWS)
+		#define MABENGINE_DEBUGBREAK() __debugbreak()
+	#elif defined(MABENGINE_PLATFORM_LINUX)
+		#include <signal.h>
+		#define MABENGINE_DEBUGBREAK() raise(SIGTRAP)
+	#else
+		#error "Platform doesn't support debugbreak yet!"
+	#endif
+	#define MABENGINE_ENABLE_ASSERTS
+#else
+	#define MABENGINE_DEBUGBREAK()
+#endif
 
 #ifdef MABENGINE_PLATFORM_WINDOWS
 	#ifdef MABENGINE_INCLUDE_AS_DLL
@@ -20,12 +36,16 @@
 
 
 #ifdef MAB_ENABLE_ASSERTS
-	#define MAB_ASSERT(x, ...) { if (!x) { MAB_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define MAB_CORE_ASSERT(x, ...) { if (!x) { MAB_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define MAB_ASSERT(x, ...) { if (!(x)) { MAB_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define MAB_CORE_ASSERT(x, ...) { if (!(x)) { MAB_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 	#define MAB_ASSERT(x, ...)
 	#define MAB_CORE_ASSERT(x, ...) 
 #endif
+
+#define MAB_EXPAND_MACRO(x) x
+
+#define MAB_STRINGIFY_MACRO(x) #x
 
 #define BIT(x)	(1 << x)
 
