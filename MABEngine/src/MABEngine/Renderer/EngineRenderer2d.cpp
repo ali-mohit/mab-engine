@@ -45,16 +45,11 @@ namespace MABEngine {
 			indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 			s_2dRendererData->QuadVertexArray->AddIndexBuffer(indexBuffer);
 
+			//Define White Texture
+			s_2dRendererData->WhiteTexture = Textures::Texture2D::Create(1, 1);
+			uint32_t whiteTextureData = 0xffffffff;
+			s_2dRendererData->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
-			// Loading Solid Shader
-			ShaderPackageFile packageSolidColorInfo(
-				"solid",
-				"assets/shaders/solid/",
-				"solid."
-			);
-			s_2dRendererData->FlatColorShader = Shader::Create(packageSolidColorInfo);
-
-			
 			// Loading Texture Shader
 			ShaderPackageFile packageTextureInfo(
 				"solid",
@@ -80,10 +75,6 @@ namespace MABEngine {
 
 		void EngineRenderer2d::BeginScene(Camera::OrthographicCamera& camera)
 		{
-			s_2dRendererData->FlatColorShader->Bind();
-			s_2dRendererData->FlatColorShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-
-
 			s_2dRendererData->TextureShader->Bind();
 			s_2dRendererData->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 		}
@@ -99,15 +90,17 @@ namespace MABEngine {
 
 		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 		{
-			s_2dRendererData->FlatColorShader->Bind();
-			s_2dRendererData->FlatColorShader->SetFloat4("u_UniqueColor", color);
+			s_2dRendererData->TextureShader->Bind();
+			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", color);
+			s_2dRendererData->WhiteTexture->Bind();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 				glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-			s_2dRendererData->FlatColorShader->SetMat4("u_Transform", transform);
+			s_2dRendererData->TextureShader->SetMat4("u_Transform", transform);
 
 			s_2dRendererData->QuadVertexArray->Bind();
 			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
+			s_2dRendererData->WhiteTexture->UnBind();
 		}
 
 		void EngineRenderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
@@ -118,6 +111,7 @@ namespace MABEngine {
 		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
 		{
 			s_2dRendererData->TextureShader->Bind();
+			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", glm::vec4(1.0f));
 			texture->Bind();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
@@ -126,7 +120,7 @@ namespace MABEngine {
 
 			s_2dRendererData->TextureShader->Bind();
 			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
-
+			texture->UnBind();
 		}
 
 	}
