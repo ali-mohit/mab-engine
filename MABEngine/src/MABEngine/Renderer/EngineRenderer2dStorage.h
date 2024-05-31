@@ -11,6 +11,7 @@ namespace MABEngine {
 		struct MABENGINE_API EngineRenderer2dStorage {
 			Core::Ref<VertexArray> QuadVertexArray;
 			Core::Ref<Shader> FlatColorShader;
+			Core::Ref<Shader> TextureShader;
 		};
 
 	}

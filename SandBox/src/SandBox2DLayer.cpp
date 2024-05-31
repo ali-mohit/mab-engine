@@ -31,7 +31,15 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , 0.0f }, { 2.0f, 1.0f }, { m_SolidColor1, 1.0f});
 	MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.75f , 0.0f }, { 1.0f, 2.0f }, { m_SolidColor2, 1.0f });
 
+	MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.0f , 0.0f, 0.1f }, { 10.0f, 10.0f }, m_CheckerBoardTexture);
+
+
 	MABEngine::Renderer::EngineRenderer2d::EndScene();
+}
+
+void SandBox2DLayer::OnAttach()
+{
+	m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void SandBox2DLayer::OnImGuiRender()

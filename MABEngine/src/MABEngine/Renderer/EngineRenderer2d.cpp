@@ -22,17 +22,19 @@ namespace MABEngine {
 			
 			// Loading Quad	
 			s_2dRendererData->QuadVertexArray = VertexArray::Create();
-			float vertices[3 * 4] = {
-				-0.5f, -0.5f, 0.0f,
-				-0.5f,  0.5f, 0.0f,
-				 0.5f,  0.5f, 0.0f,
-				 0.5f, -0.5f, 0.0f,
+			float vertices[5 * 4] = {
+				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 			};
 
 			MABEngine::Core::Ref<VertexBuffer> vertexBuffer;
 			vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 			BufferLayout layout = {
 				{ ShaderDataType::Float3, "a_Position"},
+				{ ShaderDataType::Float2, "a_TexCoord"},
+
 			};
 			vertexBuffer->SetLayout(layout);
 			s_2dRendererData->QuadVertexArray->AddVertexBuffer(vertexBuffer);
@@ -44,13 +46,26 @@ namespace MABEngine {
 			s_2dRendererData->QuadVertexArray->AddIndexBuffer(indexBuffer);
 
 
-			// Loading Shader
-			ShaderPackageFile packageInfo(
+			// Loading Solid Shader
+			ShaderPackageFile packageSolidColorInfo(
 				"solid",
 				"assets/shaders/solid/",
 				"solid."
 			);
-			s_2dRendererData->FlatColorShader = Shader::Create(packageInfo);
+			s_2dRendererData->FlatColorShader = Shader::Create(packageSolidColorInfo);
+
+			
+			// Loading Texture Shader
+			ShaderPackageFile packageTextureInfo(
+				"solid",
+				"assets/shaders/basic-texture/",
+				"basic-texture."
+			);
+			s_2dRendererData->TextureShader = Shader::Create(packageTextureInfo);
+
+			s_2dRendererData->TextureShader->Bind();
+			s_2dRendererData->TextureShader->SetInt("u_Texture", 0);
+			s_2dRendererData->TextureShader->UnBind();
 		}
 
 		void EngineRenderer2d::ShutDown()
@@ -67,6 +82,10 @@ namespace MABEngine {
 		{
 			s_2dRendererData->FlatColorShader->Bind();
 			s_2dRendererData->FlatColorShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+
+
+			s_2dRendererData->TextureShader->Bind();
+			s_2dRendererData->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 		}
 
 		void EngineRenderer2d::EndScene()
@@ -89,6 +108,25 @@ namespace MABEngine {
 
 			s_2dRendererData->QuadVertexArray->Bind();
 			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
+		}
+
+		void EngineRenderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
+		{
+			DrawQuad({ position.x, position.y, 1.0 }, size, texture);
+		}
+
+		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
+		{
+			s_2dRendererData->TextureShader->Bind();
+			texture->Bind();
+
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+				glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+			s_2dRendererData->TextureShader->SetMat4("u_Transform", transform);
+
+			s_2dRendererData->TextureShader->Bind();
+			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
+
 		}
 
 	}
