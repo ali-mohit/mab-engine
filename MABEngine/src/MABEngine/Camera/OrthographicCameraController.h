@@ -29,6 +29,12 @@ namespace MABEngine {
 			OrthographicCamera& GetCamera() { return m_Camera; }
 			const OrthographicCamera& GetCamera() const { return m_Camera; }
 
+			const glm::vec3& GetCameraPosition() const { return m_CameraPosition; }
+			void SetCameraPosition(const glm::vec3& position) { m_CameraPosition = { position.x, position.y, position.z }; }
+
+			const float GetZoomLevel();
+			void SetZoomLevel(float zoomLevel);
+
 		private:
 			bool OnMouseScrolled(Events::MouseScrolledEvent& e);
 			bool OnWindowResized(Events::WindowResizeEvent& e);

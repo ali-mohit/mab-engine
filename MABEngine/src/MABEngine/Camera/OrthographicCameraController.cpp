@@ -35,6 +35,15 @@ namespace MABEngine {
 		{
 		}
 
+		const float OrthographicCameraController::GetZoomLevel() { 
+			return m_ZoomLevel;
+		}
+
+		void OrthographicCameraController::SetZoomLevel(float zoomLevel) { 
+			m_ZoomLevel = zoomLevel;
+			m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		}
+
 		void OrthographicCameraController::OnUpdate(Core::EngineTimeStep ts)
 		{
 			if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_A)) {

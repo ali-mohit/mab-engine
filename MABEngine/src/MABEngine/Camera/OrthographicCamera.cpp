@@ -1,4 +1,6 @@
 #include "mabengine_pch.h"
+#include "MABEngine/Core/Base.h"
+#include "MABEngine/Logging/Log.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>

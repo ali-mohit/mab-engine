@@ -8,6 +8,7 @@
 #include "MABEngine/Renderer/Shader.h"
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace MABEngine {
 
@@ -66,7 +67,6 @@ namespace MABEngine {
 		{
 			s_2dRendererData->FlatColorShader->Bind();
 			s_2dRendererData->FlatColorShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-			s_2dRendererData->FlatColorShader->SetMat4("u_Transform", glm::mat4(1.0f));
 		}
 
 		void EngineRenderer2d::EndScene()
@@ -82,6 +82,10 @@ namespace MABEngine {
 		{
 			s_2dRendererData->FlatColorShader->Bind();
 			s_2dRendererData->FlatColorShader->SetFloat4("u_UniqueColor", color);
+
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+				glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+			s_2dRendererData->FlatColorShader->SetMat4("u_Transform", transform);
 
 			s_2dRendererData->QuadVertexArray->Bind();
 			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
