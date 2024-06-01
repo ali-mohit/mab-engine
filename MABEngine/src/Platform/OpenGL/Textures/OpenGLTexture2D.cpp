@@ -9,6 +9,27 @@
 
 namespace MABEngine {
 	namespace Textures {
+
+		OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
+			:m_Path(""), m_Width(width), m_Height(height), m_RendererId(0), m_Channels(4)
+		{
+
+			GLenum internalFormat = getInternalGLFormat();
+			GLenum dataFormat = getDataGLFormat();
+
+			MAB_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
+
+			glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererId);
+			glTextureStorage2D(m_RendererId, 1, internalFormat, m_Width, m_Height);
+
+			glTextureParameteri(m_RendererId, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTextureParameteri(m_RendererId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+			glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		}
+
 		OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 			:m_Path(path), m_Width(0), m_Height(0), m_RendererId(0), m_Channels(0)
 		{
@@ -33,6 +54,9 @@ namespace MABEngine {
 			glTextureParameteri(m_RendererId, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTextureParameteri(m_RendererId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+			glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 			glTextureSubImage2D(m_RendererId, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
 
 			stbi_image_free(data);
@@ -43,9 +67,22 @@ namespace MABEngine {
 			glDeleteTextures(1, &m_RendererId);
 		}
 
+		void OpenGLTexture2D::SetData(void* data, uint32_t size)
+		{
+			MAB_CORE_ASSERT(size == m_Width * m_Height * m_Channels, "Data must be entire texture (the size is not correct)!");
+
+			GLenum dataFormat = getDataGLFormat();
+			glTextureSubImage2D(m_RendererId, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
+		}
+
 		void OpenGLTexture2D::Bind(uint32_t slot)
 		{
 			glBindTextureUnit(slot, m_RendererId);
+		}
+
+		void OpenGLTexture2D::UnBind()
+		{
+			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
 		GLenum OpenGLTexture2D::getInternalGLFormat() const

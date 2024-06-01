@@ -15,7 +15,9 @@ namespace MABEngine {
 			virtual uint32_t GetRendererId() const = 0;
 			virtual uint32_t GetChannels() const = 0;
 
+			static Core::Ref<Texture2D> Create(uint32_t width, uint32_t height);
 			static Core::Ref<Texture2D> Create(const std::string& path);
+
 		};
 
 	}

@@ -4,7 +4,7 @@
 
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
-
+#include "MABEngine/Renderer/EngineRenderer2d.h"
 
 namespace MABEngine {
 
@@ -15,6 +15,7 @@ namespace MABEngine {
 		void EngineRenderer::Init()
 		{
 			RenderCommand::Init();
+			EngineRenderer2d::Init();
 		}
 
 		void EngineRenderer::OnWindowResize(uint32_t width, uint32_t height)

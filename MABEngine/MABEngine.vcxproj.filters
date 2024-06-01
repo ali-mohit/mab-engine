@@ -1533,6 +1533,8 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2d.h" />
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1646,5 +1648,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\EngineRenderer2d.cpp" />
   </ItemGroup>
 </Project>

@@ -9,22 +9,19 @@ public:
 
 	void OnUpdate(MABEngine::Core::EngineTimeStep ts) override;
 
+	virtual void OnAttach() override;
+
 	void OnImGuiRender() override;
 
 	void OnEvent(MABEngine::Events::Event& event) override;
 private:
-	void CreateRectangleObject();
-	void SetRectangleColor();
-private:
 	uint32_t m_Width;
 	uint32_t m_Height;
 
-	MABEngine::Renderer::ShaderLibrary m_ShaderLib;
-
-	glm::vec3 m_SolidColor = { 0.2f, 0.3f, 0.8f };
-	MABEngine::Core::Ref<MABEngine::Renderer::Shader> m_SolidColorShader;
-	MABEngine::Core::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
-
+	glm::vec3 m_SolidColor1 = { 0.2f, 0.3f, 0.8f };
+	glm::vec3 m_SolidColor2 = { 0.5f, 0.8f, 0.3f };
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
+
+	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_CheckerBoardTexture;
 
 };

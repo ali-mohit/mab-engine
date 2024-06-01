@@ -21,6 +21,7 @@
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Renderer/RenderCommand.h"
 #include "MABEngine/Renderer/EngineRenderer.h"
+#include "MABEngine/Renderer/EngineRenderer2D.h"
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/ShaderDataType.h"
 #include "MABEngine/Renderer/ShaderFileType.h"
