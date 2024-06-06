@@ -21,20 +21,33 @@ SandBox2DLayer::SandBox2DLayer(uint32_t width, uint32_t height)
 
 void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 {
-	m_CameraController.OnUpdate(ts);
+	MAB_PROFILE_FUNCTION();
 
-	MABEngine::Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
-	MABEngine::Renderer::RenderCommand::Clear();
+	// update
+	{
+		MAB_PROFILE_SCOPE("CameraController::OnUpdate()");
+		m_CameraController.OnUpdate(ts);
+	}
 
-	MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
-	
-	MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , 0.0f }, { 2.0f, 1.0f }, { m_SolidColor1, 1.0f});
-	MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.75f , 0.0f }, { 1.0f, 2.0f }, { m_SolidColor2, 1.0f });
+	// Rendering Pre
+	{
+		MAB_PROFILE_SCOPE("PreProcessRendering");
+		MABEngine::Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
+		MABEngine::Renderer::RenderCommand::Clear();
+	}
 
-	MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.0f , 0.0f, 0.1f }, { 10.0f, 10.0f }, m_CheckerBoardTexture);
+	// Rendering 
+	{
+		MAB_PROFILE_SCOPE("Rendering");
+		MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
 
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , 0.0f }, { 2.0f, 1.0f }, { m_SolidColor1, 1.0f });
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.75f , 0.0f }, { 1.0f, 2.0f }, { m_SolidColor2, 1.0f });
 
-	MABEngine::Renderer::EngineRenderer2d::EndScene();
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.0f , 0.0f, 0.1f }, { 10.0f, 10.0f }, m_CheckerBoardTexture);
+
+		MABEngine::Renderer::EngineRenderer2d::EndScene();
+	}
 }
 
 void SandBox2DLayer::OnAttach()
@@ -44,10 +57,11 @@ void SandBox2DLayer::OnAttach()
 
 void SandBox2DLayer::OnImGuiRender()
 {
+	MAB_PROFILE_FUNCTION();
+
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit3("Square Color1", glm::value_ptr(m_SolidColor1));
 	ImGui::ColorEdit3("Square Color2", glm::value_ptr(m_SolidColor2));
-
 	ImGui::End();
 }
 
@@ -55,4 +69,3 @@ void SandBox2DLayer::OnEvent(MABEngine::Events::Event& event)
 {
 	m_CameraController.OnEvent(event);
 }
-
