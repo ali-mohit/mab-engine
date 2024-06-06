@@ -23,11 +23,7 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 {
 	MAB_PROFILE_FUNCTION();
 
-	// update
-	{
-		MAB_PROFILE_SCOPE("CameraController::OnUpdate()");
-		m_CameraController.OnUpdate(ts);
-	}
+	m_CameraController.OnUpdate(ts);
 
 	// Rendering Pre
 	{
@@ -52,6 +48,8 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 
 void SandBox2DLayer::OnAttach()
 {
+	MAB_PROFILE_FUNCTION();
+
 	m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 

@@ -12,7 +12,6 @@ namespace MABEngine {
 	namespace Renderer {
 		Core::Ref<VertexArray> VertexArray::Create()
 		{
-
 			switch (EngineRenderer::GetCurrentAPI())
 			{
 			case RendererAPIType::None:

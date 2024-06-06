@@ -46,6 +46,8 @@ namespace MABEngine {
 
 		void OrthographicCameraController::OnUpdate(Core::EngineTimeStep ts)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_A)) {
 				//m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
 				m_CameraPosition.x -= cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
@@ -99,14 +101,17 @@ namespace MABEngine {
 
 		void OrthographicCameraController::OnEvent(Events::Event& e)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			Events::EventDispatcher dispatcher(e);
 			dispatcher.Dispatch<Events::MouseScrolledEvent>(MAB_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 			dispatcher.Dispatch<Events::WindowResizeEvent>(MAB_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
-
 		}
 
 		bool OrthographicCameraController::OnMouseScrolled(Events::MouseScrolledEvent& e)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			m_ZoomLevel -= e.GetYOffSet() * 0.25f;
 			m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 
@@ -117,6 +122,8 @@ namespace MABEngine {
 
 		bool OrthographicCameraController::OnWindowResized(Events::WindowResizeEvent& e)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 			m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 			return false;

@@ -17,6 +17,8 @@ namespace MABEngine {
 		}
 
 		void OpenGLGraphicContext::Init() {
+			MAB_PROFILE_FUNCTION();
+
 			glfwMakeContextCurrent(m_WindowHandle);
 
 			int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -32,6 +34,8 @@ namespace MABEngine {
 		}
 
 		void OpenGLGraphicContext::SwapBuffers() {
+			MAB_PROFILE_FUNCTION();
+
 			glfwSwapBuffers(m_WindowHandle);
 		}
 

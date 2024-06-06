@@ -18,6 +18,8 @@ namespace MABEngine {
 
 		void EngineRenderer2d::Init()
 		{
+			MAB_PROFILE_FUNCTION();
+
 			s_2dRendererData = new EngineRenderer2dStorage();
 			
 			// Loading Quad	
@@ -63,8 +65,9 @@ namespace MABEngine {
 			s_2dRendererData->TextureShader->UnBind();
 		}
 
-		void EngineRenderer2d::ShutDown()
-		{
+		void EngineRenderer2d::ShutDown() {
+			MAB_PROFILE_FUNCTION();
+
 			delete(s_2dRendererData);
 		}
 
@@ -75,12 +78,15 @@ namespace MABEngine {
 
 		void EngineRenderer2d::BeginScene(Camera::OrthographicCamera& camera)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			s_2dRendererData->TextureShader->Bind();
 			s_2dRendererData->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 		}
 
 		void EngineRenderer2d::EndScene()
 		{
+			MAB_PROFILE_FUNCTION();
 		}
 
 		void EngineRenderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
@@ -90,6 +96,8 @@ namespace MABEngine {
 
 		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			s_2dRendererData->TextureShader->Bind();
 			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", color);
 			s_2dRendererData->WhiteTexture->Bind();
@@ -110,6 +118,8 @@ namespace MABEngine {
 
 		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			s_2dRendererData->TextureShader->Bind();
 			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", glm::vec4(1.0f));
 			texture->Bind();

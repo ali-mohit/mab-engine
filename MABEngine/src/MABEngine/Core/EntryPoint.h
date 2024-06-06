@@ -14,17 +14,17 @@ int main(int argc, char** argv) {
 	MABEngine::Logging::Log::Init(appSetting.GetCoreLogSettings(), appSetting.GetAppLogSettings());
 
 
-	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Startup.json");
+	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Startup.json");
 	auto app = MABEngine::Core::CreateApplication(argc, argv);
 	MAB_PROFILE_END_SESSION();
 
 
-	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Runtime.json");
+	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Runtime.json");
 	app->Run();
 	MAB_PROFILE_END_SESSION();
 
 
-	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Shutdown.json");
+	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Shutdown.json");
 	delete app;
 	MAB_PROFILE_END_SESSION();
 

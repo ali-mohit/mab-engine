@@ -18,40 +18,51 @@
 
 namespace MABEngine {
 	namespace Core {
-		static bool s_GLFWInitialized = false;
+		static uint32_t s_GLFWWindowCount = 0;
 
 		static void GLFWErrorCallBack(int error, const char* description) {
 			MAB_CORE_ERROR("GLFW Error CallBack: (code: {0} - text: {1})", error, description);
 		}
 
-		Window* Window::Create(const WindowProps& props) {
-			return new WindowsGlfwWindow(props);
+		Scope<Window> Window::Create(const WindowProps& props) {
+			return CreateScope<WindowsGlfwWindow>(props);
 		}
 
 		WindowsGlfwWindow::WindowsGlfwWindow(const WindowProps& props) {
+			MAB_PROFILE_FUNCTION();
+
 			Init(props);
 		}
 
 		WindowsGlfwWindow::~WindowsGlfwWindow() {
+			MAB_PROFILE_FUNCTION();
+
 			Shutdown();
 		}
 
 		void WindowsGlfwWindow::Init(const WindowProps& props) {
+			MAB_PROFILE_FUNCTION();
+
 			m_Data.Title = props.Title;
 			m_Data.Width = props.Width;
 			m_Data.Height = props.Height;
 
 			MAB_CORE_INFO("Creating Window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-			if (!s_GLFWInitialized) {
-				// TODO: glfwTerminate on system shutdown
+			if (s_GLFWWindowCount == 0) {
+				MAB_PROFILE_SCOPE("glfwInit");
+
 				int success = glfwInit();
 				MAB_CORE_ASSERT(success, "Could not initialize GLFW");
 				glfwSetErrorCallback(GLFWErrorCallBack);
-				s_GLFWInitialized = true;
 			}
 
-			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			{
+				MAB_PROFILE_SCOPE("glfwCreateWindow");
+
+				m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+				s_GLFWWindowCount++;
+			}
 
 			m_GraphicContext = new Renderer::OpenGLGraphicContext(m_Window);
 			m_GraphicContext->Init();
@@ -175,15 +186,26 @@ namespace MABEngine {
 		}
 
 		void WindowsGlfwWindow::Shutdown() {
+			MAB_PROFILE_FUNCTION();
+
 			glfwDestroyWindow(m_Window);
+
+			s_GLFWWindowCount--;
+			if (s_GLFWWindowCount == 0) {
+				glfwTerminate();
+			}
 		}
 
 		void WindowsGlfwWindow::OnUpdate() {
+			MAB_PROFILE_FUNCTION();
+
 			glfwPollEvents();
 			m_GraphicContext->SwapBuffers();
 		}
 
 		void WindowsGlfwWindow::SetVSync(bool enabled) {
+			MAB_PROFILE_FUNCTION();
+
 			if (enabled)
 				glfwSwapInterval(1);
 			else

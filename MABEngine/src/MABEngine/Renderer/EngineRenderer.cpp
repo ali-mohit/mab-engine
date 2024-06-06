@@ -14,8 +14,15 @@ namespace MABEngine {
 
 		void EngineRenderer::Init()
 		{
+			MAB_PROFILE_FUNCTION();
+
 			RenderCommand::Init();
 			EngineRenderer2d::Init();
+		}
+
+		void EngineRenderer::Shutdown()
+		{
+			EngineRenderer2d::ShutDown();
 		}
 
 		void EngineRenderer::OnWindowResize(uint32_t width, uint32_t height)
