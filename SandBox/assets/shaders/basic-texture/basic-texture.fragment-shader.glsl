@@ -7,7 +7,8 @@ in vec2 v_TexCoord;
 			
 uniform vec4 u_UniqueColor;
 uniform sampler2D u_Texture;
+uniform vec2 u_Tiling;
 
 void main() {
-	color = texture(u_Texture, v_TexCoord * 10) * u_UniqueColor;
+	color = texture(u_Texture, v_TexCoord * u_Tiling) * u_UniqueColor;
 }

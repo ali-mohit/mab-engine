@@ -21,6 +21,8 @@ namespace MABEngine {
 		OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 			:m_RendererId(0), m_Name(name)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			std::unordered_map<ShaderFileType, std::string> shaderContents;
 			shaderContents[ShaderFileType::VertexShader] = vertexSource;
 			shaderContents[ShaderFileType::FragmentSahder] = fragmentSource;
@@ -31,6 +33,8 @@ namespace MABEngine {
 		OpenGLShader::OpenGLShader(const ShaderPackageFile& packageInfo)
 			:m_RendererId(0), m_Name(packageInfo.GetName())
 		{
+			MAB_PROFILE_FUNCTION();
+
 			std::string vertexShaderPath = packageInfo.GetShaderFilePath(ShaderFileType::VertexShader);
 			std::string fragmentShaderPath = packageInfo.GetShaderFilePath(ShaderFileType::FragmentSahder);
 
@@ -51,23 +55,28 @@ namespace MABEngine {
 			Compile(shaderContents);
 		}
 
-		OpenGLShader::~OpenGLShader()
-		{
+		OpenGLShader::~OpenGLShader() {
+			MAB_PROFILE_FUNCTION();
+
 			glDeleteProgram(m_RendererId);
 		}
 
-		void OpenGLShader::Bind() const
-		{
+		void OpenGLShader::Bind() const {
+			MAB_PROFILE_FUNCTION();
+
 			glUseProgram(m_RendererId);
 		}
 
-		void OpenGLShader::UnBind() const
-		{
+		void OpenGLShader::UnBind() const {
+			MAB_PROFILE_FUNCTION();
+
 			glUseProgram(0);
 		}
 
 		std::string OpenGLShader::ReadFileContent(const std::string& filePath)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			std::string result = "";
 
 			if (!std::filesystem::exists(filePath)) {
@@ -107,8 +116,9 @@ namespace MABEngine {
 			return 0;
 		}
 
-		void OpenGLShader::Compile(const std::unordered_map<ShaderFileType, std::string>& shadersContent)
-		{
+		void OpenGLShader::Compile(const std::unordered_map<ShaderFileType, std::string>& shadersContent) {
+			MAB_PROFILE_FUNCTION();
+
 			// Get a program object.
 			GLuint program = glCreateProgram();
 
@@ -195,113 +205,118 @@ namespace MABEngine {
 			m_RendererId = program;
 		}
 
-		void OpenGLShader::SetInt(const std::string& name, int value)
-		{
+		void OpenGLShader::SetInt(const std::string& name, int value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformInt(name, value);
 		}
 
-		void OpenGLShader::SetInt2(const std::string& name, const glm::ivec2& value)
-		{
+		void OpenGLShader::SetInt2(const std::string& name, const glm::ivec2& value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformInt2(name, value);
 		}
 
-		void OpenGLShader::SetInt3(const std::string& name, const glm::ivec3& value)
-		{
+		void OpenGLShader::SetInt3(const std::string& name, const glm::ivec3& value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformInt3(name, value);
 		}
 
-		void OpenGLShader::SetInt4(const std::string& name, const glm::ivec4& value)
-		{
+		void OpenGLShader::SetInt4(const std::string& name, const glm::ivec4& value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformInt4(name, value);
 		}
 
-		void OpenGLShader::SetFloat(const std::string& name, float value)
-		{
+		void OpenGLShader::SetFloat(const std::string& name, float value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformFloat(name, value);
 		}
 
-		void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& value)
-		{
+		void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformFloat2(name, value);
 		}
 
-		void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
-		{
+		void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value) {
+			MAB_PROFILE_FUNCTION();
 
 			UploadUniformFloat3(name, value);
 		}
 
-		void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
-		{
+		void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformFloat4(name, value);
 		}
 
-		void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
-		{
+		void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformMat3(name, matrix);
 		}
 
-		void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
-		{
+		void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix) {
+			MAB_PROFILE_FUNCTION();
+
 			UploadUniformMat4(name, matrix);
 		}
 
-		void OpenGLShader::UploadUniformInt(const std::string& name, int value)
-		{
+		void OpenGLShader::UploadUniformInt(const std::string& name, int value) {
+			
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform1i(location, value);
 		}
 
-		void OpenGLShader::UploadUniformInt2(const std::string& name, const glm::ivec2& value)
-		{
+		void OpenGLShader::UploadUniformInt2(const std::string& name, const glm::ivec2& value) {
+			
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform2i(location, value.x, value.y);
 		}
 
-		void OpenGLShader::UploadUniformInt3(const std::string& name, const glm::ivec3& value)
-		{
+		void OpenGLShader::UploadUniformInt3(const std::string& name, const glm::ivec3& value) {
+			
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform3i(location, value.x, value.y, value.z);
 		}
 
-		void OpenGLShader::UploadUniformInt4(const std::string& name, const glm::ivec4& value)
-		{
+		void OpenGLShader::UploadUniformInt4(const std::string& name, const glm::ivec4& value) {
+
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform4i(location, value.x, value.y, value.z, value.w);
 		}
 
-		void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
-		{
+		void OpenGLShader::UploadUniformFloat(const std::string& name, float value) {
+
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform1f(location, value);
 		}
 
-		void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& value)
-		{
+		void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& value) {
+
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform2f(location, value.x, value.y);
 		}
 
-		void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& value)
-		{
+		void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& value) {
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform3f(location, value.x, value.y, value.z);
 		}
 
-		void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& value)
-		{
+		void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& value) {
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform4f(location, value.x, value.y, value.z, value.w);
 		}
 
-		void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
-		{
+		void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix) {
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 		}
 
-		void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
-		{
+		void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix) {
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 		}

@@ -17,6 +17,8 @@ namespace MABEngine {
 
 		Application::Application()
 		{
+			MAB_PROFILE_FUNCTION();
+
 			MAB_CORE_ASSERT(!s_Instance, "Application already exists!");
 			s_Instance = this;
 
@@ -33,33 +35,48 @@ namespace MABEngine {
 
 		Application::~Application()
 		{
+			MAB_PROFILE_FUNCTION();
+
+			Renderer::EngineRenderer::Shutdown();
 		}
 
 		void Application::Run() {
+			MAB_PROFILE_FUNCTION();
+
 			while (m_Running) {
+				MAB_PROFILE_SCOPE("Run Loop");
 
 				float time = (float)EngineTimeObj->GetTime();
 				Core::EngineTimeStep timeStep = time - m_LastFrameTime;
 				m_LastFrameTime = time;
 
 				if (!m_Minimize) {
-					for (Layers::Layer* layer : m_LayerStack)
-						layer->OnUpdate(timeStep);
-				}
+					{
+						MAB_PROFILE_SCOPE("LayerStack OnUpdate");
 
-				m_ImGuiLayer->Begin();
-				for (Layers::Layer* layer : m_LayerStack)
-					layer->OnImGuiRender();
-				m_ImGuiLayer->End();
+						for (Layers::Layer* layer : m_LayerStack)
+							layer->OnUpdate(timeStep);
+					}
+
+					m_ImGuiLayer->Begin();
+					{
+						MAB_PROFILE_SCOPE("LayerStack OnImGuiRender");
+						for (Layers::Layer* layer : m_LayerStack)
+							layer->OnImGuiRender();
+					}
+					m_ImGuiLayer->End();
+				}
 
 
 				m_Window->OnUpdate();
-			
+
 			}
 		}
 
 		void Application::OnEvent(Events::Event& e)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			Events::EventDispatcher dispatcher(e);
 			dispatcher.Dispatch<Events::WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 			dispatcher.Dispatch<Events::WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
@@ -73,12 +90,16 @@ namespace MABEngine {
 
 		void Application::PushLayer(Layers::Layer* layer)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			m_LayerStack.PushLayer(layer);
 			layer->OnAttach();
 		}
 
 		void Application::PushOverLayer(Layers::Layer* layer)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			m_LayerStack.PushOverlay(layer);
 			layer->OnAttach();
 		}
@@ -92,6 +113,8 @@ namespace MABEngine {
 
 		bool Application::OnWindowResize(Events::WindowResizeEvent& e)
 		{
+			MAB_PROFILE_FUNCTION();
+
 			if (e.GetWidth() == 0 || e.GetHeight() == 0) {
 				m_Minimize = true;
 
@@ -102,5 +125,5 @@ namespace MABEngine {
 
 			return false;
 		}
-		}
+	}
 }

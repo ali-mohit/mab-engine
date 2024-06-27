@@ -13,11 +13,20 @@ int main(int argc, char** argv) {
 	auto appSetting = MABEngine::Core::Setting();
 	MABEngine::Logging::Log::Init(appSetting.GetCoreLogSettings(), appSetting.GetAppLogSettings());
 
+
+	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Startup.json");
 	auto app = MABEngine::Core::CreateApplication(argc, argv);
+	MAB_PROFILE_END_SESSION();
 
+
+	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Runtime.json");
 	app->Run();
+	MAB_PROFILE_END_SESSION();
 
+
+	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Shutdown.json");
 	delete app;
+	MAB_PROFILE_END_SESSION();
 
 	return 0;
 }

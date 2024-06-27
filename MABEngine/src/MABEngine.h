@@ -13,6 +13,11 @@
 
 #include "MABEngine/Logging/Log.h"
 
+#include "MABEngine/Events/Event.h"
+#include "MABEngine/Events/ApplicationEvent.h"
+#include "MABEngine/Events/KeyEvent.h"
+#include "MABEngine/Events/MouseEvent.h"
+
 #include "MABEngine/Inputs/Input.h"
 #include "MABEngine/Inputs/KeyboardCodes.h"
 #include "MABEngine/Inputs/MouseButtonCodes.h"
@@ -38,4 +43,3 @@
 #include "MABEngine/Camera/OrthographicCamera.h"
 #include "MABEngine/Camera/OrthographicCameraController.h"
 #include "MABEngine/Camera/PerspectiveFreeCamera.h"
-

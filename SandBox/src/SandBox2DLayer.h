@@ -23,5 +23,4 @@ private:
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
 
 	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_CheckerBoardTexture;
-
 };

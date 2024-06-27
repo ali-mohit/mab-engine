@@ -158,6 +158,8 @@
     <ClInclude Include="src\MABEngine\Core\Settings.h" />
     <ClInclude Include="src\MABEngine\Core\TimeStep.h" />
     <ClInclude Include="src\MABEngine\Core\Window.h" />
+    <ClInclude Include="src\MABEngine\Debugging\Instrumentor.h" />
+    <ClInclude Include="src\MABEngine\Debugging\Profiler.h" />
     <ClInclude Include="src\MABEngine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\MABEngine\Events\Event.h" />
     <ClInclude Include="src\MABEngine\Events\KeyEvent.h" />
