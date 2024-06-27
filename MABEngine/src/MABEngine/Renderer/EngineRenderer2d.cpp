@@ -89,17 +89,24 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 		}
 
-		void EngineRenderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
-		{
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec2& position,
+			const glm::vec2& size,
+			const glm::vec4& color
+		) {
 			DrawQuad({ position.x, position.y, 1.0 }, size, color);
 		}
 
-		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
-		{
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec3& position,
+			const glm::vec2& size,
+			const glm::vec4& color
+		) {
 			MAB_PROFILE_FUNCTION();
 
 			s_2dRendererData->TextureShader->Bind();
 			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", color);
+			s_2dRendererData->TextureShader->SetFloat2("u_Tiling", {1.0f, 1.0f});
 			s_2dRendererData->WhiteTexture->Bind();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
@@ -111,17 +118,58 @@ namespace MABEngine {
 			s_2dRendererData->WhiteTexture->UnBind();
 		}
 
-		void EngineRenderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
-		{
-			DrawQuad({ position.x, position.y, 1.0 }, size, texture);
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec2& position,
+			const glm::vec2& size,
+			float rotation,
+			const glm::vec4& color
+		) {
+			DrawQuad({ position.x, position.y, 1.0 }, size, rotation, color);
 		}
 
-		void EngineRenderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture)
-		{
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec3& position,
+			const glm::vec2& size,
+			float rotation,
+			const glm::vec4& color
+		) {
+			MAB_PROFILE_FUNCTION();
+
+			s_2dRendererData->TextureShader->Bind();
+			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", color);
+			s_2dRendererData->TextureShader->SetFloat2("u_Tiling", { 1.0f, 1.0f });
+			s_2dRendererData->WhiteTexture->Bind();
+
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) 
+				* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
+				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+			s_2dRendererData->TextureShader->SetMat4("u_Transform", transform);
+
+			s_2dRendererData->QuadVertexArray->Bind();
+			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
+			s_2dRendererData->WhiteTexture->UnBind();
+		}
+
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec2& position,
+			const glm::vec2& size,
+			const Core::Ref<Textures::Texture2D>& texture,
+			const glm::vec2& tiling
+		) {
+			DrawQuad({ position.x, position.y, 1.0 }, size, texture, tiling);
+		}
+
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec3& position,
+			const glm::vec2& size,
+			const Core::Ref<Textures::Texture2D>& texture,
+			const glm::vec2& tiling
+		) {
 			MAB_PROFILE_FUNCTION();
 
 			s_2dRendererData->TextureShader->Bind();
 			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", glm::vec4(1.0f));
+			s_2dRendererData->TextureShader->SetFloat2("u_Tiling", tiling);
 			texture->Bind();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
@@ -131,6 +179,39 @@ namespace MABEngine {
 			s_2dRendererData->TextureShader->Bind();
 			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
 			texture->UnBind();
+		}
+
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec2& position,
+			const glm::vec2& size,
+			float rotation,
+			const Core::Ref<Textures::Texture2D>& texture,
+			const glm::vec4& color,
+			const glm::vec2& tiling
+		) {
+			DrawQuad({ position.x, position.y, 0.0f }, size, rotation, texture, color, tiling);
+		}
+
+		void EngineRenderer2d::DrawQuad(
+			const glm::vec3& position,
+			const glm::vec2& size,
+			float rotation,
+			const Core::Ref<Textures::Texture2D>& texture,
+			const glm::vec4& color,
+			const glm::vec2& tiling
+		) {
+			s_2dRendererData->TextureShader->Bind();
+			s_2dRendererData->TextureShader->SetFloat4("u_UniqueColor", color);
+			s_2dRendererData->TextureShader->SetFloat2("u_Tiling", tiling);
+			texture->Bind();
+
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+				* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
+				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+			s_2dRendererData->TextureShader->SetMat4("u_Transform", transform);
+
+			s_2dRendererData->QuadVertexArray->Bind();
+			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray);
 		}
 
 	}
