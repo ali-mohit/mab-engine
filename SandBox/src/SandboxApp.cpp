@@ -18,8 +18,8 @@ public:
 		uint32_t h = GetWindow().GetHeight();
 
 		//PushLayer(new SandBox3DLayer(w, h));
-		//PushLayer(new SandBox2DLayer(w, h));
-		PushLayer(new SimpleGame::GameLayer(w, h));
+		PushLayer(new SandBox2DLayer(w, h));
+		//PushLayer(new SimpleGame::GameLayer(w, h));
 	}
 	~SandBoxApp() {
 

@@ -1,11 +1,12 @@
 #pragma once
 
 #include "MABEngine/Core/Base.h"
+#include "MABEngine/Core/EngineObject.h"
 
 namespace MABEngine {
 	namespace Textures {
 		
-		class MABENGINE_API Texture {
+		class MABENGINE_API Texture: public Core::EngineObject {
 		public:
 			virtual ~Texture() = default;
 

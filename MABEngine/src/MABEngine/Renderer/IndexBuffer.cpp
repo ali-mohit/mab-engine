@@ -26,5 +26,21 @@ namespace MABEngine {
 			return nullptr;
 		}
 
+		IndexBuffer* IndexBuffer::Create(uint32_t size, uint32_t elementSize)
+		{
+			switch (EngineRenderer::GetCurrentAPI())
+			{
+			case RendererAPIType::None:
+				MAB_CORE_ASSERT(false, "RendererAPIType::None is not support. There is not any IndexBuffer.");
+				break;
+			case RendererAPIType::OpenGL:
+				return new OpenGLIndexBuffer(size, elementSize);
+				break;
+			}
+
+			MAB_CORE_ASSERT(false, "IndexBuffer that support RendererAPI is not found. it returns nullptr.");
+			return nullptr;
+		}
+
 	}
 }

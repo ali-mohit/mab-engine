@@ -37,6 +37,12 @@ namespace MABEngine {
 
 			virtual void SetMat3(const std::string& name, const glm::mat3& matrix) override;
 			virtual void SetMat4(const std::string& name, const glm::mat4& matrix) override;
+
+			virtual void SetMat3Array(const std::string& name, const  std::vector<glm::mat3>& matrixList) override;
+			virtual void SetMat4Array(const std::string& name, const  std::vector<glm::mat4>& matrixList) override;
+
+			virtual void SetIntArray(const std::string& name, int* values, int count) override;
+			virtual void SetFloatArray(const std::string& name, float* values, int count) override;
 		
 		private:
 			std::string ReadFileContent(const std::string& filePath);
@@ -55,7 +61,12 @@ namespace MABEngine {
 
 			void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
 			void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
-		
+			
+			void UploadUniformMat3Array(const std::string& name, const std::vector<glm::mat3>& matrixList);
+			void UploadUniformMat4Array(const std::string& name, const std::vector<glm::mat4>& matrixList);
+
+			void UploadUniformIntArray(const std::string& name, int* values, int count);
+			void UploadUniformFloatArray(const std::string& name, float* values, int count);
 		private:
 			uint32_t m_RendererId = 0;
 			std::string m_Name = "";

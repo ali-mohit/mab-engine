@@ -259,10 +259,38 @@ namespace MABEngine {
 			UploadUniformMat3(name, matrix);
 		}
 
+		void OpenGLShader::SetMat3Array(const std::string& name, const std::vector<glm::mat3>& matrixList)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			UploadUniformMat3Array(name, matrixList);
+		}
+
 		void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix) {
 			MAB_PROFILE_FUNCTION();
 
 			UploadUniformMat4(name, matrix);
+		}
+
+		void OpenGLShader::SetMat4Array(const std::string& name, const std::vector<glm::mat4>& matrixList)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			UploadUniformMat4Array(name, matrixList);
+		}
+
+		void OpenGLShader::SetIntArray(const std::string& name, int* values, int count)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			UploadUniformIntArray(name, values, count);
+		}
+
+		void OpenGLShader::SetFloatArray(const std::string& name, float* values, int count)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			UploadUniformFloatArray(name, values, count);
 		}
 
 		void OpenGLShader::UploadUniformInt(const std::string& name, int value) {
@@ -319,6 +347,49 @@ namespace MABEngine {
 		void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix) {
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+		}
+
+		void OpenGLShader::UploadUniformMat3Array(const std::string& name, const std::vector<glm::mat3>& matrixList)
+		{
+			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+
+			std::vector<float> matrixData;
+			matrixData.reserve(matrixList.size() * 9);
+
+			for (const auto& mat : matrixList) {
+				const float* pSource = (const float*)glm::value_ptr(mat);
+				matrixData.insert(matrixData.end(), pSource, pSource + 9);
+			}
+
+			glUniformMatrix4fv(location, matrixList.size(), GL_FALSE, matrixData.data());
+		}
+
+		void OpenGLShader::UploadUniformMat4Array(const std::string& name, const std::vector<glm::mat4>& matrixList)
+		{
+			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+
+			std::vector<float> matrixData;
+			matrixData.reserve(matrixList.size() * 16);
+
+			for (const auto& mat : matrixList) {
+				const float* pSource = (const float*)glm::value_ptr(mat);
+				matrixData.insert(matrixData.end(), pSource, pSource + 16);
+			}
+
+			glUniformMatrix4fv(location, matrixList.size(), GL_FALSE, matrixData.data());
+		}
+
+		void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values, int count)
+		{
+			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+			glUniform1iv(location, count, values);
+		}
+
+		void OpenGLShader::UploadUniformFloatArray(const std::string& name, float* values, int count)
+		{
+			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+			glUniform1fv(location, count, values);
+
 		}
 
 	}

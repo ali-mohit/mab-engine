@@ -62,14 +62,14 @@ namespace MABEngine {
 			m_VertexBufferList.push_back(vertexBuffer);
 		}
 		
-		void OpenGLVertexArray::AddIndexBuffer(const Core::Ref<IndexBuffer>& indexBuffer)
+		void OpenGLVertexArray::SetIndexBuffer(const Core::Ref<IndexBuffer>& indexBuffer)
 		{
 			MAB_PROFILE_FUNCTION();
 
 			glBindVertexArray(m_RendererId);
 			indexBuffer->Bind();
 
-			m_IndexBufferList.push_back(indexBuffer);
+			m_IndexBuffer = indexBuffer;
 		}
 	}
 

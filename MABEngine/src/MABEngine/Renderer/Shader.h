@@ -34,6 +34,12 @@ namespace MABEngine {
 			virtual void SetMat3(const std::string& name, const glm::mat3& matrix) = 0;
 			virtual void SetMat4(const std::string& name, const glm::mat4& matrix) = 0;
 
+			virtual void SetMat3Array(const std::string& name, const  std::vector<glm::mat3>& matrixList) = 0;
+			virtual void SetMat4Array(const std::string& name, const  std::vector<glm::mat4>& matrixList) = 0;
+			
+			virtual void SetIntArray(const std::string& name, int* values, int count) = 0;
+			virtual void SetFloatArray(const std::string& name, float* values, int count) = 0;
+
 		};
 
 	}

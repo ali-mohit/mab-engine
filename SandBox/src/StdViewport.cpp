@@ -29,7 +29,7 @@ StdViewPort::StdViewPort(uint32_t width, uint32_t height)
 	unsigned int indices[3] = { 0, 1, 2 };
 	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-	m_VertexArray->AddIndexBuffer(indexBuffer);
+	m_VertexArray->SetIndexBuffer(indexBuffer);
 
 	std::string vertextSrc = R"(
 			#version 330 core
