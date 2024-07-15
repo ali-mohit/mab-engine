@@ -23,6 +23,8 @@ namespace MABEngine {
 			static void BeginScene(Camera::OrthographicCamera& camera);
 			static void EndScene();
 
+			static void Flush();
+
 			inline static RendererAPIType GetCurrentAPI() { return RendererAPI::GetAPI(); }
 			
 			static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
@@ -34,6 +36,10 @@ namespace MABEngine {
 			static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Core::Ref<Textures::Texture2D>& texture, const glm::vec2& tiling = { 1.0f, 1.0f });
 			static void DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Core::Ref<Textures::Texture2D>& texture, const glm::vec4& color = { 1.0f, 1.0f, 1.0f, 1.0f }, const glm::vec2& tiling = { 1.0f, 1.0f });
 			static void DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Core::Ref<Textures::Texture2D>& texture, const glm::vec4& color = { 1.0f, 1.0f, 1.0f, 1.0f }, const glm::vec2& tiling = { 1.0f, 1.0f });
+
+		private:
+			static void InnerDrawQuad(const glm::mat4& transform, const glm::vec4& color, float textureId = 0, float maskTextureId = 0, const glm::vec2& tiling = { 1.0f, 1.0f });
+
 		};
 
 	}

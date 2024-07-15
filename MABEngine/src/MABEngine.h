@@ -23,10 +23,7 @@
 #include "MABEngine/Inputs/MouseButtonCodes.h"
 
 #include "MABEngine/Renderer/RenderAPIType.h"
-#include "MABEngine/Renderer/RendererAPI.h"
-#include "MABEngine/Renderer/RenderCommand.h"
-#include "MABEngine/Renderer/EngineRenderer.h"
-#include "MABEngine/Renderer/EngineRenderer2D.h"
+#include "MABEngine/Renderer/QuadVertexInfo.h"
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/ShaderDataType.h"
 #include "MABEngine/Renderer/ShaderFileType.h"
@@ -36,6 +33,11 @@
 #include "MABEngine/Renderer/BufferLayout.h"
 #include "MABEngine/Renderer/IndexBuffer.h"
 #include "MABEngine/Renderer/VertexArray.h"
+#include "MABEngine/Renderer/EngineRenderer2dStorage.h"
+#include "MABEngine/Renderer/EngineRenderer.h"
+#include "MABEngine/Renderer/EngineRenderer2D.h"
+#include "MABEngine/Renderer/RendererAPI.h"
+#include "MABEngine/Renderer/RenderCommand.h"
 
 #include "MABEngine/Textures/Texture.h"
 #include "MABEngine/Textures/Texture2D.h"

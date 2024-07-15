@@ -13,7 +13,7 @@ namespace SimpleGame {
 		//Smoke
 		m_SmokeParticle.Position = { 0.0f, 0.0f };
 		
-		m_SmokeParticle.Velocity = { -2.0f, 0.0f };
+		m_SmokeParticle.Velocity = { -3.0f, 0.0f };
 		m_SmokeParticle.VelocityVariation = { 4.0f, 2.0f };
 		
 		m_SmokeParticle.SizeBegin = 0.35f;
@@ -23,12 +23,12 @@ namespace SimpleGame {
 		m_SmokeParticle.ColorBegin = { 0.8f, 0.8f, 0.8f, 1.0f };
 		m_SmokeParticle.ColorEnd = { 0.6f, 0.6f, 0.6f, 1.0f };
 		
-		m_SmokeParticle.LifeTime = 4.0f;
+		m_SmokeParticle.LifeTime = 6.0f;
 
 		// Flames
 		m_EngineParticle.Position = { 0.0f, 0.0f };
 
-		m_EngineParticle.Velocity = { -2.0f, 0.0f };
+		m_EngineParticle.Velocity = { -3.0f, 0.0f };
 		m_EngineParticle.VelocityVariation = { 3.0f, 1.0f };
 		
 		m_EngineParticle.SizeBegin = 0.5f;
@@ -38,7 +38,7 @@ namespace SimpleGame {
 		m_EngineParticle.ColorBegin = { 254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f };
 		m_EngineParticle.ColorEnd = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f , 1.0f };
 		
-		m_EngineParticle.LifeTime = 1.0f;
+		m_EngineParticle.LifeTime = 3.0f;
 	}
 	void Player::LoadAssets()
 	{

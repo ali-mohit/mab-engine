@@ -88,7 +88,7 @@ void SandBox3DLayer::CreateTriangleObject()
 	unsigned int indices[3] = { 0, 1, 2 };
 	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-	m_TriangleVertexArray->AddIndexBuffer(indexBuffer);
+	m_TriangleVertexArray->SetIndexBuffer(indexBuffer);
 
 	MABEngine::Renderer::ShaderPackageFile packageInfo(
 		"solidColor",
@@ -127,7 +127,7 @@ void SandBox3DLayer::CreateRectangleObject()
 	unsigned int indices[6] = { 0, 1, 2, 0, 2, 3 };
 	MABEngine::Core::Ref<MABEngine::Renderer::IndexBuffer> indexBuffer;
 	indexBuffer.reset(MABEngine::Renderer::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-	m_RectangleVertexArray->AddIndexBuffer(indexBuffer);
+	m_RectangleVertexArray->SetIndexBuffer(indexBuffer);
 
 	MABEngine::Renderer::ShaderPackageFile packageInfo(
 		"basic-texture",

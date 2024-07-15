@@ -25,5 +25,21 @@ namespace MABEngine {
 			MAB_CORE_ASSERT(false, "VertexBuffer that support RendererAPI is not found. it returns nullptr.");
 			return nullptr;
 		}
+
+		VertexBuffer* VertexBuffer::Create(uint32_t size)
+		{
+			switch (EngineRenderer::GetCurrentAPI())
+			{
+			case RendererAPIType::None:
+				MAB_CORE_ASSERT(false, "RendererAPIType::None is not support. There is not any VertexBuffer.");
+				break;
+			case RendererAPIType::OpenGL:
+				return new OpenGLVertexBuffer(size);
+				break;
+			}
+
+			MAB_CORE_ASSERT(false, "VertexBuffer that support RendererAPI is not found. it returns nullptr.");
+			return nullptr;
+		}
 	}
 }

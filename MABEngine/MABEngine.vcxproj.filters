@@ -1537,6 +1537,7 @@
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorage.h" />
     <ClInclude Include="src\MABEngine\Debugging\Instrumentor.h" />
     <ClInclude Include="src\MABEngine\Debugging\Profiler.h" />
+    <ClInclude Include="src\MABEngine\Renderer\QuadVertexInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">

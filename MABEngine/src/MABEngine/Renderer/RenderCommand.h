@@ -14,6 +14,10 @@ namespace MABEngine {
 				s_RendererAPI->Init();
 			}
 
+			inline static uint32_t GetMaxNumberOfTextureImageUnit() {
+				return s_RendererAPI->GetMaxNumberOfTextureImageUnit();
+			}
+
 			inline static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
 				s_RendererAPI->SetViewport(x, y, width, height);
 			}
@@ -26,8 +30,8 @@ namespace MABEngine {
 				s_RendererAPI->Clear();
 			}
 
-			inline static void DrawIndexed(const Core::Ref<VertexArray>& vertexArray) {
-				s_RendererAPI->DrawIndexed(vertexArray);
+			inline static void DrawIndexed(const Core::Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) {
+				s_RendererAPI->DrawIndexed(vertexArray, indexCount);
 			}
 		private:
 			static RendererAPI* s_RendererAPI;

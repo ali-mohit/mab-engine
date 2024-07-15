@@ -18,10 +18,10 @@ namespace MABEngine {
 			virtual void UnBind() const = 0;
 
 			virtual void AddVertexBuffer(const Core::Ref<VertexBuffer>& vertexBuffer) = 0;
-			virtual void AddIndexBuffer(const Core::Ref<IndexBuffer>& indexBuffer) = 0;
+			virtual void SetIndexBuffer(const Core::Ref<IndexBuffer>& indexBuffer) = 0;
 
 			virtual const std::vector<Core::Ref<VertexBuffer>>& GetVertexBufferList() const = 0;
-			virtual const std::vector<Core::Ref<IndexBuffer>>& GetIndexBufferList() const = 0;
+			virtual const Core::Ref<IndexBuffer>& GetIndexBuffer() const = 0;
 
 
 			static Core::Ref<VertexArray> Create();

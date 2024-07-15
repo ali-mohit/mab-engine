@@ -15,6 +15,14 @@ namespace MABEngine {
 
 			glEnable(GL_DEPTH_TEST);
 		}
+		
+		uint32_t OpenGLRendererAPI::GetMaxNumberOfTextureImageUnit()
+		{
+			GLint maxTextureUnit = 0;
+			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnit);
+			return maxTextureUnit;
+		}
+
 		void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 		{
 			glClearColor(color.r, color.b, color.g, color.a);
@@ -30,9 +38,11 @@ namespace MABEngine {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		void OpenGLRendererAPI::DrawIndexed(const Core::Ref<VertexArray>& vertextArray)
+		void OpenGLRendererAPI::DrawIndexed(const Core::Ref<VertexArray>& vertextArray, uint32_t indexCount)
 		{
-			glDrawElements(GL_TRIANGLES, vertextArray->GetIndexBufferList()[0]->GetCount(), GL_UNSIGNED_INT, nullptr);
+			uint32_t count = indexCount > 0 ? indexCount : vertextArray->GetIndexBuffer()->GetCount();
+
+			glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 		}
 	}
 }
