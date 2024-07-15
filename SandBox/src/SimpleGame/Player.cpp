@@ -40,10 +40,12 @@ namespace SimpleGame {
 		
 		m_EngineParticle.LifeTime = 3.0f;
 	}
+	
 	void Player::LoadAssets()
 	{
 		m_ShipTextuer = MABEngine::Textures::Texture2D::Create("assets/simple_game/images/ShipTexture.png");
 	}
+
 	void Player::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	{
 		m_Time += ts;
@@ -87,7 +89,7 @@ namespace SimpleGame {
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 			{ m_Position.x, m_Position.y, 0.5f },
 			GetScaleTexture(),
-			glm::radians(GetRotation()),
+			GetRotation(),
 			m_ShipTextuer
 		);
 	}

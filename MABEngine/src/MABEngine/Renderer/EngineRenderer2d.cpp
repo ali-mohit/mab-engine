@@ -44,7 +44,7 @@ namespace MABEngine {
 			
 			//Generate VertexInfoArray and Edge
 			s_2dRendererData->QuadVertexInfoBase = new QuadVertexInfo[s_2dRendererData->MAX_VERTICES];
-			s_2dRendererData->QuadIndexEdgeBase = new uint32_t[s_2dRendererData->MAX_INDICES];
+			s_2dRendererData->QuadEdgeBase = new uint32_t[s_2dRendererData->MAX_INDICES];
 
 			// Loading Texture Shader
 			ShaderPackageFile packageTextureInfo(
@@ -75,20 +75,20 @@ namespace MABEngine {
 
 
 			s_2dRendererData->VertexPositionTemplate[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
-			s_2dRendererData->VertexPositionTemplate[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
-			s_2dRendererData->VertexPositionTemplate[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
+			s_2dRendererData->VertexPositionTemplate[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
+			s_2dRendererData->VertexPositionTemplate[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
 			s_2dRendererData->VertexPositionTemplate[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 		}
 
 		void EngineRenderer2d::ShutDown() {
 			MAB_PROFILE_FUNCTION();
 
-			delete[] s_2dRendererData->QuadIndexEdgeBase;
+			delete[] s_2dRendererData->QuadEdgeBase;
 			delete[] s_2dRendererData->QuadVertexInfoBase;
 
 			s_2dRendererData->QuadVertexInfoBase = nullptr;
 			s_2dRendererData->QuadVertexInfoPtr = nullptr;
-			s_2dRendererData->QuadIndexEdgeBase = nullptr;
+			s_2dRendererData->QuadEdgeBase = nullptr;
 
 			delete(s_2dRendererData);
 		}
@@ -107,8 +107,8 @@ namespace MABEngine {
 
 			s_2dRendererData->QuadVertexInfoPtr = s_2dRendererData->QuadVertexInfoBase;
 
-			s_2dRendererData->QuadIndexCount += 0;
-			s_2dRendererData->QuadEdgeCount += 0;
+			s_2dRendererData->QuadVertexCount = 0;
+			s_2dRendererData->QuadEdgeCount = 0;
 		}
 
 		void EngineRenderer2d::EndScene()
@@ -119,7 +119,7 @@ namespace MABEngine {
 			s_2dRendererData->QuadVertexBuffer->SetData(s_2dRendererData->QuadVertexInfoBase, vertexInfoSize);
 
 			uint32_t edgeSize = s_2dRendererData->QuadEdgeCount * sizeof(uint32_t);
-			s_2dRendererData->QuadIndexBuffer->SetData(s_2dRendererData->QuadIndexEdgeBase, edgeSize);
+			s_2dRendererData->QuadIndexBuffer->SetData(s_2dRendererData->QuadEdgeBase, edgeSize);
 
 			Flush();
 		}
@@ -127,14 +127,14 @@ namespace MABEngine {
 		void EngineRenderer2d::Flush()
 		{
 			MAB_PROFILE_FUNCTION();
-
+			
 			for (const auto& pair : s_2dRendererData->TextureLib) {
 				uint32_t slotId = s_2dRendererData->TextureLibIndex[pair.first];
 				
 				pair.second->Bind(slotId);
 			}
 
-			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray, s_2dRendererData->QuadIndexCount);
+			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray, s_2dRendererData->QuadEdgeCount);
 		}
 
 		void EngineRenderer2d::DrawQuad(
@@ -230,7 +230,7 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-				* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
+				* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
 				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 			
 			
@@ -279,16 +279,16 @@ namespace MABEngine {
 			s_2dRendererData->QuadVertexInfoPtr++;
 
 			uint32_t offset = s_2dRendererData->QuadEdgeCount;
-			uint32_t vertexCode = s_2dRendererData->QuadIndexCount;
-			s_2dRendererData->QuadIndexEdgeBase[offset + 0] = vertexCode + 0;
-			s_2dRendererData->QuadIndexEdgeBase[offset + 1] = vertexCode + 1;
-			s_2dRendererData->QuadIndexEdgeBase[offset + 2] = vertexCode + 2;
+			uint32_t vertexCode = s_2dRendererData->QuadVertexCount;
+			s_2dRendererData->QuadEdgeBase[offset + 0] = vertexCode + 0;
+			s_2dRendererData->QuadEdgeBase[offset + 1] = vertexCode + 1;
+			s_2dRendererData->QuadEdgeBase[offset + 2] = vertexCode + 2;
 
-			s_2dRendererData->QuadIndexEdgeBase[offset + 3] = vertexCode + 2;
-			s_2dRendererData->QuadIndexEdgeBase[offset + 4] = vertexCode + 3;
-			s_2dRendererData->QuadIndexEdgeBase[offset + 5] = vertexCode + 0;
+			s_2dRendererData->QuadEdgeBase[offset + 3] = vertexCode + 2;
+			s_2dRendererData->QuadEdgeBase[offset + 4] = vertexCode + 3;
+			s_2dRendererData->QuadEdgeBase[offset + 5] = vertexCode + 0;
 
-			s_2dRendererData->QuadIndexCount += 4;
+			s_2dRendererData->QuadVertexCount += 4;
 			s_2dRendererData->QuadEdgeCount += 6;
 		}
 
