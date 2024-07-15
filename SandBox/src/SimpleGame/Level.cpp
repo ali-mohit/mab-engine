@@ -71,7 +71,7 @@ namespace SimpleGame {
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 				pillar.TopPosition,
 				pillar.TopScale,
-				glm::radians(180.0f),
+				180.0f,
 				m_TriangleTexture,
 				color
 			);
@@ -79,7 +79,7 @@ namespace SimpleGame {
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 				pillar.BottomPosition,
 				pillar.BottomScale,
-				glm::radians(0.0f),
+				0.0f,
 				m_TriangleTexture,
 				color
 			);
@@ -133,7 +133,7 @@ namespace SimpleGame {
 
 		for (int i = 0; i < 4; i++) {
 			playerGridTransform[i] = glm::translate(glm::mat4(1.0f), { playerPos.x, playerPos.y, 0.0 })
-				* glm::rotate(glm::mat4(1.0f), glm::radians(m_Player.GetRotation()), { 0.0f, 0.0f, 1.0f })
+				* glm::rotate(glm::mat4(1.0f), glm::radians(m_Player.GetRotation()), {0.0f, 0.0f, 1.0f})
 				* glm::scale(glm::mat4(1.0f), { m_Player.GetScaleTexture() , 1.0f})
 				* playerGrid[i];
 		}

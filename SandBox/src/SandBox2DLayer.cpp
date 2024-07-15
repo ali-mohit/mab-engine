@@ -34,14 +34,17 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 
 	// Rendering 
 	{
+		static float rotation = 0.0;
+		rotation += ts * 50.0f;
+
 		MAB_PROFILE_SCOPE("Rendering");
 		MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
 
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , 0.0f }, { 2.0f, 1.0f }, { m_SolidColor1, 1.0f });
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.75f , 0.0f }, { 1.0f, 2.0f }, { m_SolidColor2, 1.0f });
 
-		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , -1.0f }, { 0.5f, 0.5f }, 45.0f, { m_SolidColor3, 1.0f });
-		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.0f , 0.0f, 0.1f }, { 10.0f, 10.0f }, m_CheckerBoardTexture);
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , -1.0f }, { 0.5f, 0.5f }, rotation, { m_SolidColor3, 1.0f });
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.0f , 0.0f, 0.1f }, { 10.0f, 10.0f }, m_CheckerBoardTexture, {10.0f, 10.0f});
 
 		MABEngine::Renderer::EngineRenderer2d::EndScene();
 	}

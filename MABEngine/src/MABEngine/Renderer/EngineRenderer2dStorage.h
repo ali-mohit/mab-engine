@@ -30,9 +30,9 @@ namespace MABEngine {
 			QuadVertexInfo* QuadVertexInfoBase = nullptr;
 			QuadVertexInfo* QuadVertexInfoPtr = nullptr;
 
-			uint32_t QuadIndexCount = 0;
+			uint32_t QuadVertexCount = 0;
 			uint32_t QuadEdgeCount = 0;
-			uint32_t* QuadIndexEdgeBase = nullptr;
+			uint32_t* QuadEdgeBase = nullptr;
 
 			glm::vec4 VertexPositionTemplate[4];
 
