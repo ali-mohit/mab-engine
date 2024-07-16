@@ -109,6 +109,8 @@ namespace MABEngine {
 
 			s_2dRendererData->QuadVertexCount = 0;
 			s_2dRendererData->QuadEdgeCount = 0;
+
+			s_2dRendererData->ClearTextureLib();
 		}
 
 		void EngineRenderer2d::EndScene()
@@ -135,6 +137,8 @@ namespace MABEngine {
 			}
 
 			RenderCommand::DrawIndexed(s_2dRendererData->QuadVertexArray, s_2dRendererData->QuadEdgeCount);
+
+			INCREASE_NUMBER_OF_CALLS(s_2dRendererData->Stats, 1);
 		}
 
 		void EngineRenderer2d::DrawQuad(
@@ -153,7 +157,7 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 			
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-				* glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), { 0.0f, 0.0f, 1.0f })
+				* glm::rotate(glm::mat4(1.0f), 0.0f, { 0.0f, 0.0f, 1.0f })
 				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 			InnerDrawQuad(transform, color);
@@ -177,7 +181,7 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-				* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+				* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
 				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 			InnerDrawQuad(transform, color);
@@ -201,11 +205,10 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-				* glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), { 0.0f, 0.0f, 1.0f })
+				* glm::rotate(glm::mat4(1.0f), 0.0f, { 0.0f, 0.0f, 1.0f })
 				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-			float textureId = s_2dRendererData->AddTextureInToLib(texture);
-			InnerDrawQuad(transform, {1.0f, 1.0f, 1.0f, 1.0f}, textureId, 0, tiling);
+			InnerDrawQuad(transform, {1.0f, 1.0f, 1.0f, 1.0f}, texture, 0, tiling);
 		}
 
 		void EngineRenderer2d::DrawQuad(
@@ -230,22 +233,42 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-				* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
+				* glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f})
 				* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 			
-			
-			float textureId = s_2dRendererData->AddTextureInToLib(texture);
-			InnerDrawQuad(transform, color, textureId, 0, tiling);
+			InnerDrawQuad(transform, color, texture, 0, tiling);
+		}
+
+		void EngineRenderer2d::ResetStats()
+		{
+			memset(&s_2dRendererData->Stats, 0, sizeof(EngineRenderer2dStorageStatistics));
+		}
+
+		EngineRenderer2dStorageStatistics EngineRenderer2d::GetStats()
+		{
+			return s_2dRendererData->Stats;
 		}
 
 		void EngineRenderer2d::InnerDrawQuad(
 			const glm::mat4& transform,
 			const glm::vec4& color,
-			float textureId,
-			float maskTextureId,
+			const Core::Ref<Textures::Texture2D>& texture,
+			const Core::Ref<Textures::Texture2D>& maskTexture,
 			const glm::vec2& tiling
 		)
 		{
+			if (s_2dRendererData->QuadEdgeCount >= s_2dRendererData->MAX_INDICES ||
+				!s_2dRendererData->CanUploadNewTextures(texture, maskTexture))
+				FlushAndReset();
+
+			float textureId = 0;
+			if(texture != nullptr)
+				textureId = s_2dRendererData->AddTextureInToLib(texture);
+			
+			float maskTextureId = 0;
+			if(maskTexture != nullptr)
+				maskTextureId = s_2dRendererData->AddTextureInToLib(maskTexture);
+
 			s_2dRendererData->QuadVertexInfoPtr->Position = transform * s_2dRendererData->VertexPositionTemplate[0];
 			s_2dRendererData->QuadVertexInfoPtr->Color = color;
 			s_2dRendererData->QuadVertexInfoPtr->TextCoordinate = { 0.0f, 0.0f };
@@ -290,6 +313,20 @@ namespace MABEngine {
 
 			s_2dRendererData->QuadVertexCount += 4;
 			s_2dRendererData->QuadEdgeCount += 6;
+
+			INCREASE_NUMBER_OF_QUADS(s_2dRendererData->Stats, 1);
+		}
+
+		void EngineRenderer2d::FlushAndReset()
+		{
+			EndScene();
+
+			s_2dRendererData->QuadVertexInfoPtr = s_2dRendererData->QuadVertexInfoBase;
+
+			s_2dRendererData->QuadVertexCount = 0;
+			s_2dRendererData->QuadEdgeCount = 0;
+
+			s_2dRendererData->ClearTextureLib();
 		}
 
 	}

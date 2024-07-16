@@ -2,6 +2,7 @@
 
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/GraphicContext.h"
+#include "MABEngine/Renderer/EngineRenderer2dStorageStatistics.h"
 #include "MABEngine/Renderer/VertexArray.h"
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/QuadVertexInfo.h"
@@ -15,7 +16,7 @@ namespace MABEngine {
 	namespace Renderer {
 		
 		struct MABENGINE_API EngineRenderer2dStorage {
-			const uint32_t MAX_QUADS = 100000;
+			const uint32_t MAX_QUADS = 10000;
 			const uint32_t MAX_VERTICES = MAX_QUADS * 4;
 			const uint32_t MAX_INDICES = MAX_QUADS * 6;
 			uint32_t MAX_TEXTURE_UNIT = RenderCommand::GetMaxNumberOfTextureImageUnit();
@@ -60,13 +61,30 @@ namespace MABEngine {
 				
 				return TextureLibIndex[texture->ID()];
 			}
-			void ClearTextureLib(const Core::Ref<Textures::Texture2D>& texture) {
+			
+			void ClearTextureLib() {
 				TextureLib.clear();
 				TextureLibIndex.clear();
 				QuadTextureIndex = 0;
 
+				AddTextureInToLib(WhiteTexture);
 			}
+			
+			bool CanUploadNewTextures(
+				const Core::Ref<Textures::Texture2D>& texture=nullptr,
+				const Core::Ref<Textures::Texture2D>& secondTexture=nullptr
+			) {
+				int count = 0;
+				count += texture != nullptr ? 1 : 0;
+				count += secondTexture != nullptr ? 1 : 0;
 
+				if ((TextureLib.size() + count) < MAX_TEXTURE_UNIT)
+					return true;
+				
+				return false;
+			}
+			
+			EngineRenderer2dStorageStatistics Stats;
 		};
 
 	}

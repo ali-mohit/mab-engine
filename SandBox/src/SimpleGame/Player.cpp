@@ -89,7 +89,7 @@ namespace SimpleGame {
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 			{ m_Position.x, m_Position.y, 0.5f },
 			GetScaleTexture(),
-			GetRotation(),
+			glm::radians(GetRotation()),
 			m_ShipTextuer
 		);
 	}

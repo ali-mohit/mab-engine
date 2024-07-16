@@ -21,6 +21,7 @@ private:
 	glm::vec3 m_SolidColor1 = { 0.2f, 0.3f, 0.8f };
 	glm::vec3 m_SolidColor2 = { 0.5f, 0.8f, 0.3f };
 	glm::vec3 m_SolidColor3 = { 0.9f, 0.2f, 0.5f };
+	glm::vec3 m_rotationBoxPos = { -1.0f , -1.0f, 0.5f };
 
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
 

@@ -82,17 +82,26 @@ project "MABEngine"
 		}
 	
 	filter "configurations:Debug"
-		defines "MABENGINE_DEBUG"
+		defines {
+			"MABENGINE_DEBUG",
+			"ENGINE2D_STATISTICS=1"
+		}
 		buildoptions "/MTd"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "MABENGINE_RELEASE"
+		defines {
+			"MABENGINE_RELEASE",
+			"ENGINE2D_STATISTICS=0"
+		}
 		buildoptions "/MT"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "MABENGINE_DIST"
+		defines {
+			"MABENGINE_DIST",
+			"ENGINE2D_STATISTICS=0"
+		}
 		buildoptions "/MT"
 		optimize "on"
 
@@ -133,16 +142,25 @@ project "SandBox"
 
 	
 	filter "configurations:Debug"
-		defines "MABENGINE_DEBUG"
+		defines {
+			"MABENGINE_DEBUG",
+			"ENGINE2D_STATISTICS=1"
+		}
 		buildoptions "/MTd"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "MABENGINE_RELEASE"
+		defines {
+			"MABENGINE_RELEASE",
+			"ENGINE2D_STATISTICS=0"
+		}
 		buildoptions "/MT"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "MABENGINE_DIST"
+		defines {
+			"MABENGINE_DIST",
+			"ENGINE2D_STATISTICS=0"
+		}
 		buildoptions "/MT"
 		optimize "on"

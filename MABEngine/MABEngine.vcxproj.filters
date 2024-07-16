@@ -13,6 +13,9 @@
     <Filter Include="src\MABEngine\Core">
       <UniqueIdentifier>{5A31AC78-4615-6DCE-AF75-67219B785750}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MABEngine\Debugging">
+      <UniqueIdentifier>{FD1BFE79-6953-4611-725D-AA34DE136D0A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\MABEngine\Events">
       <UniqueIdentifier>{6601A059-5290-2923-FBAE-3D1EE71C3AC9}</UniqueIdentifier>
     </Filter>
@@ -102,7 +105,13 @@
     <ClInclude Include="src\MABEngine\Core\Base.h">
       <Filter>src\MABEngine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Core\EngineObject.h">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Core\EngineTime.h">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Core\EngineUUID.h">
       <Filter>src\MABEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Core\EntryPoint.h">
@@ -119,6 +128,12 @@
     </ClInclude>
     <ClInclude Include="src\MABEngine\Core\Window.h">
       <Filter>src\MABEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Debugging\Instrumentor.h">
+      <Filter>src\MABEngine\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Debugging\Profiler.h">
+      <Filter>src\MABEngine\Debugging</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Events\ApplicationEvent.h">
       <Filter>src\MABEngine\Events</Filter>
@@ -171,10 +186,22 @@
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2d.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorage.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorageStatistics.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\QuadVertexInfo.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\RenderAPIType.h">
@@ -1533,11 +1560,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2d.h" />
-    <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorage.h" />
-    <ClInclude Include="src\MABEngine\Debugging\Instrumentor.h" />
-    <ClInclude Include="src\MABEngine\Debugging\Profiler.h" />
-    <ClInclude Include="src\MABEngine\Renderer\QuadVertexInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1583,6 +1605,9 @@
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Renderer\EngineRenderer.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\EngineRenderer2d.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp">
@@ -1651,6 +1676,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Renderer\EngineRenderer2d.cpp" />
   </ItemGroup>
 </Project>

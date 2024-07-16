@@ -3,9 +3,9 @@
 #include <MABEngine.h>
 #include <glm/glm.hpp>
 
-#include "SimpleGame/ParticleProps.h"
+#include "Tools/ParticleProps.h"
 
-namespace SimpleGame {
+namespace Tools {
 
 	class MABENGINE_API ParticleSystem {
 	public:

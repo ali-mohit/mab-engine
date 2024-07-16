@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-namespace SimpleGame {
+namespace Tools {
 	struct ParticleProps {
 		glm::vec2 Position;
 		glm::vec2 Velocity;

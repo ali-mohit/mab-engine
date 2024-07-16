@@ -4,11 +4,11 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/compatibility.hpp>
 
-#include "SimpleGame/ParticleSystem.h"
-#include "SimpleGame/ParticleProps.h"
+#include "Tools/ParticleSystem.h"
+#include "Tools/ParticleProps.h"
 #include "Utilities/Random.h"
 
-namespace SimpleGame {
+namespace Tools {
 	
 	ParticleSystem::ParticleSystem()
 	{
@@ -76,7 +76,7 @@ namespace SimpleGame {
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 				{ particle.Position.x, particle.Position.y, -0.05 },
 				{ size, size },
-				particle.Rotation,
+				glm::radians(particle.Rotation),
 				color
 			);
 		}
