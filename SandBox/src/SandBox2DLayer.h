@@ -3,6 +3,9 @@
 #include <MABEngine.h>
 #include <glm/glm.hpp>
 
+#include "Tools/ParticleSystem.h"
+
+
 class SandBox2DLayer : public MABEngine::Layers::Layer {
 public:
 	SandBox2DLayer(uint32_t width, uint32_t height);
@@ -26,4 +29,7 @@ private:
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
 
 	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_CheckerBoardTexture;
+
+	Tools::ParticleSystem m_ParticleSystem;
+	Tools::ParticleProps m_ParticleProperties;
 };

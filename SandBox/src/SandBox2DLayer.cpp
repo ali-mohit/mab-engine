@@ -70,6 +70,24 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 		}
 		MABEngine::Renderer::EngineRenderer2d::EndScene();
 	}
+
+	if (MABEngine::Inputs::Input::IsMouseButtonPressed(MABEngine::Inputs::Mab_Mouse_Button_1)) {
+		auto [x, y] = MABEngine::Inputs::Input::GetMousePos();
+		auto width = MABEngine::Core::Application::Get().GetWindow().GetWidth();
+		auto height = MABEngine::Core::Application::Get().GetWindow().GetHeight();
+
+		auto bounds = m_CameraController.GetBounds();
+		auto pos = m_CameraController.GetCamera().GetPosition();
+		
+		x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
+		y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
+		m_ParticleProperties.Position = { x + pos.x, y + pos.y };
+		for (int i = 0; i < 5; i++) {
+			m_ParticleSystem.Emit(m_ParticleProperties);
+		}
+	}
+	m_ParticleSystem.OnUpdate(ts);
+	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 }
 
 void SandBox2DLayer::OnAttach()
@@ -77,6 +95,16 @@ void SandBox2DLayer::OnAttach()
 	MAB_PROFILE_FUNCTION();
 
 	m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
+
+	m_ParticleProperties.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
+	m_ParticleProperties.ColorEnd = { 200 / 255.0f, 58 / 255.0f, 41 / 255.0f, 1.0f };
+	m_ParticleProperties.Position = { 0.0f, 0.0f };
+	m_ParticleProperties.Velocity = { 0.0f, 0.0f };
+	m_ParticleProperties.VelocityVariation = { 3.0f, 1.0f };
+	m_ParticleProperties.SizeBegin = 0.3f;
+	m_ParticleProperties.SizeEnd = 0.0f;
+	m_ParticleProperties.SizeVariation = 0.3f;
+	m_ParticleProperties.LifeTime = 5.0f;
 }
 
 void SandBox2DLayer::OnImGuiRender()

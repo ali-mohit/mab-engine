@@ -10,9 +10,10 @@
 
 namespace Tools {
 	
-	ParticleSystem::ParticleSystem()
+	ParticleSystem::ParticleSystem(uint32_t maxParticles)
+		:m_PoolIndex(maxParticles - 1)
 	{
-		m_ParticlePool.resize(1000);
+		m_ParticlePool.resize(maxParticles);
 	}
 	
 	void ParticleSystem::Emit(const ParticleProps& particleProp)
@@ -62,6 +63,29 @@ namespace Tools {
 		}
 	}
 	
+	void ParticleSystem::OnRender(MABEngine::Camera::OrthographicCamera& camera)
+	{
+		MABEngine::Renderer::EngineRenderer2d::BeginScene(camera);
+
+		for (auto& particle : m_ParticlePool) {
+			if (!particle.IsActive)
+				continue;
+
+			float life = particle.LifeRemain / particle.LifeTime;
+			glm::vec4 color = glm::lerp(particle.ColorEnd, particle.ColorBegin, life);
+			color.a = color.a * life;
+
+			float size = glm::lerp(particle.SizeEnd, particle.SizeBegin, life);
+			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
+				{ particle.Position.x, particle.Position.y, 0.5 },
+				{ size, size },
+				glm::radians(particle.Rotation),
+				color
+			);
+		}
+
+		MABEngine::Renderer::EngineRenderer2d::EndScene();
+	}
 	void ParticleSystem::OnRender()
 	{
 		for (auto& particle : m_ParticlePool) {

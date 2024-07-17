@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="src\MABEngine.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCamera.h" />
+    <ClInclude Include="src\MABEngine\Camera\OrthographicCameraBounds.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraController.h" />
     <ClInclude Include="src\MABEngine\Camera\PerspectiveFreeCamera.h" />
     <ClInclude Include="src\MABEngine\Core\Application.h" />

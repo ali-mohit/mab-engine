@@ -9,11 +9,12 @@ namespace Tools {
 
 	class MABENGINE_API ParticleSystem {
 	public:
-		ParticleSystem();
+		ParticleSystem(uint32_t maxParticles=999);
 
 		void Emit(const ParticleProps& particleProps);
 
 		void OnUpdate(MABEngine::Core::EngineTimeStep ts);
+		void OnRender(MABEngine::Camera::OrthographicCamera& camera);
 		void OnRender();
 	private:
 		struct ParticleInfo {
@@ -35,7 +36,7 @@ namespace Tools {
 		};
 
 		std::vector<ParticleInfo> m_ParticlePool;
-		uint32_t m_PoolIndex = 999;
+		uint32_t m_PoolIndex = 0;
 	};
 
 }

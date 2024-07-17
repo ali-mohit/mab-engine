@@ -14,7 +14,8 @@ namespace MABEngine {
 			 m_ZoomLevel(zoomLevel),
 			 m_ViewWidth(DEFAULT_VIEWPORT_SIZE),
 			 m_ViewHeight((int)(DEFAULT_VIEWPORT_SIZE * aspectRatio)),
-			 m_Camera(-aspectRatio * zoomLevel, aspectRatio * zoomLevel, -zoomLevel, zoomLevel)
+			 m_Bounds({ -aspectRatio * zoomLevel, aspectRatio * zoomLevel, -zoomLevel, zoomLevel }),
+			 m_Camera(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top)
 		{
 		}
 
@@ -23,7 +24,8 @@ namespace MABEngine {
 			 m_ZoomLevel(zoomLevel),
 			 m_ViewWidth(viewportHeight != 0 ? viewportWidth : DEFAULT_VIEWPORT_SIZE),
 			 m_ViewHeight(viewportHeight != 0 ? viewportHeight : DEFAULT_VIEWPORT_SIZE),
-			 m_Camera(-m_AspectRatio * zoomLevel, m_AspectRatio * zoomLevel, -zoomLevel, zoomLevel)
+			 m_Bounds({ -m_AspectRatio * zoomLevel, m_AspectRatio * zoomLevel, -zoomLevel, zoomLevel }),
+			 m_Camera(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top)
 		{
 			MAB_CORE_ASSERT(
 				viewportHeight != 0, 
@@ -115,8 +117,8 @@ namespace MABEngine {
 			m_ZoomLevel -= e.GetYOffSet() * 0.25f;
 			m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 
-			m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
-
+			m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
+			m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
 			return false;
 		}
 
@@ -125,7 +127,8 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 
 			m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-			m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+			m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
+			m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
 			return false;
 		}
 	}
