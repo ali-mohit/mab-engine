@@ -71,7 +71,7 @@ namespace SimpleGame {
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 				pillar.TopPosition,
 				pillar.TopScale,
-				180.0f,
+				glm::radians(180.0f),
 				m_TriangleTexture,
 				color
 			);
@@ -79,7 +79,7 @@ namespace SimpleGame {
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 				pillar.BottomPosition,
 				pillar.BottomScale,
-				0.0f,
+				glm::radians(0.0f),
 				m_TriangleTexture,
 				color
 			);

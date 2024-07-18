@@ -3,8 +3,8 @@
 #include <MABEngine.h>
 #include <glm/glm.hpp>
 
-#include "SimpleGame/ParticleProps.h"
-#include "SimpleGame/ParticleSystem.h"
+#include "Tools/ParticleProps.h"
+#include "Tools/ParticleSystem.h"
 
 namespace SimpleGame {
 	class Player {
@@ -36,9 +36,9 @@ namespace SimpleGame {
 		float m_SmokeEmitInterval = 0.4f;
 		float m_SmokeNextEmitTime = m_SmokeEmitInterval;
 
-		ParticleProps m_SmokeParticle;
-		ParticleProps m_EngineParticle;
-		ParticleSystem m_ParticleSystem;
+		Tools::ParticleProps m_SmokeParticle;
+		Tools::ParticleProps m_EngineParticle;
+		Tools::ParticleSystem m_ParticleSystem;
 
 		MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_ShipTextuer;
 

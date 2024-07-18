@@ -2,6 +2,7 @@
 
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Core/TimeStep.h"
+#include "MABEngine/Camera/OrthographicCameraBounds.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Events/ApplicationEvent.h"
@@ -35,6 +36,8 @@ namespace MABEngine {
 			const float GetZoomLevel();
 			void SetZoomLevel(float zoomLevel);
 
+			const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
+
 		private:
 			bool OnMouseScrolled(Events::MouseScrolledEvent& e);
 			bool OnWindowResized(Events::WindowResizeEvent& e);
@@ -45,6 +48,7 @@ namespace MABEngine {
 			uint32_t m_ViewHeight = 800;
 			bool m_ZRotationEnabled = false;
 
+			OrthographicCameraBounds m_Bounds;
 			OrthographicCamera m_Camera;
 
 			glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };

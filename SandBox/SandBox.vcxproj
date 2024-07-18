@@ -78,7 +78,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_DEBUG;ENGINE2D_STATISTICS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MABEngine\vendor\spdlog\include;..\MABEngine\vendor\ImGUI\imgui;..\MABEngine\src;src;..\MABEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -96,7 +96,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_RELEASE;ENGINE2D_STATISTICS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MABEngine\vendor\spdlog\include;..\MABEngine\vendor\ImGUI\imgui;..\MABEngine\src;src;..\MABEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -118,7 +118,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MABENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MABENGINE_DIST;ENGINE2D_STATISTICS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MABEngine\vendor\spdlog\include;..\MABEngine\vendor\ImGUI\imgui;..\MABEngine\src;src;..\MABEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -137,28 +137,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandBox3DLayer.h" />
     <ClInclude Include="src\SandBox2DLayer.h" />
+    <ClInclude Include="src\SandBox3DLayer.h" />
     <ClInclude Include="src\SimpleGame\Color.h" />
     <ClInclude Include="src\SimpleGame\GameLayer.h" />
     <ClInclude Include="src\SimpleGame\Level.h" />
-    <ClInclude Include="src\SimpleGame\ParticleProps.h" />
-    <ClInclude Include="src\SimpleGame\ParticleSystem.h" />
     <ClInclude Include="src\SimpleGame\Pillar.h" />
     <ClInclude Include="src\SimpleGame\Player.h" />
     <ClInclude Include="src\StdViewport.h" />
+    <ClInclude Include="src\Tools\ParticleProps.h" />
+    <ClInclude Include="src\Tools\ParticleSystem.h" />
     <ClInclude Include="src\Utilities\HSV.h" />
     <ClInclude Include="src\Utilities\Random.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandBox3DLayer.cpp" />
     <ClCompile Include="src\SandBox2DLayer.cpp" />
+    <ClCompile Include="src\SandBox3DLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\SimpleGame\GameLayer.cpp" />
     <ClCompile Include="src\SimpleGame\Level.cpp" />
-    <ClCompile Include="src\SimpleGame\ParticleSystem.cpp" />
     <ClCompile Include="src\SimpleGame\Player.cpp" />
     <ClCompile Include="src\StdViewport.cpp" />
+    <ClCompile Include="src\Tools\ParticleSystem.cpp" />
     <ClCompile Include="src\Utilities\HSV.cpp" />
     <ClCompile Include="src\Utilities\Random.cpp" />
   </ItemGroup>

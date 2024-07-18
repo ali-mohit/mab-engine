@@ -89,7 +89,7 @@ namespace SimpleGame {
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 			{ m_Position.x, m_Position.y, 0.5f },
 			GetScaleTexture(),
-			GetRotation(),
+			glm::radians(GetRotation()),
 			m_ShipTextuer
 		);
 	}
@@ -101,7 +101,6 @@ namespace SimpleGame {
 		std::string message = "Position: {" + std::to_string(m_Position.x) + ", " + std::to_string(m_Position.y) + "} ";
 		ImGui::Text(message.c_str());
 	}
-
 	void Player::Reset()
 	{
 		m_Position = { -10.0f, 0.0f };
