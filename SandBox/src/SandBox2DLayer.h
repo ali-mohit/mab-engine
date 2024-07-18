@@ -29,6 +29,10 @@ private:
 	MABEngine::Camera::OrthographicCameraController m_CameraController;
 
 	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_CheckerBoardTexture;
+	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_PaperBackground;
+	MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_SpriteSheet;
+	MABEngine::Core::Ref<MABEngine::Textures::SubTexture2D> m_Castle;
+
 
 	Tools::ParticleSystem m_ParticleSystem;
 	Tools::ParticleProps m_ParticleProperties;

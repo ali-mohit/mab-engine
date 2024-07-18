@@ -41,7 +41,7 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 		MAB_PROFILE_SCOPE("Rendering");
 		MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
 
-		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , 0.0f }, { 2.0f, 1.0f }, { m_SolidColor1, 1.0f });
+		/*MABEngine::Renderer::EngineRenderer2d::DrawQuad({ -1.0f , 0.0f }, { 2.0f, 1.0f }, { m_SolidColor1, 1.0f });
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad({ 0.75f , 0.0f }, { 1.0f, 2.0f }, { m_SolidColor2, 1.0f });
 
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
@@ -50,25 +50,32 @@ void SandBox2DLayer::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 			glm::radians(rotation),
 			m_CheckerBoardTexture,
 			{ m_SolidColor3, 1.0f }
-		);
+		);*/
+
 		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-			{ 0.0f , 0.0f, 0.05f },
+			{ 0.0f , 0.0f, -0.2f },
 			{ 10.0f, 10.0f },
 			m_CheckerBoardTexture,
 			{10.0f, 10.0f}
 		);
 
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
+			{ 0.0, 0.0, 0.01f },
+			{ 10.0f, 10.0f },
+			m_PaperBackground,
+			{ 1.0f, 1.0f }
+		);
+
+		MABEngine::Renderer::EngineRenderer2d::DrawQuad(
+			{ 0.0f, 0.0f, 0.3f },
+			{ 2.0f, 1.0f },
+			glm::radians(0.0f),
+			m_Castle,
+			{ 0.0f, 0.0f, 0.0f , 1.0f }
+		);
+
 		MABEngine::Renderer::EngineRenderer2d::EndScene();
 
-		//Draw Quads
-		MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
-		for (float y=-4.5f; y < 5.0; y += 0.5f) {
-			for (float x=-4.5f; x < 5.0; x += 0.5f) {
-				glm::vec4 color = { 0.6f, (x + 5.0f) / 10.0f, (y + 5.0f) / 10.0f, 0.8f };
-				MABEngine::Renderer::EngineRenderer2d::DrawQuad({ x , y, 0.1f }, { 0.45f, 0.45f }, color);
-			}
-		}
-		MABEngine::Renderer::EngineRenderer2d::EndScene();
 	}
 
 	if (MABEngine::Inputs::Input::IsMouseButtonPressed(MABEngine::Inputs::Mab_Mouse_Button_1)) {
@@ -95,6 +102,9 @@ void SandBox2DLayer::OnAttach()
 	MAB_PROFILE_FUNCTION();
 
 	m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
+	m_PaperBackground = MABEngine::Textures::Texture2D::Create("assets/textures/parchmentBasic.png");
+	m_SpriteSheet = MABEngine::Textures::Texture2D::Create("assets/textures/Cartography_Sheet_2x.png");
+	m_Castle = MABEngine::Textures::SubTexture2D::CreateFromCoordinates(m_SpriteSheet, { 0.0, 9.0 }, { 128.0f , 128.0f }, { 2, 1 });
 
 	m_ParticleProperties.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
 	m_ParticleProperties.ColorEnd = { 200 / 255.0f, 58 / 255.0f, 41 / 255.0f, 1.0f };

@@ -36,6 +36,7 @@ namespace MABEngine {
 			uint32_t* QuadEdgeBase = nullptr;
 
 			glm::vec4 VertexPositionTemplate[4];
+			glm::vec2 DefaultTextureCoordinate[4];
 
 			std::map<std::string, Core::Ref<Textures::Texture2D>> TextureLib;
 			std::map<std::string, uint32_t> TextureLibIndex;
