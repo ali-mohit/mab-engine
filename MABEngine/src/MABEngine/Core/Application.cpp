@@ -104,6 +104,11 @@ namespace MABEngine {
 			layer->OnAttach();
 		}
 
+		void Application::CloseApplication()
+		{
+			m_Running = false;
+		}
+
 		bool Application::OnWindowClose(Events::WindowCloseEvent& e)
 		{
 			m_Running = false;

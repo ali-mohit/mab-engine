@@ -25,6 +25,8 @@ namespace SandBoxLayers
 
 		glm::vec3 m_SolidColor1 = { 0.2f, 0.3f, 0.8f };
 		float m_rotationBox = 0.0f;
+		bool IsDockSapceActive = true;
+		bool m_ShowSettingBox = true;
 
 		MABEngine::Camera::OrthographicCameraController m_CameraController;
 
