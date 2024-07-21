@@ -137,27 +137,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandBox2DLayer.h" />
-    <ClInclude Include="src\SandBox3DLayer.h" />
+    <ClInclude Include="src\SandBoxLayers\SandBox2DLayer.h" />
+    <ClInclude Include="src\SandBoxLayers\SandBox3DLayer.h" />
     <ClInclude Include="src\SimpleGame\Color.h" />
     <ClInclude Include="src\SimpleGame\GameLayer.h" />
     <ClInclude Include="src\SimpleGame\Level.h" />
     <ClInclude Include="src\SimpleGame\Pillar.h" />
     <ClInclude Include="src\SimpleGame\Player.h" />
-    <ClInclude Include="src\StdViewport.h" />
+    <ClInclude Include="src\SandBoxLayers\DockSpaceView.h" />
     <ClInclude Include="src\Tools\ParticleProps.h" />
     <ClInclude Include="src\Tools\ParticleSystem.h" />
     <ClInclude Include="src\Utilities\HSV.h" />
     <ClInclude Include="src\Utilities\Random.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandBox2DLayer.cpp" />
-    <ClCompile Include="src\SandBox3DLayer.cpp" />
+    <ClCompile Include="src\SandBoxLayers\SandBox2DLayer.cpp" />
+    <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\SimpleGame\GameLayer.cpp" />
     <ClCompile Include="src\SimpleGame\Level.cpp" />
     <ClCompile Include="src\SimpleGame\Player.cpp" />
-    <ClCompile Include="src\StdViewport.cpp" />
+    <ClCompile Include="src\SandBoxLayers\DockSpaceView.cpp" />
     <ClCompile Include="src\Tools\ParticleSystem.cpp" />
     <ClCompile Include="src\Utilities\HSV.cpp" />
     <ClCompile Include="src\Utilities\Random.cpp" />

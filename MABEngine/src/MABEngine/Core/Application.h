@@ -26,6 +26,7 @@ namespace MABEngine {
 		void OnEvent(Events::Event& e);
 		void PushLayer(Layers::Layer* layer);
 		void PushOverLayer(Layers::Layer* layer);
+		void CloseApplication();
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }

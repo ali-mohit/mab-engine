@@ -38,6 +38,8 @@
 #include "MABEngine/Renderer/EngineRenderer2D.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Renderer/RenderCommand.h"
+#include "MABEngine/Renderer/FrameBufferSpecification.h"
+#include "MABEngine/Renderer/FramBuffer.h"
 
 #include "MABEngine/Textures/Texture.h"
 #include "MABEngine/Textures/Texture2D.h"
