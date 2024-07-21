@@ -29,7 +29,7 @@ namespace SandBoxLayers
 	{
 		MAB_PROFILE_FUNCTION();
 
-		if (IsDockSapceActive) {
+		if (m_IsDockSapceActive) {
 
             static bool opt_fullscreen = true;
             static bool opt_padding = false;
@@ -66,7 +66,7 @@ namespace SandBoxLayers
             // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
             if (!opt_padding)
                 ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-            ImGui::Begin("Dockspace view", &IsDockSapceActive, window_flags);
+            ImGui::Begin("Dockspace view", &m_IsDockSapceActive, window_flags);
             if (!opt_padding)
                 ImGui::PopStyleVar();
 
@@ -106,6 +106,8 @@ namespace SandBoxLayers
 
 			MakeSettingWindow();
 
+			MakeViewWindow();
+
             ImGui::End();
 		}
 		else {
@@ -122,6 +124,8 @@ namespace SandBoxLayers
 		m_SpriteSheet = MABEngine::Textures::Texture2D::Create("assets/textures/Cartography_Sheet_2x.png");
 		m_Castle = MABEngine::Textures::SubTexture2D::CreateFromCoordinates(m_SpriteSheet, { 0.0, 9.0 }, { 128.0f , 128.0f }, { 2, 1 });
 
+		MABEngine::Renderer::FrameBufferSpecification fbSpec(m_Width, m_Height);
+		m_FramBuffer = MABEngine::Renderer::FrameBuffer::Create(fbSpec);
 	}
 
 	void DockSpaceView::OnEvent(MABEngine::Events::Event& event)
@@ -143,10 +147,20 @@ namespace SandBoxLayers
 
 			ImGui::ColorEdit3("Square Color1", glm::value_ptr(m_SolidColor1));
 			ImGui::DragFloat("Rotation Box Value", &m_rotationBox);
-			ImGui::Checkbox("Dockspace Viewport", &IsDockSapceActive);
+			ImGui::Checkbox("Dockspace Viewport", &m_IsDockSapceActive);
 
 			ImGui::End();
 		}
+	}
+
+	void DockSpaceView::MakeViewWindow()
+	{
+		ImGui::Begin("View");
+
+		uint32_t textureId = m_FramBuffer->GetColorAttachmentID();
+		ImGui::Image((void*)textureId, ImVec2{m_Width/2.0f, m_Height/2.0f}, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
+
+		ImGui::End();
 	}
 
 	void DockSpaceView::OnUpdate(MABEngine::Core::EngineTimeStep ts)
@@ -156,10 +170,13 @@ namespace SandBoxLayers
 		m_CameraController.OnUpdate(ts);
 
 		MABEngine::Renderer::EngineRenderer2d::ResetStats();
-
 		// Rendering Pre
 		{
 			MAB_PROFILE_SCOPE("PreProcessRendering");
+
+			if (m_IsDockSapceActive)
+				m_FramBuffer->Bind();
+
 			MABEngine::Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
 			MABEngine::Renderer::RenderCommand::Clear();
 		}
@@ -196,6 +213,8 @@ namespace SandBoxLayers
 
 			MABEngine::Renderer::EngineRenderer2d::EndScene();
 
+			if (m_IsDockSapceActive)
+				m_FramBuffer->UnBind();
 		}
 	}
 }

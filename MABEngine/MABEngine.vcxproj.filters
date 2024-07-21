@@ -1560,6 +1560,11 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\OrthographicCameraBounds.h" />
+    <ClInclude Include="src\MABEngine\Textures\SubTexture2D.h" />
+    <ClInclude Include="src\MABEngine\Renderer\FramBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.h" />
+    <ClInclude Include="src\MABEngine\Renderer\FrameBufferSpecification.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1676,5 +1681,8 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Textures\SubTexture2D.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\FramBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.cpp" />
   </ItemGroup>
 </Project>
