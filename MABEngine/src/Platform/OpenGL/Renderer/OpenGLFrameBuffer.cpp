@@ -16,6 +16,8 @@ namespace MABEngine {
 		OpenGLFrameBuffer::~OpenGLFrameBuffer()
 		{
 			glDeleteFramebuffers(1, &m_RendererID);
+			glDeleteTextures(1, &m_ColorAttachmentID);
+			glDeleteTextures(1, &m_DepthAttachmentID);
 		}
 
 		void OpenGLFrameBuffer::Bind()
