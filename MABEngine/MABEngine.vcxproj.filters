@@ -93,6 +93,9 @@
     <ClInclude Include="src\MABEngine\Camera\OrthographicCamera.h">
       <Filter>src\MABEngine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\OrthographicCameraBounds.h">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraController.h">
       <Filter>src\MABEngine\Camera</Filter>
     </ClInclude>
@@ -195,6 +198,12 @@
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorageStatistics.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\FramBuffer.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\FrameBufferSpecification.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
@@ -237,6 +246,9 @@
     <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Textures\SubTexture2D.h">
+      <Filter>src\MABEngine\Textures</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Textures\Texture.h">
       <Filter>src\MABEngine\Textures</Filter>
     </ClInclude>
@@ -244,6 +256,9 @@
       <Filter>src\MABEngine\Textures</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.h">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.h">
       <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.h">
@@ -1560,11 +1575,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Camera\OrthographicCameraBounds.h" />
-    <ClInclude Include="src\MABEngine\Textures\SubTexture2D.h" />
-    <ClInclude Include="src\MABEngine\Renderer\FramBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.h" />
-    <ClInclude Include="src\MABEngine\Renderer\FrameBufferSpecification.h" />
+    <ClInclude Include="src\MABEngine\Core\ApplicationProps.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1615,6 +1626,9 @@
     <ClCompile Include="src\MABEngine\Renderer\EngineRenderer2d.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\FramBuffer.cpp">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
@@ -1639,10 +1653,16 @@
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Textures\SubTexture2D.cpp">
+      <Filter>src\MABEngine\Textures</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Textures\Texture2D.cpp">
       <Filter>src\MABEngine\Textures</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.cpp">
+      <Filter>src\Platform\OpenGL\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.cpp">
       <Filter>src\Platform\OpenGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.cpp">
@@ -1681,8 +1701,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Textures\SubTexture2D.cpp" />
-    <ClCompile Include="src\MABEngine\Renderer\FramBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.cpp" />
   </ItemGroup>
 </Project>

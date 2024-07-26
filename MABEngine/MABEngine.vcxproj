@@ -152,6 +152,7 @@
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraController.h" />
     <ClInclude Include="src\MABEngine\Camera\PerspectiveFreeCamera.h" />
     <ClInclude Include="src\MABEngine\Core\Application.h" />
+    <ClInclude Include="src\MABEngine\Core\ApplicationProps.h" />
     <ClInclude Include="src\MABEngine\Core\Base.h" />
     <ClInclude Include="src\MABEngine\Core\EngineObject.h" />
     <ClInclude Include="src\MABEngine\Core\EngineTime.h" />
@@ -167,7 +168,6 @@
     <ClInclude Include="src\MABEngine\Events\Event.h" />
     <ClInclude Include="src\MABEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\MABEngine\Events\MouseEvent.h" />
-    <ClInclude Include="src\MABEngine\Renderer\FrameBufferSpecification.h" />
     <ClInclude Include="src\MABEngine\Inputs\Input.h" />
     <ClInclude Include="src\MABEngine\Inputs\KeyboardCodes.h" />
     <ClInclude Include="src\MABEngine\Inputs\KeyboardCodesDefine.h" />
@@ -185,6 +185,7 @@
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorage.h" />
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorageStatistics.h" />
     <ClInclude Include="src\MABEngine\Renderer\FramBuffer.h" />
+    <ClInclude Include="src\MABEngine\Renderer\FrameBufferSpecification.h" />
     <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h" />
     <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h" />
     <ClInclude Include="src\MABEngine\Renderer\QuadVertexInfo.h" />

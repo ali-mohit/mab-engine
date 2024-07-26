@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "MABEngine/Core/EngineTime.h"
+#include "MABEngine/Core/Window.h"
 
 #include "MABEngine/Logging/Log.h"
 #include "MABEngine/Inputs/Input.h"
@@ -19,18 +20,15 @@ namespace MABEngine {
 		{
 			MAB_PROFILE_FUNCTION();
 
-			MAB_CORE_ASSERT(!s_Instance, "Application already exists!");
-			s_Instance = this;
+			ApplicationProps appProps;
+			InitializeApplication(appProps);
+		}
 
-			m_Window = Scope<Window>(Window::Create());
-			m_Window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
+		Application::Application(const ApplicationProps& appProps)
+		{
+			MAB_PROFILE_FUNCTION();
 
-			Renderer::EngineRenderer::Init();
-
-			m_ImGuiLayer = new Layers::ImGuiLayer("Debug ImGui");
-			PushOverLayer(m_ImGuiLayer);
-
-			EngineTimeObj = Scope<Core::EngineTime>(Core::EngineTime::Create());
+			InitializeApplication(appProps);
 		}
 
 		Application::~Application()
@@ -107,6 +105,27 @@ namespace MABEngine {
 		void Application::CloseApplication()
 		{
 			m_Running = false;
+		}
+
+
+		void Application::InitializeApplication(const ApplicationProps& appProps)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			MAB_CORE_ASSERT(!s_Instance, "Application already exists!");
+			s_Instance = this;
+
+			WindowProps wProp(appProps);
+
+			m_Window = Scope<Window>(Window::Create(wProp));
+			m_Window->SetEventCallBack(BIND_EVENT_FN(Application::OnEvent));
+
+			Renderer::EngineRenderer::Init();
+
+			m_ImGuiLayer = new Layers::ImGuiLayer("Debug ImGui");
+			PushOverLayer(m_ImGuiLayer);
+
+			EngineTimeObj = Scope<Core::EngineTime>(Core::EngineTime::Create());
 		}
 
 		bool Application::OnWindowClose(Events::WindowCloseEvent& e)

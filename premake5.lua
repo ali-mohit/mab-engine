@@ -105,6 +105,66 @@ project "MABEngine"
 		buildoptions "/MT"
 		optimize "on"
 
+project "MABLightsAndShadows"
+	location "MABLightsAndShadows"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}" )
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}" )
+
+	files {
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp",
+	}
+
+	includedirs {
+		"MABEngine/vendor/spdlog/include",
+		"MABEngine/vendor/ImGUI/imgui",
+		"MABEngine/src",
+		"%{prj.name}/src",
+		"%{IncludeDir.glm}",
+	}
+
+	links {
+		"MABEngine"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines {
+			--"MABENGINE_PLATFORM_WINDOWS",
+			--"MABENGINE_INCLUDE_AS_DLL",
+		}
+
+	
+	filter "configurations:Debug"
+		defines {
+			"MABENGINE_DEBUG",
+			"ENGINE2D_STATISTICS=1"
+		}
+		buildoptions "/MTd"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines {
+			"MABENGINE_RELEASE",
+			"ENGINE2D_STATISTICS=0"
+		}
+		buildoptions "/MT"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines {
+			"MABENGINE_DIST",
+			"ENGINE2D_STATISTICS=0"
+		}
+		buildoptions "/MT"
+		optimize "on"
+
 project "SandBox"
 	location "SandBox"
 	kind "ConsoleApp"
