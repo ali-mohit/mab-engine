@@ -11,6 +11,8 @@ namespace MABEngine {
 
 		class MABENGINE_API Input {
 		public:
+			virtual ~Input() = default;
+
 			inline static bool IsKeyPressed(MABKeyboardCode keyCode) { return s_Instance->IsKeyPressedImp(keyCode); }
 			inline static bool IsKeyRepeat(MABKeyboardCode keyCode) { return s_Instance->IsKeyRepeatImp(keyCode); }
 

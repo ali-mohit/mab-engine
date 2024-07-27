@@ -8,7 +8,7 @@ namespace MABEngine {
 
 		class MABENGINE_API FrameBuffer {
 		public:
-			~FrameBuffer() = default;
+			virtual ~FrameBuffer() = default;
 
 			virtual void Bind() = 0;
 			virtual void UnBind() = 0;
