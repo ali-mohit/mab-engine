@@ -43,6 +43,9 @@ namespace MABEngine {
 
 			const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
 
+			bool GetHandleKeyboardEventsFlag() const { return m_HandleKeyboardEventsFlag; }
+			void SetHandleKeyboardEventsFlag(bool handled) { m_HandleKeyboardEventsFlag = handled; }
+
 		private:
 			bool OnMouseScrolled(Events::MouseScrolledEvent& e);
 			bool OnWindowResized(Events::WindowResizeEvent& e);
@@ -53,6 +56,7 @@ namespace MABEngine {
 			uint32_t m_ViewHeight = 800;
 			bool m_ZRotationEnabled = false;
 			bool m_HandleWindowResizeEnabled = true;
+			bool m_HandleKeyboardEventsFlag = true;
 
 			OrthographicCameraBounds m_Bounds;
 			OrthographicCamera m_Camera;

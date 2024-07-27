@@ -72,11 +72,18 @@ namespace MABEngine {
 
         void ImGuiLayer::OnEvent(Events::Event& event)
         {
-            if (m_BlockEvents) {
-                ImGuiIO& io = ImGui::GetIO();
+
+            ImGuiIO& io = ImGui::GetIO();
+            if (m_BlockMouseEvents)
+            {
                 event.Handled |= event.IsInCategory(Events::EventCategoryMouse) & io.WantCaptureMouse;
+            }
+            
+            if (m_BlockKeyboardEvents)
+            {
                 event.Handled |= event.IsInCategory(Events::EventCategoryKeyboard) & io.WantCaptureKeyboard;
             }
+            
         }
 
         void ImGuiLayer::OnDetach()
