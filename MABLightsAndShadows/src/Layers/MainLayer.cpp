@@ -154,6 +154,14 @@ namespace LightAndShadows {
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0.0f, 0.0f});
 			ImGui::Begin("View");
 			
+			m_IsViewFocused = ImGui::IsWindowFocused();
+			m_IsMouseHover = ImGui::IsWindowHovered();
+
+			m_CameraController.SetHandleKeyboardEventsFlag(m_IsViewFocused);
+			MABEngine::Core::Application::Get().GetImGuiLayer()->SetBlockMouseEvents(!m_IsMouseHover);
+			MABEngine::Core::Application::Get().GetImGuiLayer()->SetBlockKeyboardEvents(!m_IsViewFocused);
+			
+
 			ImVec2 currentSize = ImGui::GetContentRegionAvail();
 			if ((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) {
 				m_ViewportWidth = currentSize.x;
@@ -208,7 +216,7 @@ namespace LightAndShadows {
 
 				//Box 01
 				MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-					{ -1.0f , 0.0f },
+					{ -1.0f , 0.0f, 0.0 },
 					{ 2.0f, 1.0f },
 					glm::radians(m_rotationBox),
 					{ m_SolidColor1, 1.0f }

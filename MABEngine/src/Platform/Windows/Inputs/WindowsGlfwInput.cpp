@@ -1,15 +1,13 @@
 #include "mabengine_pch.h"
 #include "GLFW/glfw3.h"
 
-#include "WindowsGlfwInput.h"
 #include "MABEngine/Core/Application.h"
+#include "MABEngine/Inputs/Input.h"
 
 namespace MABEngine {
 	namespace Inputs {
 
-		Input* Input::s_Instance = new WindowsGlfwInput();
-
-		bool WindowsGlfwInput::IsKeyPressedImp(MABKeyboardCode keyCode)
+		bool Input::IsKeyPressed(MABKeyboardCode keyCode)
 		{
 			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			auto state = glfwGetKey(window, (int)keyCode);
@@ -17,7 +15,7 @@ namespace MABEngine {
 			return state == GLFW_PRESS || state == GLFW_REPEAT;
 		}
 
-		bool WindowsGlfwInput::IsKeyRepeatImp(MABKeyboardCode keyCode)
+		bool Input::IsKeyRepeat(MABKeyboardCode keyCode)
 		{
 			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			auto state = glfwGetKey(window, (int)keyCode);
@@ -25,7 +23,7 @@ namespace MABEngine {
 			return state == GLFW_REPEAT;
 		}
 
-		bool WindowsGlfwInput::IsMouseButtonPressedImp(MABMouseButton buttonCode)
+		bool Input::IsMouseButtonPressed(MABMouseButton buttonCode)
 		{
 			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			auto state = glfwGetMouseButton(window, (int)buttonCode);
@@ -33,7 +31,7 @@ namespace MABEngine {
 			return state == GLFW_PRESS;
 		}
 
-		std::pair<double, double> WindowsGlfwInput::GetMousePosImp()
+		std::pair<double, double> Input::GetMousePos()
 		{
 			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
 			
@@ -44,17 +42,16 @@ namespace MABEngine {
 			return { xPos, yPos };
 		}
 
-		double WindowsGlfwInput::GetMousePosXImp()
+		double Input::GetMousePosX()
 		{
-			auto[x,y] = GetMousePosImp();
+			auto[x,y] = GetMousePos();
 			return x;
 		}
 
-		double WindowsGlfwInput::GetMousePosYImp()
+		double Input::GetMousePosY()
 		{
-			auto[x, y] = GetMousePosImp();
+			auto[x, y] = GetMousePos();
 			return y;
 		}
-
 	}
 }

@@ -25,10 +25,14 @@ namespace MABEngine {
             
             void End();
 
-            inline const bool& GetBlockEvents() const { return m_BlockEvents; }
-            inline void SetBlockEvents(bool block) { m_BlockEvents = block; }
+            inline const bool& GetBlockMouseEvents() const { return m_BlockMouseEvents; }
+            inline void SetBlockMouseEvents(bool block) { m_BlockMouseEvents = block; }
+
+            inline const bool& GetBlockKeyboardEvents() const { return m_BlockKeyboardEvents; }
+            inline void SetBlockKeyboardEvents(bool block) { m_BlockKeyboardEvents = block; }
         private:
-            bool m_BlockEvents = true;
+            bool m_BlockMouseEvents = true;
+            bool m_BlockKeyboardEvents = true;
         };
 
     }

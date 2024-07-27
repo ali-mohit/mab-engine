@@ -6,7 +6,7 @@ namespace MABEngine {
 	namespace Renderer {
 		class MABENGINE_API GraphicContext {
 		public:
-			~GraphicContext() = default;
+			virtual ~GraphicContext() = default;
 
 			virtual void Init() = 0;
 			virtual void SwapBuffers() = 0;

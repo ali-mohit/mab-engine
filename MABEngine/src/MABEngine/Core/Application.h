@@ -32,6 +32,8 @@ namespace MABEngine {
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
+
+		inline Layers::ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 	private:
 		void InitializeApplication(const ApplicationProps& appProps);
 		bool OnWindowClose(Events::WindowCloseEvent& e);

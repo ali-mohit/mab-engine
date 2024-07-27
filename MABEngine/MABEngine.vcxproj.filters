@@ -288,9 +288,6 @@
     <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwWindow.h">
       <Filter>src\Platform\Windows\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\Inputs\WindowsGlfwInput.h">
-      <Filter>src\Platform\Windows\Inputs</Filter>
-    </ClInclude>
     <ClInclude Include="src\mabengine_pch.h">
       <Filter>src</Filter>
     </ClInclude>

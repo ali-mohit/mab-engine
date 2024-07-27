@@ -12,6 +12,8 @@ namespace MABEngine {
 
 		class MABENGINE_API RendererAPI {
 		public:
+			virtual ~RendererAPI() = default;
+
 			virtual void Init() = 0;
 
 			virtual uint32_t GetMaxNumberOfTextureImageUnit() = 0;

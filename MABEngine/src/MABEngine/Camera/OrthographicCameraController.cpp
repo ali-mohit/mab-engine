@@ -50,51 +50,54 @@ namespace MABEngine {
 		{
 			MAB_PROFILE_FUNCTION();
 
-			if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_A)) {
-				//m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
-				m_CameraPosition.x -= cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-				m_CameraPosition.y -= sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-			}
-			else if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_D))
-			{
-				//m_CameraPosition.x += m_CameraTranslationSpeed * ts;
-				m_CameraPosition.x += cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-				m_CameraPosition.y += sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-			}
+			if (m_HandleKeyboardEventsFlag) {
+				if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_A)) {
+					//m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
+					m_CameraPosition.x -= cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+					m_CameraPosition.y -= sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+				}
+				else if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_D))
+				{
+					//m_CameraPosition.x += m_CameraTranslationSpeed * ts;
+					m_CameraPosition.x += cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+					m_CameraPosition.y += sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+				}
 
-			if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_W)) {
-				//m_CameraPosition.y += m_CameraTranslationSpeed * ts;
-				m_CameraPosition.x += -sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-				m_CameraPosition.y += cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-			}
-			else if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_S)) {
-				//m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
-				m_CameraPosition.x -= -sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-				m_CameraPosition.y -= cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
-			}
+				if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_W)) {
+					//m_CameraPosition.y += m_CameraTranslationSpeed * ts;
+					m_CameraPosition.x += -sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+					m_CameraPosition.y += cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+				}
+				else if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_S)) {
+					//m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
+					m_CameraPosition.x -= -sin(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+					m_CameraPosition.y -= cos(glm::radians(m_CameraZRotationSpeed)) * m_CameraTranslationSpeed * ts;
+				}
 
-			if (m_ZRotationEnabled) {
-				if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Q))
-					m_CameraZRotation += m_CameraZRotationSpeed * ts;
-				else if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_E))
-					m_CameraZRotation -= m_CameraZRotationSpeed * ts;
+				if (m_ZRotationEnabled) {
+					if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Q))
+						m_CameraZRotation += m_CameraZRotationSpeed * ts;
+					else if (Inputs::Input::IsKeyPressed(Inputs::Mab_Key_E))
+						m_CameraZRotation -= m_CameraZRotationSpeed * ts;
 
-				if (m_CameraZRotation > 180.0f)
-					m_CameraZRotation -= 360.0f;
-				else if (m_CameraZRotation <= -180.0f)
-					m_CameraZRotation += 360.0f;
+					if (m_CameraZRotation > 180.0f)
+						m_CameraZRotation -= 360.0f;
+					else if (m_CameraZRotation <= -180.0f)
+						m_CameraZRotation += 360.0f;
 
-				m_Camera.SetRotationZ(m_CameraZRotation);
+					m_Camera.SetRotationZ(m_CameraZRotation);
+				}
+
+				if (MABEngine::Inputs::Input::IsKeyPressed(Inputs::Mab_Key_F))
+				{
+					m_CameraZRotation = 0;
+					m_ZoomLevel = 1.0f;
+					m_CameraPosition = { 0.0f, 0.0f, 0.0f };
+
+					m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+				}
 			}
 			
-			if (MABEngine::Inputs::Input::IsKeyPressed(Inputs::Mab_Key_F))
-			{
-				m_CameraZRotation = 0;
-				m_ZoomLevel = 1.0f;
-				m_CameraPosition = { 0.0f, 0.0f, 0.0f };
-
-				m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
-			}
 
 			m_Camera.SetPosition(m_CameraPosition);
 

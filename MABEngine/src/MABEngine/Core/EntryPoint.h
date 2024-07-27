@@ -19,12 +19,12 @@ int main(int argc, char** argv) {
 	MAB_PROFILE_END_SESSION();
 
 
-	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Runtime.json");
+	MAB_PROFILE_BEGIN_SESSION("Running", "MABEngine-Profiler-Runtime.json");
 	app->Run();
 	MAB_PROFILE_END_SESSION();
 
 
-	MAB_PROFILE_BEGIN_SESSION("Startup", "MABEngine-Profiler-Shutdown.json");
+	MAB_PROFILE_BEGIN_SESSION("Shutdown", "MABEngine-Profiler-Shutdown.json");
 	delete app;
 	MAB_PROFILE_END_SESSION();
 
