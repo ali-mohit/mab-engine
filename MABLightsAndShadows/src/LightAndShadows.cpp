@@ -4,7 +4,7 @@
 #include <MABEngine/Layers/ImGui/ImGuiLayer.h>
 #include <imgui.h>
 
-#include "Layers/DockSpaceView.h"
+#include "Layers/MainLayer.h"
 
 namespace LightAndShadows{
 
@@ -15,14 +15,14 @@ namespace LightAndShadows{
 			uint32_t w = GetWindow().GetWidth();
 			uint32_t h = GetWindow().GetHeight();
 
-			PushLayer(new Layers::DockSpaceView(w, h));
+			PushLayer(new Layers::MainLayer(w, h));
 		}
 		LightAndShadows(const MABEngine::Core::ApplicationProps props): Application(props) {
 
 			uint32_t w = props.DefaultWidth;
 			uint32_t h = props.DefaultHeight;
 
-			PushLayer(new Layers::DockSpaceView(w, h));
+			PushLayer(new Layers::MainLayer(w, h));
 		}
 		~LightAndShadows() {
 

@@ -107,7 +107,23 @@ namespace MABEngine {
 
 			Events::EventDispatcher dispatcher(e);
 			dispatcher.Dispatch<Events::MouseScrolledEvent>(MAB_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
-			dispatcher.Dispatch<Events::WindowResizeEvent>(MAB_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
+
+			if(m_HandleWindowResizeEnabled)
+				dispatcher.Dispatch<Events::WindowResizeEvent>(MAB_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
+		}
+
+		void OrthographicCameraController::Resize(uint32_t width, uint32_t height)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			if (height == 0 || width == 0) return;
+
+			m_ViewWidth = width;
+			m_ViewHeight = height;
+			
+			m_AspectRatio = (float)width / (float)height;
+			m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
+			m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
 		}
 
 		bool OrthographicCameraController::OnMouseScrolled(Events::MouseScrolledEvent& e)
@@ -126,9 +142,8 @@ namespace MABEngine {
 		{
 			MAB_PROFILE_FUNCTION();
 
-			m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-			m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
-			m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
+			Resize(e.GetWidth(), e.GetHeight());
+
 			return false;
 		}
 	}

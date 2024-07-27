@@ -15,6 +15,8 @@ namespace MABEngine {
 			virtual void Bind() override;
 			virtual void UnBind() override;
 
+			virtual void Resize(uint32_t width, uint32_t height) override;
+
 			void RebuildFrameBuffer();
 
 			virtual uint32_t GetRendererID() override { return m_RendererID; }

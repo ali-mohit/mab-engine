@@ -23,6 +23,7 @@ namespace MABEngine {
 		void OpenGLFrameBuffer::Bind()
 		{
 			glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
+			glViewport(0, 0, m_Specification.Width, m_Specification.Height);
 		}
 
 		void OpenGLFrameBuffer::UnBind()
@@ -30,8 +31,24 @@ namespace MABEngine {
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		}
 
+		void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
+		{
+			m_Specification.Width = width;
+			m_Specification.Height = height;
+
+			RebuildFrameBuffer();
+		}
+
 		void OpenGLFrameBuffer::RebuildFrameBuffer()
 		{
+			if (m_RendererID > 0) {
+				glDeleteFramebuffers(1, &m_RendererID);
+				glDeleteTextures(1, &m_ColorAttachmentID);
+
+				if(m_DepthAttachmentID > 0)
+					glDeleteTextures(1, &m_DepthAttachmentID);
+			}
+
 			//Create FrameBuffer
 			glGenFramebuffers(1, &m_RendererID);
 			glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
@@ -66,27 +83,11 @@ namespace MABEngine {
 			// Create and attach depth buffer if needed
 			if (m_Specification.ActivateDepthBuffer) {
 				
-				/*glCreateTextures(GL_TEXTURE_2D, 1, &m_DepthAttachmentID);
+				glCreateTextures(GL_TEXTURE_2D, 1, &m_DepthAttachmentID);
 				glBindTexture(GL_TEXTURE_2D, m_DepthAttachmentID);
 				glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, m_Specification.Width, m_Specification.Height);
-				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthAttachmentID, 0);*/
+				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthAttachmentID, 0);
 
-				glGenRenderbuffers(1, &m_DepthAttachmentID);
-				glBindRenderbuffer(GL_RENDERBUFFER, m_DepthAttachmentID);
-
-				glRenderbufferStorage(
-					GL_RENDERBUFFER,
-					GL_DEPTH24_STENCIL8,
-					m_Specification.Width,
-					m_Specification.Height
-				);
-
-				glFramebufferRenderbuffer(
-					GL_FRAMEBUFFER,
-					GL_DEPTH_ATTACHMENT,
-					GL_RENDERBUFFER,
-					m_DepthAttachmentID
-				);
 			}
 
 			MAB_CORE_ASSERT(
