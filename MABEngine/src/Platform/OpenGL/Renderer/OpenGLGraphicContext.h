@@ -2,6 +2,7 @@
 
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/GraphicContext.h"
+#include "MABEngine/Renderer/GraphicCardInfo.h"
 
 struct GLFWwindow;
 
@@ -10,21 +11,15 @@ namespace MABEngine {
 
 		class MABENGINE_API OpenGLGraphicContext : public GraphicContext {
 		public:
-			OpenGLGraphicContext(GLFWwindow* windowHandle);
+			OpenGLGraphicContext(GLFWwindow* windowHandle, Core::Ref<GraphicCardInfo> graphicCardInfo);
 
 			virtual void Init() override;
 			virtual void SwapBuffers() override;
 
-			virtual std::string GetGraphicCardVendor() override;
-			virtual std::string GetGraphicCardRenderer() override;
-			virtual uint32_t GetMaxNumberOfTextureImageUnit() override;
-			std::string GetOpenGLVersion();
+			virtual const Core::Ref<GraphicCardInfo> GetGraphicCardInfo() const override { return m_GraphicCardInfo; }
 		private:
 			GLFWwindow* m_WindowHandle;
-			std::string m_GraphicCardVendor;
-			std::string m_GraphicCardRenderer;
-			std::string m_OpenGLVersion;
-
+			Core::Ref<GraphicCardInfo> m_GraphicCardInfo;
 		};
 
 	}

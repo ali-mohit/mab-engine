@@ -163,7 +163,9 @@ namespace LightAndShadows {
 			
 
 			ImVec2 currentSize = ImGui::GetContentRegionAvail();
-			if ((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) {
+			if (((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) &&
+				(int)currentSize.x > 0 &&
+				(int)currentSize.y > 0) {
 				m_ViewportWidth = currentSize.x;
 				m_ViewportHeight = currentSize.y;
 				

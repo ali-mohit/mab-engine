@@ -1573,6 +1573,8 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Core\ApplicationProps.h" />
+    <ClInclude Include="src\MABEngine\Renderer\GraphicCardInfo.h" />
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicCardInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1698,5 +1700,7 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Renderer\GraphicCardInfo.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicCardInfo.cpp" />
   </ItemGroup>
 </Project>

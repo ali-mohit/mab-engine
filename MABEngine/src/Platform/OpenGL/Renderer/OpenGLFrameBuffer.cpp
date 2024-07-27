@@ -1,5 +1,8 @@
 #include "mabengine_pch.h"
+
+#include "MABEngine/Renderer/GraphicCardInfo.h"
 #include "Platform/OpenGL/Renderer/OpenGLFrameBuffer.h"
+
 
 #include <glad/glad.h>
 
@@ -10,6 +13,9 @@ namespace MABEngine {
 		OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification& spec)
 			:m_Specification(spec)
 		{
+			auto graphicCardInfo = GraphicCardInfo::Create();
+			m_MaxFrameBufferSize = graphicCardInfo->GetMaxFrameBufferSize();
+			
 			RebuildFrameBuffer();
 		}
 		
@@ -33,6 +39,12 @@ namespace MABEngine {
 
 		void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
 		{
+
+			if (width == 0 || height == 0 || width > m_MaxFrameBufferSize || height > m_MaxFrameBufferSize) {
+				MAB_CORE_WARN("Attempted to resize framebuffer {0}, {1}", width, height);
+				return;
+			}
+
 			m_Specification.Width = width;
 			m_Specification.Height = height;
 

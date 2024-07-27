@@ -30,6 +30,9 @@ namespace MABEngine {
 
 		private:
 			FrameBufferSpecification m_Specification;
+
+			uint32_t m_MaxFrameBufferSize = 16384;
+
 			uint32_t m_RendererID = 0;
 			uint32_t m_ColorAttachmentID = 0;
 			uint32_t m_DepthAttachmentID = 0;

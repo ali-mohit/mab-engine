@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MABEngine/Core/Base.h"
+#include "MABEngine/Renderer/GraphicCardInfo.h"
 
 namespace MABEngine {
 	namespace Renderer {
@@ -11,9 +12,7 @@ namespace MABEngine {
 			virtual void Init() = 0;
 			virtual void SwapBuffers() = 0;
 
-			virtual std::string GetGraphicCardVendor() = 0;
-			virtual std::string GetGraphicCardRenderer() = 0;
-			virtual uint32_t GetMaxNumberOfTextureImageUnit() = 0;
+			virtual const Core::Ref<GraphicCardInfo> GetGraphicCardInfo() const = 0;
 		};
 	}
 }

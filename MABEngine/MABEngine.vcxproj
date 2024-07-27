@@ -158,6 +158,7 @@
     <ClInclude Include="src\MABEngine\Core\EngineTime.h" />
     <ClInclude Include="src\MABEngine\Core\EngineUUID.h" />
     <ClInclude Include="src\MABEngine\Core\EntryPoint.h" />
+    <ClInclude Include="src\MABEngine\Renderer\GraphicCardInfo.h" />
     <ClInclude Include="src\MABEngine\Core\PlatformDetection.h" />
     <ClInclude Include="src\MABEngine\Core\Settings.h" />
     <ClInclude Include="src\MABEngine\Core\TimeStep.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="src\MABEngine\Textures\Texture2D.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicCardInfo.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLIndexBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLRendererAPI.h" />
@@ -649,6 +651,7 @@
     <ClCompile Include="src\MABEngine\Camera\PerspectiveFreeCamera.cpp" />
     <ClCompile Include="src\MABEngine\Core\Application.cpp" />
     <ClCompile Include="src\MABEngine\Core\EngineTime.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\GraphicCardInfo.cpp" />
     <ClCompile Include="src\MABEngine\Core\Settings.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiLayer.cpp" />
@@ -673,6 +676,7 @@
     <ClCompile Include="src\MABEngine\Textures\Texture2D.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicCardInfo.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLRendererAPI.cpp" />
