@@ -3,6 +3,7 @@
 #include "mabengine_pch.h"
 
 #include "MABEngine/Core/Base.h"
+#include "MABEngine/Core/ApplicationProps.h"
 #include "MABEngine/Events/Event.h"
 
 
@@ -18,6 +19,11 @@ namespace MABEngine {
 				unsigned int width = 1280,
 				unsigned int height = 720)
 				: Title(title), Width(width), Height(height)
+			{
+			}
+
+			WindowProps(const ApplicationProps& appProps) 
+				:Title(appProps.Title), Width(appProps.DefaultWidth), Height(appProps.DefaultHeight)
 			{
 			}
 		};

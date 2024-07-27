@@ -4,6 +4,7 @@
 
 #include "MABEngine/Core/Window.h"
 
+#include "MABEngine/Core/ApplicationProps.h"
 #include "MABEngine/Core/TimeStep.h"
 #include "MABEngine/Core/EngineTime.h"
 
@@ -19,6 +20,7 @@ namespace MABEngine {
 	{
 	public:
 		Application();
+		Application(const ApplicationProps& appProps);
 		virtual ~Application();
 		
 		void Run();
@@ -31,6 +33,7 @@ namespace MABEngine {
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
 	private:
+		void InitializeApplication(const ApplicationProps& appProps);
 		bool OnWindowClose(Events::WindowCloseEvent& e);
 		bool OnWindowResize(Events::WindowResizeEvent& e);
 	private:

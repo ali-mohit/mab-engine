@@ -24,8 +24,13 @@ namespace MABEngine {
 			void OnUpdate(Core::EngineTimeStep ts);
 			void OnEvent(Events::Event& e);
 
+			void Resize(uint32_t width, uint32_t height);
+
 			bool GetZRotationEnabled() const { return m_ZRotationEnabled; }
 			void SetZRotationEnabled(bool enable) { m_ZRotationEnabled = enable; }
+
+			bool GetHandleWindowResizeEnbaled() const { return m_HandleWindowResizeEnabled; }
+			void SetHandleWindowResizeEnbaled(bool enabled) { m_HandleWindowResizeEnabled = enabled; }
 
 			OrthographicCamera& GetCamera() { return m_Camera; }
 			const OrthographicCamera& GetCamera() const { return m_Camera; }
@@ -47,6 +52,7 @@ namespace MABEngine {
 			uint32_t m_ViewWidth = 800;
 			uint32_t m_ViewHeight = 800;
 			bool m_ZRotationEnabled = false;
+			bool m_HandleWindowResizeEnabled = true;
 
 			OrthographicCameraBounds m_Bounds;
 			OrthographicCamera m_Camera;

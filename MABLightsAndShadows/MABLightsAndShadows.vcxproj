@@ -15,10 +15,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D43924E3-4019-A37E-4931-2E55B58F09E0}</ProjectGuid>
+    <ProjectGuid>{CC622CC6-38C4-09D4-C131-50862D924093}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>SandBox</RootNamespace>
+    <RootNamespace>MABLightsAndShadows</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -55,23 +55,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-windows-x86_64\SandBox\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\SandBox\</IntDir>
-    <TargetName>SandBox</TargetName>
+    <OutDir>..\bin\Debug-windows-x86_64\MABLightsAndShadows\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\MABLightsAndShadows\</IntDir>
+    <TargetName>MABLightsAndShadows</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-windows-x86_64\SandBox\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\SandBox\</IntDir>
-    <TargetName>SandBox</TargetName>
+    <OutDir>..\bin\Release-windows-x86_64\MABLightsAndShadows\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\MABLightsAndShadows\</IntDir>
+    <TargetName>MABLightsAndShadows</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Dist-windows-x86_64\SandBox\</OutDir>
-    <IntDir>..\bin-int\Dist-windows-x86_64\SandBox\</IntDir>
-    <TargetName>SandBox</TargetName>
+    <OutDir>..\bin\Dist-windows-x86_64\MABLightsAndShadows\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\MABLightsAndShadows\</IntDir>
+    <TargetName>MABLightsAndShadows</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -137,35 +137,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandBoxLayers\DockSpaceView.h" />
-    <ClInclude Include="src\SandBoxLayers\SandBox2DLayer.h" />
-    <ClInclude Include="src\SandBoxLayers\SandBox3DLayer.h" />
-    <ClInclude Include="src\SimpleGame\Color.h" />
-    <ClInclude Include="src\SimpleGame\GameLayer.h" />
-    <ClInclude Include="src\SimpleGame\Level.h" />
-    <ClInclude Include="src\SimpleGame\Pillar.h" />
-    <ClInclude Include="src\SimpleGame\Player.h" />
-    <ClInclude Include="src\Tools\ParticleProps.h" />
-    <ClInclude Include="src\Tools\ParticleSystem.h" />
-    <ClInclude Include="src\Utilities\HSV.h" />
-    <ClInclude Include="src\Utilities\Random.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\SandBoxLayers\DockSpaceView.cpp" />
-    <ClCompile Include="src\SandBoxLayers\SandBox2DLayer.cpp" />
-    <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp" />
-    <ClCompile Include="src\SandboxApp.cpp" />
-    <ClCompile Include="src\SimpleGame\GameLayer.cpp" />
-    <ClCompile Include="src\SimpleGame\Level.cpp" />
-    <ClCompile Include="src\SimpleGame\Player.cpp" />
-    <ClCompile Include="src\Tools\ParticleSystem.cpp" />
-    <ClCompile Include="src\Utilities\HSV.cpp" />
-    <ClCompile Include="src\Utilities\Random.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MABEngine\MABEngine.vcxproj">
       <Project>{EB01BA79-576C-6EF0-A0AA-1F960C544C45}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\LightAndShadows.cpp" />
+    <ClCompile Include="src\Layers\MainLayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Layers\MainLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

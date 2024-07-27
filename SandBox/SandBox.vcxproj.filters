@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="SandBoxLayers">
+      <UniqueIdentifier>{24B84CDD-9078-C813-59B3-1191C5320DF0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="SimpleGame">
       <UniqueIdentifier>{69E7E094-559F-22E2-BEA6-FB3DAA7DBDD2}</UniqueIdentifier>
     </Filter>
@@ -12,8 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandBoxLayers\SandBox2DLayer.h" />
-    <ClInclude Include="src\SandBoxLayers\SandBox3DLayer.h" />
+    <ClInclude Include="src\SandBoxLayers\DockSpaceView.h">
+      <Filter>SandBoxLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SandBoxLayers\SandBox2DLayer.h">
+      <Filter>SandBoxLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SandBoxLayers\SandBox3DLayer.h">
+      <Filter>SandBoxLayers</Filter>
+    </ClInclude>
     <ClInclude Include="src\SimpleGame\Color.h">
       <Filter>SimpleGame</Filter>
     </ClInclude>
@@ -29,7 +39,6 @@
     <ClInclude Include="src\SimpleGame\Player.h">
       <Filter>SimpleGame</Filter>
     </ClInclude>
-    <ClInclude Include="src\SandBoxLayers\DockSpaceView.h" />
     <ClInclude Include="src\Tools\ParticleProps.h">
       <Filter>Tools</Filter>
     </ClInclude>
@@ -44,8 +53,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandBoxLayers\SandBox2DLayer.cpp" />
-    <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp" />
+    <ClCompile Include="src\SandBoxLayers\DockSpaceView.cpp">
+      <Filter>SandBoxLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SandBoxLayers\SandBox2DLayer.cpp">
+      <Filter>SandBoxLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp">
+      <Filter>SandBoxLayers</Filter>
+    </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\SimpleGame\GameLayer.cpp">
       <Filter>SimpleGame</Filter>
@@ -56,7 +72,6 @@
     <ClCompile Include="src\SimpleGame\Player.cpp">
       <Filter>SimpleGame</Filter>
     </ClCompile>
-    <ClCompile Include="src\SandBoxLayers\DockSpaceView.cpp" />
     <ClCompile Include="src\Tools\ParticleSystem.cpp">
       <Filter>Tools</Filter>
     </ClCompile>

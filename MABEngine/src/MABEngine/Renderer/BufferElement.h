@@ -30,6 +30,8 @@ namespace MABEngine {
 
 			}
 
+			~BufferElement() = default;
+
 			uint32_t GetComponentCount() const;
 		};
 
