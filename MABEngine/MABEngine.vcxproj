@@ -214,7 +214,6 @@
     <ClInclude Include="src\Platform\OpenGL\Textures\OpenGLTexture2D.h" />
     <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwTime.h" />
     <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwWindow.h" />
-    <ClInclude Include="src\Platform\Windows\Inputs\WindowsGlfwInput.h" />
     <ClInclude Include="src\mabengine_pch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
