@@ -44,6 +44,8 @@
 #include "MABEngine/Renderer/FramBuffer.h"
 #include "MABEngine/Renderer/GraphicCardInfo.h"
 
+#include "MABEngine/Scene/SceneManagement.h"
+
 #include "MABEngine/Textures/Texture.h"
 #include "MABEngine/Textures/Texture2D.h"
 #include "MABEngine/Textures/SubTexture2D.h"

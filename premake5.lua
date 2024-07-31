@@ -19,6 +19,7 @@ IncludeDir["Glad"] = "MABEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "MABEngine/vendor/ImGUI/imgui"
 IncludeDir["glm"] = "MABEngine/vendor/glm"
 IncludeDir["stb_image"] = "MABEngine/vendor/stb_image"
+IncludeDir["entt"] = "MABEngine/vendor/entt/include"
 
 
 
@@ -47,6 +48,9 @@ project "MABEngine"
 		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		
+		"%{prj.name}/vendor/entt/**.hpp",
+		"%{prj.name}/vendor/entt/**.cpp",
+		
 		"%{prj.name}/vendor/glm/glm/**.h",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
@@ -60,6 +64,7 @@ project "MABEngine"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}",
 	}
 
 	links {
@@ -126,6 +131,7 @@ project "MABLightsAndShadows"
 		"MABEngine/src",
 		"%{prj.name}/src",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}",
 	}
 
 	links {
@@ -186,6 +192,7 @@ project "SandBox"
 		"MABEngine/src",
 		"%{prj.name}/src",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}",
 	}
 
 	links {
