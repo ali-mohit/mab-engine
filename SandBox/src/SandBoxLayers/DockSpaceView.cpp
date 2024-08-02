@@ -14,10 +14,12 @@ namespace SandBoxLayers
 		:Layer("SandBox ViewPort"),
 		m_Width(width),
 		m_Height(height),
-		m_CameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
+		m_OrtogonalCameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
 	{
-		m_CameraController.SetZRotationEnabled(true);
-		m_CameraController.SetZoomLevel(1.5f);
+		m_PerspectiveCameraController.Resize(width, height);
+
+		//m_OrtogonalCameraController.SetZRotationEnabled(true);
+		//m_OrtogonalCameraController.SetZoomLevel(1.5f);
 	}
 
 	DockSpaceView::~DockSpaceView()
@@ -120,17 +122,23 @@ namespace SandBoxLayers
 	{
 		MAB_PROFILE_FUNCTION();
 
-		m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard_64.jpg");
 		m_SpriteSheet = MABEngine::Textures::Texture2D::Create("assets/textures/Cartography_Sheet_2x.png");
 		m_Castle = MABEngine::Textures::SubTexture2D::CreateFromCoordinates(m_SpriteSheet, { 0.0, 9.0 }, { 128.0f , 128.0f }, { 2, 1 });
 
 		MABEngine::Renderer::FrameBufferSpecification fbSpec(m_Width, m_Height);
 		m_FramBuffer = MABEngine::Renderer::FrameBuffer::Create(fbSpec);
+
+		/*m_FreeCamera.SetPosition({10.0f, 10.0f, 10.0f});
+		m_FreeCamera.OnResize(m_Width, m_Height);
+		auto direction = glm::normalize(glm::vec3({ 0.0f, 0.0f, 0.0f }) - glm::vec3(glm::vec3({ 10.0f, 10.0f, 10.0f })));
+		m_FreeCamera.SetForwardDirection(direction);*/
 	}
 
 	void DockSpaceView::OnEvent(MABEngine::Events::Event& event)
 	{
-		m_CameraController.OnEvent(event);
+		//m_OrtogonalCameraController.OnEvent(event);
+		m_PerspectiveCameraController.OnEvent(event);
 	}
 
 	void DockSpaceView::MakeSettingWindow()
@@ -156,9 +164,21 @@ namespace SandBoxLayers
 	void DockSpaceView::MakeViewWindow()
 	{
 		ImGui::Begin("View");
+		ImVec2 currentSize = ImGui::GetContentRegionAvail();
+		
+		if (((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) &&
+			(int)currentSize.x > 0 &&
+			(int)currentSize.y > 0) {
+			m_ViewportWidth = currentSize.x;
+			m_ViewportHeight = currentSize.y;
+
+			m_FramBuffer->Resize((uint32_t)m_ViewportWidth, (uint32_t)m_ViewportHeight);
+
+			m_PerspectiveCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
+		}
 
 		uint32_t textureId = m_FramBuffer->GetColorAttachmentID();
-		ImGui::Image((void*)textureId, ImVec2{m_Width/2.0f, m_Height/2.0f}, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
+		ImGui::Image((void*)textureId, ImVec2{ (float)m_ViewportWidth, (float)m_ViewportHeight}, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
 
 		ImGui::End();
 	}
@@ -167,7 +187,8 @@ namespace SandBoxLayers
 	{
 		MAB_PROFILE_FUNCTION();
 
-		m_CameraController.OnUpdate(ts);
+		//m_OrtogonalCameraController.OnUpdate(ts);
+		m_PerspectiveCameraController.OnUpdate(ts);
 
 		MABEngine::Renderer::EngineRenderer2d::ResetStats();
 		// Rendering Pre
@@ -179,16 +200,19 @@ namespace SandBoxLayers
 
 			MABEngine::Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
 			MABEngine::Renderer::RenderCommand::Clear();
+			
 		}
-
+		
 		// Rendering 
 		{
 			MAB_PROFILE_SCOPE("Rendering");
-			MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
+			MABEngine::Renderer::EngineRenderer2d::BeginScene(m_PerspectiveCameraController.GetCamera());
+			//MABEngine::Renderer::EngineRenderer2d::BeginScene(m_FreeCamera);
+
 
 			//Background
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ 0.0f , 0.0f, -0.2f },
+				{ 0.0f , 0.0f, -2.0f },
 				{ 10.0f, 10.0f },
 				m_CheckerBoardTexture,
 				{ 10.0f, 10.0f }
@@ -196,7 +220,7 @@ namespace SandBoxLayers
 
 			//Box 01
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ -1.0f , 0.0f },
+				{ -1.0f , 0.0f, 2.0f },
 				{ 2.0f, 1.0f },
 				glm::radians(m_rotationBox),
 				{ m_SolidColor1, 1.0f }
@@ -204,7 +228,7 @@ namespace SandBoxLayers
 
 			//Castle Texture
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ 1.0f, 0.0f, 0.3f },
+				{ 1.0f, 0.0f, 3.0f },
 				{ 2.0f, 1.0f },
 				glm::radians(0.0f),
 				m_Castle,

@@ -103,19 +103,25 @@ namespace MABEngine {
 			RenderCommand::SetViewport(0, 0, width, height);
 		}
 
-		void EngineRenderer2d::BeginScene(Camera::OrthographicCamera& camera)
+		void EngineRenderer2d::BeginScene(const Camera::OrthographicCamera& camera)
 		{
 			MAB_PROFILE_FUNCTION();
 
-			s_2dRendererData->ShaderObject->Bind();
-			s_2dRendererData->ShaderObject->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+			InnerBeginScene(camera.GetViewProjectionMatrix());
+		}
 
-			s_2dRendererData->QuadVertexInfoPtr = s_2dRendererData->QuadVertexInfoBase;
+		void EngineRenderer2d::BeginScene(const Camera::PerspectiveTargetCamera& camera)
+		{
+			MAB_PROFILE_FUNCTION();
 
-			s_2dRendererData->QuadVertexCount = 0;
-			s_2dRendererData->QuadEdgeCount = 0;
+			InnerBeginScene(camera.GetViewProjectionMatrix());
+		}
 
-			s_2dRendererData->ClearTextureLib();
+		void EngineRenderer2d::BeginScene(const Camera::PerspectiveFreeCamera& camera)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			InnerBeginScene(camera.GetViewProjectionMatrix());
 		}
 
 		void EngineRenderer2d::EndScene()
@@ -310,6 +316,19 @@ namespace MABEngine {
 		EngineRenderer2dStorageStatistics EngineRenderer2d::GetStats()
 		{
 			return s_2dRendererData->Stats;
+		}
+
+		void EngineRenderer2d::InnerBeginScene(const glm::mat4& viewProjectionMatrix)
+		{
+			s_2dRendererData->ShaderObject->Bind();
+			s_2dRendererData->ShaderObject->SetMat4("u_ViewProjection", viewProjectionMatrix);
+
+			s_2dRendererData->QuadVertexInfoPtr = s_2dRendererData->QuadVertexInfoBase;
+
+			s_2dRendererData->QuadVertexCount = 0;
+			s_2dRendererData->QuadEdgeCount = 0;
+
+			s_2dRendererData->ClearTextureLib();
 		}
 
 		void EngineRenderer2d::InnerDrawQuad(

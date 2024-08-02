@@ -54,3 +54,5 @@
 #include "MABEngine/Camera/OrthographicCameraBounds.h"
 #include "MABEngine/Camera/OrthographicCameraController.h"
 #include "MABEngine/Camera/PerspectiveFreeCamera.h"
+#include "MABEngine/Camera/PerspectiveTargetCamera.h"
+#include "MABEngine/Camera/PerspectiveCameraController.h"
