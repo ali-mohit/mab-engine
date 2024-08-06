@@ -1,28 +1,24 @@
 #include "mabengine_pch.h"
 #include "MABEngine/Camera/PerspectiveTargetCamera.h"
 
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/rotate_vector.hpp>
-#include "glm/glm.hpp"
 
 namespace MABEngine {
 
 	namespace Camera {
 		PerspectiveTargetCamera::PerspectiveTargetCamera()
 		{
+			RecalculateAxises();
 			RecalculateProjection();
 			RecalculateView();
-			RecalculateAxises();
 		}
 		
 		PerspectiveTargetCamera::PerspectiveTargetCamera(float nearClip, float farClip, float verticalFOV):
 			m_NearClip(nearClip), m_FarClip(farClip), m_VerticalFOV(verticalFOV)
 		{
+			RecalculateAxises();
 			RecalculateProjection();
 			RecalculateView();
-			RecalculateAxises();
+			
 		}
 
 		PerspectiveTargetCamera::PerspectiveTargetCamera(
@@ -32,9 +28,9 @@ namespace MABEngine {
 			:m_NearClip(nearClip), m_FarClip(farClip), m_VerticalFOV(verticalFOV),
 			m_ViewportWidth(width), m_ViewportHeight(height)
 		{
+			RecalculateAxises();
 			RecalculateProjection();
 			RecalculateView();
-			RecalculateAxises();
 		}
 
 		PerspectiveTargetCamera::PerspectiveTargetCamera(
@@ -46,9 +42,9 @@ namespace MABEngine {
 			m_Position(cameraPos), m_Target(cameraTarget),
 			m_ViewportWidth(width), m_ViewportHeight(height)
 		{
+			RecalculateAxises();
 			RecalculateProjection();
 			RecalculateView();
-			RecalculateAxises();
 		}
 
 		PerspectiveTargetCamera::PerspectiveTargetCamera(
@@ -61,9 +57,10 @@ namespace MABEngine {
 			m_ViewportWidth(width), m_ViewportHeight(height), m_UpDirection(upDirection)
 
 		{
+			RecalculateAxises();
 			RecalculateProjection();
 			RecalculateView();
-			RecalculateAxises();
+			
 		}
 
 		
@@ -79,30 +76,45 @@ namespace MABEngine {
 		}
 
 
-		void PerspectiveTargetCamera::RotateAroundTargetLocal(float angleX, float angleY)
+		void PerspectiveTargetCamera::RotateAroundTargetLocal(float yaw, float pitch)
 		{
-			bool changed = false;
-			
-			if (angleX != 0) {
-				m_ForwardDirection = glm::rotate(m_ForwardDirection, angleX, m_UpDirection);
-				m_RightDirection = glm::rotate(m_RightDirection, angleX, m_UpDirection);
-				changed = true;
-			}
+			if (yaw == 0 && pitch == 0)
+				return;
 
-			if (angleY != 0) {
-				m_ForwardDirection = glm::rotate(m_ForwardDirection, angleY, m_RightDirection);
-				m_UpDirection = glm::rotate(m_UpDirection, angleY, m_RightDirection);
-				changed = true;
-			}
-			
-			
-			
-			if (changed) {
-				m_Position = -m_Distance * m_ForwardDirection;
+			m_Yaw += yaw;
+			m_Pitch += pitch;
 
-				RecalculateView();
-			}
-			
+			// Constrain the pitch
+			if (m_Pitch > 89.0f)
+				m_Pitch = 89.0f;
+			if (m_Pitch < -89.0f)
+				m_Pitch = -89.0f;
+
+			// Normalize the angles to avoid overflow
+			if (m_Yaw > 360.0f)
+				m_Yaw -= 360.0f;
+			else if (m_Yaw < -360.0f)
+				m_Yaw += 360.0f;
+
+			// Create quaternion for pitch rotation
+			glm::quat pitchQuat = glm::angleAxis(glm::radians(m_Pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+
+			// Create quaternion for yaw rotation
+			glm::quat yawQuat = glm::angleAxis(glm::radians(m_Yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+
+			// Combine the two rotations
+			m_Orientation = glm::normalize(yawQuat * pitchQuat);
+
+			// Update the forward direction
+			m_ForwardDirection = glm::normalize(glm::rotate(m_Orientation, glm::vec3(0.0f, 0.0f, -1.0f)));
+
+			// Recalculate the Right and Up vector
+			m_RightDirection = glm::normalize(glm::cross(m_ForwardDirection, WORLD_UP));
+			m_UpDirection = glm::normalize(glm::cross(m_RightDirection, m_ForwardDirection));
+
+			m_Position = m_Target + (-m_ForwardDirection * m_Distance);
+
+			RecalculateView();
 		}
 
 		void PerspectiveTargetCamera::MoveTowardTarget(float delta)
@@ -128,9 +140,10 @@ namespace MABEngine {
 
 		void PerspectiveTargetCamera::RecalculateProjection()
 		{
-			m_Projection = glm::perspective(
+			m_Projection = glm::perspectiveFov(
 				glm::radians(m_VerticalFOV),
-				((float)m_ViewportWidth/ (float)m_ViewportHeight),
+				(float)m_ViewportWidth,
+				(float)m_ViewportHeight,
 				m_NearClip,
 				m_FarClip
 			);
@@ -142,7 +155,7 @@ namespace MABEngine {
 
 		void PerspectiveTargetCamera::RecalculateView()
 		{
-			m_View = glm::lookAt(m_Position, m_Target, m_UpDirection);
+			m_View = glm::lookAt(m_Position, m_ForwardDirection, m_UpDirection);
 			m_InverseView = glm::inverse(m_View);
 
 

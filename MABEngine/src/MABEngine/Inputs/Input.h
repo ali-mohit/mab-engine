@@ -17,9 +17,12 @@ namespace MABEngine {
 
 			static bool IsMouseButtonPressed(MABMouseButton buttonCode);
 			static std::pair<double, double> GetMousePos();
+			static void SetMousePos(double x, double y);
 			static double GetMousePosX();
 			static double GetMousePosY();
 		
+			static void HideMouseCursor();
+			static void ShowMouseCursor();
 		};
 
 	}

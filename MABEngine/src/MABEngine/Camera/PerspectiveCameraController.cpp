@@ -60,22 +60,22 @@ namespace MABEngine {
 
 						float angleX = 0;
 						float angleY = 0;
-						float rotationValue = glm::radians(m_CameraRotationSpeed);
+						float rotationValue = m_CameraRotationSpeed;
 						
 						if (absX >= absY)
 						{
-							delta.x = (absX - deltaC) <= 0 ? 0.0f : delta.x / absX;
+							delta.x = (absX - deltaC) <= 0 ? 0.0f : delta.x;
 							delta.y = 0;
 						}
 						else {
 							delta.x = 0;
-							delta.y = (absY - deltaC) <= 0 ? 0.0f : delta.y / absY;
+							delta.y = (absY - deltaC) <= 0 ? 0.0f : delta.y;
 						}
 
 						angleX = rotationValue * ts * delta.x;
 						angleY = rotationValue * ts * delta.y;
 
-						m_Camera.RotateAroundTargetLocal(angleX, -angleY);
+						m_Camera.RotateAroundTargetLocal(-angleX, -angleY);
 					}
 					
 					m_IsLastMousePosSet = true;

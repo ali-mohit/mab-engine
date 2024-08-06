@@ -20,6 +20,9 @@ namespace MABEngine {
 			const glm::vec2& spriteSize
 		)
 		{
+			auto w = texture->GetWidth();
+			auto h = texture->GetHeight();
+
 			glm::vec2 min = {
 				(coords.x * cellSize.x) / texture->GetWidth(),
 				(coords.y * cellSize.y) / texture->GetHeight()

@@ -48,7 +48,7 @@ namespace MABEngine {
 			PerspectiveTargetCamera m_Camera;
 			
 			float m_CameraTranslationSpeed = 10.0f;
-			float m_CameraRotationSpeed = 180.0f;
+			float m_CameraRotationSpeed = 5.0f;
 
 			bool m_HandleWindowResizeEnabled = false;
 			bool m_HandleKeyboardEventsFlag = true;

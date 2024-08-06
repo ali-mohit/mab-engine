@@ -48,6 +48,7 @@ void main() {
 		case 30: color = texture(u_Textures[30], v_TexCoord * v_Tiling) * v_Color; break;
 		case 31: color = texture(u_Textures[31], v_TexCoord * v_Tiling) * v_Color; break;
 	}/**/
-	color = texture(u_Textures[int(v_TextureId)], v_TexCoord * v_Tiling) * v_Color;
+	//color = vec4(v_TexCoord , 0.0f, 1.0f);
+	//color = texture(u_Textures[int(v_TextureId)], v_TexCoord * v_Tiling) * v_Color;
 	//color = v_Color;
 }

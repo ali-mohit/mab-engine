@@ -31,6 +31,12 @@ namespace MABEngine {
 			return state == GLFW_PRESS;
 		}
 
+		void Input::SetMousePos(double x, double y) {
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
+
+			glfwSetCursorPos(window, x, y);
+		}
+
 		std::pair<double, double> Input::GetMousePos()
 		{
 			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
@@ -52,6 +58,18 @@ namespace MABEngine {
 		{
 			auto[x, y] = GetMousePos();
 			return y;
+		}
+
+		void Input::HideMouseCursor() {
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
+
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		}
+
+		void Input::ShowMouseCursor() {
+			auto window = static_cast<GLFWwindow*>(Core::Application::Get().GetWindow().GetNativeWindow());
+
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		}
 	}
 }

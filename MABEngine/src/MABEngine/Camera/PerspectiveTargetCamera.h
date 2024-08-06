@@ -2,7 +2,12 @@
 
 #include "MABEngine/Core/Base.h"
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/quaternion.hpp> // Ensure this is included for quaternion rotation
 
 
 namespace MABEngine {
@@ -42,12 +47,6 @@ namespace MABEngine {
 
 			void MoveTowardTarget(float delta);
 
-			//Change the pitch (up, down) for the free camera
-			void ChangePitch(float degrees);
-
-			//Change heading (left, right) for the free camera
-			void ChangeHeading(float degrees);
-
 			const glm::mat4& GetProjection() const { return m_Projection; }
 			const glm::mat4& GetInverseProjection() const { return m_InverseProjection; }
 			const glm::mat4& GetView() const { return m_View; }
@@ -85,7 +84,7 @@ namespace MABEngine {
 			glm::vec3 m_Target = { 0.0f, 0.0f, 0.0f };
 			glm::vec3 m_Position = { 0.0f, 0.0f, 10.0f };
 
-			float m_Distance = 0;
+			float m_Distance = 10;
 
 			float m_VerticalFOV = 45.0f;
 			float m_NearClip = 0.1f;
@@ -94,8 +93,12 @@ namespace MABEngine {
 			uint32_t m_ViewportWidth = 1280;
 			uint32_t m_ViewportHeight = 720;
 
-			float camera_heading = 0.0f;
-			float camera_pitch = 0.0f;
+			glm::quat m_Orientation;
+
+			float m_Yaw = 0.0f;
+			float m_Pitch = 0.0f;
+
+			static constexpr glm::vec3 WORLD_UP = glm::vec3(0.0f, 1.0f, 0.0f); // WORLD_UP definition
 		};
 
 	}

@@ -14,12 +14,13 @@ namespace SandBoxLayers
 		:Layer("SandBox ViewPort"),
 		m_Width(width),
 		m_Height(height),
-		m_OrtogonalCameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
+		m_OrtogonalCameraController(1.5f, width, height)
 	{
 		m_PerspectiveCameraController.Resize(width, height);
 
 		//m_OrtogonalCameraController.SetZRotationEnabled(true);
 		//m_OrtogonalCameraController.SetZoomLevel(1.5f);
+		//m_OrtogonalCameraController.SetHandleWindowResizeEnbaled(false);
 	}
 
 	DockSpaceView::~DockSpaceView()
@@ -175,6 +176,7 @@ namespace SandBoxLayers
 			m_FramBuffer->Resize((uint32_t)m_ViewportWidth, (uint32_t)m_ViewportHeight);
 
 			m_PerspectiveCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
+			//m_OrtogonalCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
 		}
 
 		uint32_t textureId = m_FramBuffer->GetColorAttachmentID();
@@ -206,6 +208,7 @@ namespace SandBoxLayers
 		// Rendering 
 		{
 			MAB_PROFILE_SCOPE("Rendering");
+			//MABEngine::Renderer::EngineRenderer2d::BeginScene(m_OrtogonalCameraController.GetCamera());
 			MABEngine::Renderer::EngineRenderer2d::BeginScene(m_PerspectiveCameraController.GetCamera());
 			//MABEngine::Renderer::EngineRenderer2d::BeginScene(m_FreeCamera);
 
@@ -230,7 +233,7 @@ namespace SandBoxLayers
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 				{ 1.0f, 0.0f, 3.0f },
 				{ 2.0f, 1.0f },
-				glm::radians(0.0f),
+				glm::radians(45.0f),
 				m_Castle,
 				{ 0.0f, 0.0f, 0.0f , 1.0f }
 			);
