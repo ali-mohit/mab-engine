@@ -28,7 +28,6 @@ namespace MABEngine {
 
 			glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
 		}
 
 		OpenGLTexture2D::OpenGLTexture2D(const std::string& path)

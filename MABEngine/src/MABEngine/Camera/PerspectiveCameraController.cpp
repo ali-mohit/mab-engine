@@ -2,6 +2,8 @@
 #include "MABEngine/Camera/PerspectiveCameraController.h"
 
 #include "MABEngine/Core/Base.h"
+#include "MABEngine/Core/Application.h"
+#include "MABEngine/Camera/CameraSpecification.h"
 #include "MABEngine/Events/Event.h"
 #include "MABEngine/Inputs/Input.h"
 
@@ -10,13 +12,22 @@ namespace MABEngine {
 
 	namespace Camera {
 		PerspectiveCameraController::PerspectiveCameraController()
+			:m_Camera()
 		{
 		}
+
+		PerspectiveCameraController::PerspectiveCameraController(const CameraSpecification& spec)
+			:m_Camera(spec)
+		{
+		}
+
 		PerspectiveCameraController::PerspectiveCameraController(
 			float nearClip, float farClip, float verticalFOV,
 			uint32_t width, uint32_t height
 		):
-			m_Camera(nearClip, farClip, verticalFOV, width, height)
+			m_Camera(CameraSpecification::CreateFreeCam(verticalFOV, nearClip, farClip, width, height)),
+			m_Width(width),
+			m_Height(height)
 		{
 		}
 
@@ -25,7 +36,14 @@ namespace MABEngine {
 			uint32_t width, uint32_t height,
 			const glm::vec3& cameraPos, const glm::vec3& cameraTarget
 		):
-			m_Camera(nearClip, farClip, verticalFOV, width, height,cameraPos, cameraTarget)
+			m_Camera(CameraSpecification::CreateFreeCam(
+				verticalFOV, nearClip, farClip,
+				width, height,
+				cameraPos, glm::normalize(cameraTarget - cameraPos), glm::vec3(0.0f, 1.0f, 0.0f)
+				)
+			),
+			m_Width(width),
+			m_Height(height)
 		{
 		}
 
@@ -34,7 +52,10 @@ namespace MABEngine {
 			uint32_t width, uint32_t height,
 			const glm::vec3& cameraPos, const glm::vec3& cameraTarget, const glm::vec3& upDirection
 		):
-			m_Camera(nearClip, farClip, verticalFOV, width, height, cameraPos, cameraTarget, upDirection)
+			m_Camera(CameraSpecification::CreateFreeCam(
+				verticalFOV, nearClip, farClip,
+				width, height,
+				cameraPos, glm::normalize(cameraTarget - cameraPos), upDirection))
 		{
 		}
 
@@ -44,51 +65,70 @@ namespace MABEngine {
 
 			if (m_HandleKeyboardEventsFlag) {
 				auto isCtrlPressed = Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Left_Control) ||
-					Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Left_Control);
+					Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Right_Control);
+
+				auto isXPressed = Inputs::Input::IsKeyPressed(Inputs::Mab_Key_X);
+
 				auto isLeftClickPressed = Inputs::Input::IsMouseButtonPressed(Inputs::Mab_Mouse_Button_Left);
 				auto isRightClickPressed = Inputs::Input::IsMouseButtonPressed(Inputs::Mab_Mouse_Button_Right);
+				auto isMiddleClickPressed = Inputs::Input::IsMouseButtonPressed(Inputs::Mab_Mouse_Button_Middle);
 
-				if (isCtrlPressed && isLeftClickPressed) {
-					auto [x, y] = Inputs::Input::GetMousePos();
+				if (isCtrlPressed) {
 					
+					float width = m_Width;
+					float height = m_Height;
 
-					if (m_IsLastMousePosSet) {
-						auto delta = glm::vec2(x, y) - m_LastMousePosition;
-						auto absX = std::abs(delta.x);
-						auto absY = std::abs(delta.y);
-						float deltaC = 10;
+					// Prevents camera from jumping on the first click
+					if (m_FirstClick)
+					{
+						m_FirstClick = false;
+						auto[last_x, last_y] = Inputs::Input::GetMousePos();
+						m_LastMousePosition = { last_x, last_y };
+					}
 
-						float angleX = 0;
-						float angleY = 0;
-						float rotationValue = m_CameraRotationSpeed;
-						
-						if (absX >= absY)
-						{
-							delta.x = (absX - deltaC) <= 0 ? 0.0f : delta.x;
-							delta.y = 0;
-						}
-						else {
-							delta.x = 0;
-							delta.y = (absY - deltaC) <= 0 ? 0.0f : delta.y;
-						}
+					// Fetches the coordinates of the cursor
+					auto [mouseX, mouseY] = Inputs::Input::GetMousePos();
+					
+					float moveX = (float)(mouseX - m_LastMousePosition.x);
+					float moveY = (float)(mouseY - m_LastMousePosition.y);
 
-						angleX = rotationValue * ts * delta.x;
-						angleY = rotationValue * ts * delta.y;
+					if (isLeftClickPressed && !isXPressed) {
+						// Normalizes and shifts the coordinates of the cursor such that they begin in the middle of the screen
+						// and then "transforms" them into degrees 
+						float rotY = m_RotationSensitivity * moveY;
+						float rotX = m_RotationSensitivity * moveX;
 
-						m_Camera.RotateAroundTargetLocal(-angleX, -angleY);
+						m_Camera.LocalXYRotation(rotX, rotY);
+					}
+					else if (isLeftClickPressed && isXPressed) {
+						float rotX = m_RotationSensitivity * moveX;
+						m_Camera.RollRotation(rotX);
+					}
+					else if (isMiddleClickPressed) {
+						float valueX = m_TranslationSensitivity * moveX;
+						float valueY = m_TranslationSensitivity * moveY;
+
+						m_Camera.TruckAndPedestalMovement(-valueX, valueY);
+					}
+					else if (isRightClickPressed) {
+
+						float valueX = m_TranslationSensitivity * moveX;
+						float valueY = m_TranslationSensitivity * moveY;
+
+						m_Camera.MoveDolly(-valueY);
 					}
 					
-					m_IsLastMousePosSet = true;
-					m_LastMousePosition = { x, y };
+					
+					m_LastMousePosition = { mouseX, mouseY };
 				}
 				else {
-					m_IsLastMousePosSet = false;
-
+					m_FirstClick = true;
 				}
 
 				if (MABEngine::Inputs::Input::IsKeyPressed(Inputs::Mab_Key_F))
 				{
 					//Reset Scene
+					m_Camera = PerspectiveCamera(m_Camera.GetCameraSetupSpecification());
 				}
 			}
 
@@ -111,16 +151,18 @@ namespace MABEngine {
 
 			if (height == 0 || width == 0) return;
 
-			m_Camera.OnResize(width, height);
+			m_Camera.Resize(width, height);
+			m_Width = width;
+			m_Height = height;
 		}
 
 		bool PerspectiveCameraController::OnMouseScrolled(Events::MouseScrolledEvent& e)
 		{
 			MAB_PROFILE_FUNCTION();
 
-			float translationDelta = e.GetYOffSet() * 0.1f * m_CameraTranslationSpeed;
+			float translationDelta = -e.GetYOffSet() * m_ZoomSensitivity;
 
-			m_Camera.MoveTowardTarget(translationDelta);
+			m_Camera.ZoomCamera(translationDelta);
 			return false;
 		}
 

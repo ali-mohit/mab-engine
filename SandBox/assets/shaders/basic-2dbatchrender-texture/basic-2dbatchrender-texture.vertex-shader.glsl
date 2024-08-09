@@ -1,4 +1,4 @@
-#version 330 core
+#version 430 core
 			
 layout(location = 0) in vec4  a_Position;
 layout(location = 1) in vec4  a_Color;
@@ -15,10 +15,9 @@ out vec4  v_Position;
 out vec4  v_Color;
 out vec2  v_TexCoord;
 out vec2  v_Tiling;
-out float v_TextureId;
-out float v_TextureMaskId;
-out float v_TransformIndex;
-
+flat out float v_TextureId;
+flat out float v_TextureMaskId;
+flat out float v_TransformIndex;
 
 void main() {
 	v_Position = a_Position;

@@ -147,12 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\MABEngine.h" />
+    <ClInclude Include="src\MABEngine\Camera\CameraTypeEnum.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCamera.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraBounds.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraController.h" />
+    <ClInclude Include="src\MABEngine\Camera\PerspectiveCamera.h" />
     <ClInclude Include="src\MABEngine\Camera\PerspectiveCameraController.h" />
-    <ClInclude Include="src\MABEngine\Camera\PerspectiveFreeCamera.h" />
-    <ClInclude Include="src\MABEngine\Camera\PerspectiveTargetCamera.h" />
+    <ClInclude Include="src\MABEngine\Camera\CameraSpecification.h" />
+    <ClInclude Include="src\MABEngine\Camera\Utilities.h" />
     <ClInclude Include="src\MABEngine\Core\Application.h" />
     <ClInclude Include="src\MABEngine\Core\ApplicationProps.h" />
     <ClInclude Include="src\MABEngine\Core\Base.h" />
@@ -652,9 +654,8 @@
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\MABEngine\Camera\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\MABEngine\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\MABEngine\Camera\PerspectiveCameraController.cpp" />
-    <ClCompile Include="src\MABEngine\Camera\PerspectiveFreeCamera.cpp" />
-    <ClCompile Include="src\MABEngine\Camera\PerspectiveTargetCamera.cpp" />
     <ClCompile Include="src\MABEngine\Core\Application.cpp" />
     <ClCompile Include="src\MABEngine\Core\EngineTime.cpp" />
     <ClCompile Include="src\MABEngine\Core\Settings.cpp" />

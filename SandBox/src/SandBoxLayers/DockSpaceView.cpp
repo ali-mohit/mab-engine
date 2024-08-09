@@ -16,11 +16,22 @@ namespace SandBoxLayers
 		m_Height(height),
 		m_OrtogonalCameraController(1.5f, width, height)
 	{
-		m_PerspectiveCameraController.Resize(width, height);
+		m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
+			MABEngine::Camera::CameraSpecification::CreateTargetCamera(
+				45.0f, 0.01, 100.0f,
+				width, height, 
+				{0.0f, 0.0f, 10.0f}, {0.0f, 0.0f, 0.0f}, MABEngine::Camera::PerspectiveCamera::WORLD_UP
+			)
+		);
 
-		//m_OrtogonalCameraController.SetZRotationEnabled(true);
-		//m_OrtogonalCameraController.SetZoomLevel(1.5f);
-		//m_OrtogonalCameraController.SetHandleWindowResizeEnbaled(false);
+		/*m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
+			MABEngine::Camera::CameraSpecification::CreateFreeCam(
+				45.0f, 0.01, 100.0f,
+				width, height,
+				{ 0.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, -1.0f }, MABEngine::Camera::PerspectiveCamera::WORLD_UP
+			)
+		);
+		*/
 	}
 
 	DockSpaceView::~DockSpaceView()
@@ -130,10 +141,7 @@ namespace SandBoxLayers
 		MABEngine::Renderer::FrameBufferSpecification fbSpec(m_Width, m_Height);
 		m_FramBuffer = MABEngine::Renderer::FrameBuffer::Create(fbSpec);
 
-		/*m_FreeCamera.SetPosition({10.0f, 10.0f, 10.0f});
-		m_FreeCamera.OnResize(m_Width, m_Height);
-		auto direction = glm::normalize(glm::vec3({ 0.0f, 0.0f, 0.0f }) - glm::vec3(glm::vec3({ 10.0f, 10.0f, 10.0f })));
-		m_FreeCamera.SetForwardDirection(direction);*/
+
 	}
 
 	void DockSpaceView::OnEvent(MABEngine::Events::Event& event)
@@ -156,7 +164,9 @@ namespace SandBoxLayers
 
 			ImGui::ColorEdit3("Square Color1", glm::value_ptr(m_SolidColor1));
 			ImGui::DragFloat("Rotation Box Value", &m_rotationBox);
-			ImGui::Checkbox("Dockspace Viewport", &m_IsDockSapceActive);
+			if (ImGui::Checkbox("Dockspace Viewport", &m_IsDockSapceActive)) {
+				SetRenderViewSize();
+			}
 
 			ImGui::End();
 		}
@@ -165,24 +175,50 @@ namespace SandBoxLayers
 	void DockSpaceView::MakeViewWindow()
 	{
 		ImGui::Begin("View");
-		ImVec2 currentSize = ImGui::GetContentRegionAvail();
 		
-		if (((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) &&
-			(int)currentSize.x > 0 &&
-			(int)currentSize.y > 0) {
-			m_ViewportWidth = currentSize.x;
-			m_ViewportHeight = currentSize.y;
+		float w = m_ViewportWidth;
+		float h = m_ViewportHeight;
 
-			m_FramBuffer->Resize((uint32_t)m_ViewportWidth, (uint32_t)m_ViewportHeight);
-
-			m_PerspectiveCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
-			//m_OrtogonalCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
-		}
+		m_CurrentSize = ImGui::GetContentRegionAvail();
+		SetRenderViewSize();
 
 		uint32_t textureId = m_FramBuffer->GetColorAttachmentID();
-		ImGui::Image((void*)textureId, ImVec2{ (float)m_ViewportWidth, (float)m_ViewportHeight}, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
+		ImGui::Image((void*)textureId, ImVec2{ (float)m_ViewportWidth, (float)m_ViewportHeight }, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
 
 		ImGui::End();
+	}
+
+	void DockSpaceView::SetRenderViewSize()
+	{
+		if (m_IsDockSapceActive) {
+			if (((int)m_CurrentSize.x != m_ViewportWidth || (int)m_CurrentSize.y != m_ViewportHeight) &&
+				(int)m_CurrentSize.x > 0 &&
+				(int)m_CurrentSize.y > 0) {
+
+				m_ViewportWidth = m_CurrentSize.x;
+				m_ViewportHeight = m_CurrentSize.y;
+
+				m_RenderViewSizeChanged = true;
+			}
+		}
+		else {
+			if (m_Width != m_ViewportWidth || m_Height != m_ViewportHeight)
+			{
+				m_ViewportWidth = m_Width;
+				m_ViewportHeight = m_Height;
+				m_RenderViewSizeChanged = true;
+
+				MABEngine::Renderer::EngineRenderer2d::OnWindowResize(m_Width, m_Height);
+			}
+		}
+
+		if (m_RenderViewSizeChanged) {
+			
+			m_FramBuffer->Resize((uint32_t)m_ViewportWidth, (uint32_t)m_ViewportHeight);
+			m_PerspectiveCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
+			
+			m_RenderViewSizeChanged = false;
+		}
 	}
 
 	void DockSpaceView::OnUpdate(MABEngine::Core::EngineTimeStep ts)
@@ -208,14 +244,12 @@ namespace SandBoxLayers
 		// Rendering 
 		{
 			MAB_PROFILE_SCOPE("Rendering");
-			//MABEngine::Renderer::EngineRenderer2d::BeginScene(m_OrtogonalCameraController.GetCamera());
 			MABEngine::Renderer::EngineRenderer2d::BeginScene(m_PerspectiveCameraController.GetCamera());
-			//MABEngine::Renderer::EngineRenderer2d::BeginScene(m_FreeCamera);
-
+			
 
 			//Background
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ 0.0f , 0.0f, -2.0f },
+				{ 0.0f , 0.0f, 0.0f },
 				{ 10.0f, 10.0f },
 				m_CheckerBoardTexture,
 				{ 10.0f, 10.0f }

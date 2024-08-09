@@ -4,8 +4,8 @@
 
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
-#include "MABEngine/Camera/PerspectiveFreeCamera.h"
-#include "MABEngine/Camera/PerspectiveTargetCamera.h"
+#include "MABEngine/Camera/PerspectiveCamera.h"
+
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Textures/Texture2D.h"
@@ -25,8 +25,8 @@ namespace MABEngine {
 			static void OnWindowResize(uint32_t width, uint32_t height);
 
 			static void BeginScene(const Camera::OrthographicCamera& camera);
-			static void BeginScene(const Camera::PerspectiveTargetCamera& camera);
-			static void BeginScene(const Camera::PerspectiveFreeCamera& camera);
+			static void BeginScene(const Camera::PerspectiveCamera& camera);
+
 			static void EndScene();
 
 			static void Flush();

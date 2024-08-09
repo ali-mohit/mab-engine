@@ -8,6 +8,7 @@
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/QuadVertexInfo.h"
 
+#include "glad/glad.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -110,14 +111,7 @@ namespace MABEngine {
 			InnerBeginScene(camera.GetViewProjectionMatrix());
 		}
 
-		void EngineRenderer2d::BeginScene(const Camera::PerspectiveTargetCamera& camera)
-		{
-			MAB_PROFILE_FUNCTION();
-
-			InnerBeginScene(camera.GetViewProjectionMatrix());
-		}
-
-		void EngineRenderer2d::BeginScene(const Camera::PerspectiveFreeCamera& camera)
+		void EngineRenderer2d::BeginScene(const Camera::PerspectiveCamera& camera)
 		{
 			MAB_PROFILE_FUNCTION();
 
@@ -358,6 +352,7 @@ namespace MABEngine {
 			else
 				textureCoord = s_2dRendererData->DefaultTextureCoordinate;
 
+			
 			s_2dRendererData->QuadVertexInfoPtr->Position = transform * s_2dRendererData->VertexPositionTemplate[0];
 			s_2dRendererData->QuadVertexInfoPtr->Color = color;
 			s_2dRendererData->QuadVertexInfoPtr->TextCoordinate = textureCoord[0];

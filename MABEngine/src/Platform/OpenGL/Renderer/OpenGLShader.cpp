@@ -286,6 +286,13 @@ namespace MABEngine {
 			UploadUniformIntArray(name, values, count);
 		}
 
+		void OpenGLShader::SetUIntArray(const std::string& name, uint32_t* values, int count)
+		{
+			MAB_PROFILE_FUNCTION();
+
+			UploadUniformUIntArray(name, values, count);
+		}
+
 		void OpenGLShader::SetFloatArray(const std::string& name, float* values, int count)
 		{
 			MAB_PROFILE_FUNCTION();
@@ -383,6 +390,12 @@ namespace MABEngine {
 		{
 			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 			glUniform1iv(location, count, values);
+		}
+
+		void OpenGLShader::UploadUniformUIntArray(const std::string& name, uint32_t* values, int count)
+		{
+			GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+			glUniform1uiv(location, count, values);
 		}
 
 		void OpenGLShader::UploadUniformFloatArray(const std::string& name, float* values, int count)

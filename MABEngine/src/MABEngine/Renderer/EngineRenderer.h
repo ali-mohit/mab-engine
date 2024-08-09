@@ -8,6 +8,7 @@
 #include "MABEngine/Renderer/Shader.h"
 
 #include "MABEngine/Camera/OrthographicCamera.h"
+#include "MABEngine/Camera/PerspectiveCamera.h"
 
 namespace MABEngine {
 
@@ -22,6 +23,7 @@ namespace MABEngine {
 			static void OnWindowResize(uint32_t width, uint32_t height);
 
 			static void BeginScene(Camera::OrthographicCamera& camera);
+			static void BeginScene(Camera::PerspectiveCamera& camera);
 			static void EndScene();
 
 			static void Submit(

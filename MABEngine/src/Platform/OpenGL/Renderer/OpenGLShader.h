@@ -30,6 +30,8 @@ namespace MABEngine {
 			virtual void SetInt3(const std::string& name, const glm::ivec3& value) override;
 			virtual void SetInt4(const std::string& name, const glm::ivec4& value) override;
 
+			virtual void SetUIntArray(const std::string& name, uint32_t* values, int count) override;
+
 			virtual void SetFloat(const std::string& name, float value) override;
 			virtual void SetFloat2(const std::string& name, const glm::vec2& value) override;
 			virtual void SetFloat3(const std::string& name, const glm::vec3& value) override;
@@ -66,6 +68,7 @@ namespace MABEngine {
 			void UploadUniformMat4Array(const std::string& name, const std::vector<glm::mat4>& matrixList);
 
 			void UploadUniformIntArray(const std::string& name, int* values, int count);
+			void UploadUniformUIntArray(const std::string& name, uint32_t* values, int count);
 			void UploadUniformFloatArray(const std::string& name, float* values, int count);
 		private:
 			uint32_t m_RendererId = 0;
