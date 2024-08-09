@@ -8,6 +8,7 @@
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Renderer/QuadVertexInfo.h"
 
+#include "glad/glad.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -103,19 +104,18 @@ namespace MABEngine {
 			RenderCommand::SetViewport(0, 0, width, height);
 		}
 
-		void EngineRenderer2d::BeginScene(Camera::OrthographicCamera& camera)
+		void EngineRenderer2d::BeginScene(const Camera::OrthographicCamera& camera)
 		{
 			MAB_PROFILE_FUNCTION();
 
-			s_2dRendererData->ShaderObject->Bind();
-			s_2dRendererData->ShaderObject->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+			InnerBeginScene(camera.GetViewProjectionMatrix());
+		}
 
-			s_2dRendererData->QuadVertexInfoPtr = s_2dRendererData->QuadVertexInfoBase;
+		void EngineRenderer2d::BeginScene(const Camera::PerspectiveCamera& camera)
+		{
+			MAB_PROFILE_FUNCTION();
 
-			s_2dRendererData->QuadVertexCount = 0;
-			s_2dRendererData->QuadEdgeCount = 0;
-
-			s_2dRendererData->ClearTextureLib();
+			InnerBeginScene(camera.GetViewProjectionMatrix());
 		}
 
 		void EngineRenderer2d::EndScene()
@@ -312,6 +312,19 @@ namespace MABEngine {
 			return s_2dRendererData->Stats;
 		}
 
+		void EngineRenderer2d::InnerBeginScene(const glm::mat4& viewProjectionMatrix)
+		{
+			s_2dRendererData->ShaderObject->Bind();
+			s_2dRendererData->ShaderObject->SetMat4("u_ViewProjection", viewProjectionMatrix);
+
+			s_2dRendererData->QuadVertexInfoPtr = s_2dRendererData->QuadVertexInfoBase;
+
+			s_2dRendererData->QuadVertexCount = 0;
+			s_2dRendererData->QuadEdgeCount = 0;
+
+			s_2dRendererData->ClearTextureLib();
+		}
+
 		void EngineRenderer2d::InnerDrawQuad(
 			const glm::mat4& transform,
 			const glm::vec4& color,
@@ -339,6 +352,7 @@ namespace MABEngine {
 			else
 				textureCoord = s_2dRendererData->DefaultTextureCoordinate;
 
+			
 			s_2dRendererData->QuadVertexInfoPtr->Position = transform * s_2dRendererData->VertexPositionTemplate[0];
 			s_2dRendererData->QuadVertexInfoPtr->Color = color;
 			s_2dRendererData->QuadVertexInfoPtr->TextCoordinate = textureCoord[0];

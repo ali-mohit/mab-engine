@@ -163,7 +163,9 @@ namespace LightAndShadows {
 			
 
 			ImVec2 currentSize = ImGui::GetContentRegionAvail();
-			if ((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) {
+			if (((int)currentSize.x != m_ViewportWidth || (int)currentSize.y != m_ViewportHeight) &&
+				(int)currentSize.x > 0 &&
+				(int)currentSize.y > 0) {
 				m_ViewportWidth = currentSize.x;
 				m_ViewportHeight = currentSize.y;
 				
@@ -226,7 +228,7 @@ namespace LightAndShadows {
 				MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 					{ 1.0f, 0.0f, 0.3f },
 					{ 2.0f, 1.0f },
-					glm::radians(0.0f),
+					glm::radians(45.0f),
 					m_Castle,
 					{ 0.0f, 0.0f, 0.0f , 1.0f }
 				);

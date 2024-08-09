@@ -14,10 +14,24 @@ namespace SandBoxLayers
 		:Layer("SandBox ViewPort"),
 		m_Width(width),
 		m_Height(height),
-		m_CameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
+		m_OrtogonalCameraController(1.5f, width, height)
 	{
-		m_CameraController.SetZRotationEnabled(true);
-		m_CameraController.SetZoomLevel(1.5f);
+		m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
+			MABEngine::Camera::CameraSpecification::CreateTargetCamera(
+				45.0f, 0.01, 100.0f,
+				width, height, 
+				{0.0f, 0.0f, 10.0f}, {0.0f, 0.0f, 0.0f}, MABEngine::Camera::PerspectiveCamera::WORLD_UP
+			)
+		);
+
+		/*m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
+			MABEngine::Camera::CameraSpecification::CreateFreeCam(
+				45.0f, 0.01, 100.0f,
+				width, height,
+				{ 0.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, -1.0f }, MABEngine::Camera::PerspectiveCamera::WORLD_UP
+			)
+		);
+		*/
 	}
 
 	DockSpaceView::~DockSpaceView()
@@ -120,17 +134,20 @@ namespace SandBoxLayers
 	{
 		MAB_PROFILE_FUNCTION();
 
-		m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_CheckerBoardTexture = MABEngine::Textures::Texture2D::Create("assets/textures/Checkerboard_64.jpg");
 		m_SpriteSheet = MABEngine::Textures::Texture2D::Create("assets/textures/Cartography_Sheet_2x.png");
 		m_Castle = MABEngine::Textures::SubTexture2D::CreateFromCoordinates(m_SpriteSheet, { 0.0, 9.0 }, { 128.0f , 128.0f }, { 2, 1 });
 
 		MABEngine::Renderer::FrameBufferSpecification fbSpec(m_Width, m_Height);
 		m_FramBuffer = MABEngine::Renderer::FrameBuffer::Create(fbSpec);
+
+
 	}
 
 	void DockSpaceView::OnEvent(MABEngine::Events::Event& event)
 	{
-		m_CameraController.OnEvent(event);
+		//m_OrtogonalCameraController.OnEvent(event);
+		m_PerspectiveCameraController.OnEvent(event);
 	}
 
 	void DockSpaceView::MakeSettingWindow()
@@ -147,7 +164,9 @@ namespace SandBoxLayers
 
 			ImGui::ColorEdit3("Square Color1", glm::value_ptr(m_SolidColor1));
 			ImGui::DragFloat("Rotation Box Value", &m_rotationBox);
-			ImGui::Checkbox("Dockspace Viewport", &m_IsDockSapceActive);
+			if (ImGui::Checkbox("Dockspace Viewport", &m_IsDockSapceActive)) {
+				SetRenderViewSize();
+			}
 
 			ImGui::End();
 		}
@@ -156,18 +175,58 @@ namespace SandBoxLayers
 	void DockSpaceView::MakeViewWindow()
 	{
 		ImGui::Begin("View");
+		
+		float w = m_ViewportWidth;
+		float h = m_ViewportHeight;
+
+		m_CurrentSize = ImGui::GetContentRegionAvail();
+		SetRenderViewSize();
 
 		uint32_t textureId = m_FramBuffer->GetColorAttachmentID();
-		ImGui::Image((void*)textureId, ImVec2{m_Width/2.0f, m_Height/2.0f}, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
+		ImGui::Image((void*)textureId, ImVec2{ (float)m_ViewportWidth, (float)m_ViewportHeight }, ImVec2{0.0f, 1.0f}, ImVec2{1.0f, 0.0f});
 
 		ImGui::End();
+	}
+
+	void DockSpaceView::SetRenderViewSize()
+	{
+		if (m_IsDockSapceActive) {
+			if (((int)m_CurrentSize.x != m_ViewportWidth || (int)m_CurrentSize.y != m_ViewportHeight) &&
+				(int)m_CurrentSize.x > 0 &&
+				(int)m_CurrentSize.y > 0) {
+
+				m_ViewportWidth = m_CurrentSize.x;
+				m_ViewportHeight = m_CurrentSize.y;
+
+				m_RenderViewSizeChanged = true;
+			}
+		}
+		else {
+			if (m_Width != m_ViewportWidth || m_Height != m_ViewportHeight)
+			{
+				m_ViewportWidth = m_Width;
+				m_ViewportHeight = m_Height;
+				m_RenderViewSizeChanged = true;
+
+				MABEngine::Renderer::EngineRenderer2d::OnWindowResize(m_Width, m_Height);
+			}
+		}
+
+		if (m_RenderViewSizeChanged) {
+			
+			m_FramBuffer->Resize((uint32_t)m_ViewportWidth, (uint32_t)m_ViewportHeight);
+			m_PerspectiveCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
+			
+			m_RenderViewSizeChanged = false;
+		}
 	}
 
 	void DockSpaceView::OnUpdate(MABEngine::Core::EngineTimeStep ts)
 	{
 		MAB_PROFILE_FUNCTION();
 
-		m_CameraController.OnUpdate(ts);
+		//m_OrtogonalCameraController.OnUpdate(ts);
+		m_PerspectiveCameraController.OnUpdate(ts);
 
 		MABEngine::Renderer::EngineRenderer2d::ResetStats();
 		// Rendering Pre
@@ -179,16 +238,18 @@ namespace SandBoxLayers
 
 			MABEngine::Renderer::RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
 			MABEngine::Renderer::RenderCommand::Clear();
+			
 		}
-
+		
 		// Rendering 
 		{
 			MAB_PROFILE_SCOPE("Rendering");
-			MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
+			MABEngine::Renderer::EngineRenderer2d::BeginScene(m_PerspectiveCameraController.GetCamera());
+			
 
 			//Background
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ 0.0f , 0.0f, -0.2f },
+				{ 0.0f , 0.0f, 0.0f },
 				{ 10.0f, 10.0f },
 				m_CheckerBoardTexture,
 				{ 10.0f, 10.0f }
@@ -196,7 +257,7 @@ namespace SandBoxLayers
 
 			//Box 01
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ -1.0f , 0.0f },
+				{ -1.0f , 0.0f, 2.0f },
 				{ 2.0f, 1.0f },
 				glm::radians(m_rotationBox),
 				{ m_SolidColor1, 1.0f }
@@ -204,9 +265,9 @@ namespace SandBoxLayers
 
 			//Castle Texture
 			MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-				{ 1.0f, 0.0f, 0.3f },
+				{ 1.0f, 0.0f, 3.0f },
 				{ 2.0f, 1.0f },
-				glm::radians(0.0f),
+				glm::radians(45.0f),
 				m_Castle,
 				{ 0.0f, 0.0f, 0.0f , 1.0f }
 			);

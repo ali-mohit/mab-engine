@@ -1,4 +1,4 @@
-#version 330 core
+#version 430 core
 			
 layout(location = 0) out vec4 color;
 			
@@ -6,14 +6,16 @@ in vec4  v_Position;
 in vec4  v_Color;
 in vec2  v_TexCoord;
 in vec2  v_Tiling;
-in float v_TextureId;
-in float v_TextureMaskId;
-in float v_TransformIndex;
-			
+flat in float v_TextureId;
+flat in float v_TextureMaskId;
+flat in float v_TransformIndex;
+
 uniform sampler2D u_Textures[32];
 
 void main() {
-	switch(int(v_TextureId))
+	uint textureIndex = uint(v_TextureId);
+	
+	switch(textureIndex)
 	{
 		case  0: color = texture(u_Textures[ 0], v_TexCoord * v_Tiling) * v_Color; break;
 		case  1: color = texture(u_Textures[ 1], v_TexCoord * v_Tiling) * v_Color; break;
@@ -47,7 +49,8 @@ void main() {
 		case 29: color = texture(u_Textures[29], v_TexCoord * v_Tiling) * v_Color; break;
 		case 30: color = texture(u_Textures[30], v_TexCoord * v_Tiling) * v_Color; break;
 		case 31: color = texture(u_Textures[31], v_TexCoord * v_Tiling) * v_Color; break;
-	}
-	//color = texture(u_Textures[int(v_TextureId)], v_TexCoord * v_Tiling) * v_Color;
+	}/**/
+	//color = vec4(textureIndex * 10, textureIndex * 10 , 0.0f, 1.0f);
+	//color = texture(u_Textures[textureIndex], v_TexCoord * v_Tiling) * v_Color;
 	//color = v_Color;
 }

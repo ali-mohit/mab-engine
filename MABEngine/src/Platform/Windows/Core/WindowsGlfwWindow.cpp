@@ -13,6 +13,8 @@
 #include "MABEngine/Inputs/KeyboardCodes.h"
 #include "MABEngine/Inputs/MouseButtonCodes.h"
 
+#include "MABEngine/Renderer/GraphicCardInfo.h"
+
 #include <GLFW/glfw3.h>
 
 
@@ -64,7 +66,9 @@ namespace MABEngine {
 				s_GLFWWindowCount++;
 			}
 
-			m_GraphicContext = new Renderer::OpenGLGraphicContext(m_Window);
+			m_GraphicCardInfo = Renderer::GraphicCardInfo::Create();
+
+			m_GraphicContext = new Renderer::OpenGLGraphicContext(m_Window, m_GraphicCardInfo);
 			m_GraphicContext->Init();
 
 			glfwSetWindowUserPointer(m_Window, &m_Data);

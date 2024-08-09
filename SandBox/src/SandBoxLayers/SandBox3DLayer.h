@@ -31,6 +31,7 @@ namespace SandBoxLayers
 
 		MABEngine::Core::Ref<MABEngine::Renderer::VertexArray> m_RectangleVertexArray;
 
-		MABEngine::Camera::OrthographicCameraController m_CameraController;
+		//MABEngine::Camera::OrthographicCameraController m_CameraController;
+		MABEngine::Camera::PerspectiveCameraController m_CameraController;
 	};
 }

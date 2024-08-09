@@ -13,9 +13,9 @@ namespace SandBoxLayers
 		:Layer("Example"),
 		m_Width(width),
 		m_Height(height),
-		m_CameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
+		m_CameraController(0.01f, 100.0f, 45.0f, width, height)
 	{
-		m_CameraController.SetZRotationEnabled(true);
+		//m_CameraController.SetZRotationEnabled(true);
 
 		CreateTriangleObject();
 		CreateRectangleObject();
@@ -45,7 +45,7 @@ namespace SandBoxLayers
 		m_TextureCheckerBoard->Bind();
 		MABEngine::Renderer::EngineRenderer::Submit(textureShader, m_RectangleVertexArray, textureCheckerBoardtransform);
 		textureShader->SetFloat4(
-			"u_Color", glm::vec4(0.3f, 0.2f, 0.8f, 1.0f)
+			"u_UniqueColor", glm::vec4(0.3f, 0.2f, 0.8f, 1.0f)
 		);
 
 		m_TextureMabLogo->Bind();
@@ -142,6 +142,7 @@ namespace SandBoxLayers
 
 		m_TextureShader->Bind();
 		m_TextureShader->SetInt("u_Texture", 0);
+		m_TextureShader->SetFloat2("u_Tiling", glm::vec2{ 1.0f, 1.0f });
 
 	}
 }

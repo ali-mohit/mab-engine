@@ -42,12 +42,17 @@
 #include "MABEngine/Renderer/RenderCommand.h"
 #include "MABEngine/Renderer/FrameBufferSpecification.h"
 #include "MABEngine/Renderer/FramBuffer.h"
+#include "MABEngine/Renderer/GraphicCardInfo.h"
+
+#include "MABEngine/Scene/SceneManagement.h"
 
 #include "MABEngine/Textures/Texture.h"
 #include "MABEngine/Textures/Texture2D.h"
 #include "MABEngine/Textures/SubTexture2D.h"
 
+#include "MABEngine/Camera/CameraSpecification.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
 #include "MABEngine/Camera/OrthographicCameraBounds.h"
 #include "MABEngine/Camera/OrthographicCameraController.h"
-#include "MABEngine/Camera/PerspectiveFreeCamera.h"
+#include "MABEngine/Camera/PerspectiveCamera.h"
+#include "MABEngine/Camera/PerspectiveCameraController.h"

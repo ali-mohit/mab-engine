@@ -1,7 +1,9 @@
 #pragma once
 
+#include "MABEngine/Core/Base.h"
 #include "MABEngine/Core/Window.h"
 #include "MABEngine/Renderer/GraphicContext.h"
+#include "MABEngine/Renderer/GraphicCardInfo.h"
 
 struct GLFWwindow;
 
@@ -25,11 +27,14 @@ namespace MABEngine {
 			bool IsVSync() const override;
 
 			inline virtual void* GetNativeWindow() const override { return m_Window; }
+
 		private:
 			virtual void Init(const WindowProps& props);
 			virtual void Shutdown();
 		private:
 			GLFWwindow* m_Window;
+
+			Ref<Renderer::GraphicCardInfo> m_GraphicCardInfo;
 			Renderer::GraphicContext* m_GraphicContext;
 
 			struct WindowData {

@@ -4,6 +4,7 @@
 
 #include "MABEngine/Renderer/Shader.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
+#include "MABEngine/Camera/PerspectiveCamera.h"
 #include "MABEngine/Renderer/EngineRenderer2d.h"
 
 namespace MABEngine {
@@ -31,6 +32,10 @@ namespace MABEngine {
 		}
 
 		void EngineRenderer::BeginScene(Camera::OrthographicCamera& camera)
+		{
+			m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		}
+		void EngineRenderer::BeginScene(Camera::PerspectiveCamera& camera)
 		{
 			m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 		}

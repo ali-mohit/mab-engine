@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;MAB_ENABLE_ASSERTS;MABENGINE_DEBUG;ENGINE2D_STATISTICS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -99,7 +99,7 @@
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;MAB_ENABLE_ASSERTS;MABENGINE_RELEASE;ENGINE2D_STATISTICS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -125,7 +125,7 @@
       <PrecompiledHeaderFile>mabengine_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;MAB_ENABLE_ASSERTS;MABENGINE_DIST;ENGINE2D_STATISTICS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\GLFW\include;vendor\Glad\include;vendor\ImGUI\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -147,10 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\MABEngine.h" />
+    <ClInclude Include="src\MABEngine\Camera\CameraTypeEnum.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCamera.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraBounds.h" />
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraController.h" />
-    <ClInclude Include="src\MABEngine\Camera\PerspectiveFreeCamera.h" />
+    <ClInclude Include="src\MABEngine\Camera\PerspectiveCamera.h" />
+    <ClInclude Include="src\MABEngine\Camera\PerspectiveCameraController.h" />
+    <ClInclude Include="src\MABEngine\Camera\CameraSpecification.h" />
+    <ClInclude Include="src\MABEngine\Camera\Utilities.h" />
     <ClInclude Include="src\MABEngine\Core\Application.h" />
     <ClInclude Include="src\MABEngine\Core\ApplicationProps.h" />
     <ClInclude Include="src\MABEngine\Core\Base.h" />
@@ -186,6 +190,7 @@
     <ClInclude Include="src\MABEngine\Renderer\EngineRenderer2dStorageStatistics.h" />
     <ClInclude Include="src\MABEngine\Renderer\FramBuffer.h" />
     <ClInclude Include="src\MABEngine\Renderer\FrameBufferSpecification.h" />
+    <ClInclude Include="src\MABEngine\Renderer\GraphicCardInfo.h" />
     <ClInclude Include="src\MABEngine\Renderer\GraphicContext.h" />
     <ClInclude Include="src\MABEngine\Renderer\IndexBuffer.h" />
     <ClInclude Include="src\MABEngine\Renderer\QuadVertexInfo.h" />
@@ -200,11 +205,13 @@
     <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexArray.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h" />
+    <ClInclude Include="src\MABEngine\Scene\SceneManagement.h" />
     <ClInclude Include="src\MABEngine\Textures\SubTexture2D.h" />
     <ClInclude Include="src\MABEngine\Textures\Texture.h" />
     <ClInclude Include="src\MABEngine\Textures\Texture2D.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicCardInfo.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLIndexBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\Renderer\OpenGLRendererAPI.h" />
@@ -215,6 +222,7 @@
     <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwTime.h" />
     <ClInclude Include="src\Platform\Windows\Core\WindowsGlfwWindow.h" />
     <ClInclude Include="src\mabengine_pch.h" />
+    <ClInclude Include="vendor\entt\include\entt.hpp" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -646,7 +654,8 @@
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\MABEngine\Camera\OrthographicCameraController.cpp" />
-    <ClCompile Include="src\MABEngine\Camera\PerspectiveFreeCamera.cpp" />
+    <ClCompile Include="src\MABEngine\Camera\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\MABEngine\Camera\PerspectiveCameraController.cpp" />
     <ClCompile Include="src\MABEngine\Core\Application.cpp" />
     <ClCompile Include="src\MABEngine\Core\EngineTime.cpp" />
     <ClCompile Include="src\MABEngine\Core\Settings.cpp" />
@@ -661,6 +670,7 @@
     <ClCompile Include="src\MABEngine\Renderer\EngineRenderer.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\EngineRenderer2d.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\FramBuffer.cpp" />
+    <ClCompile Include="src\MABEngine\Renderer\GraphicCardInfo.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\IndexBuffer.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\RendererAPI.cpp" />
@@ -669,10 +679,12 @@
     <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp" />
+    <ClCompile Include="src\MABEngine\Scene\SceneManagement.cpp" />
     <ClCompile Include="src\MABEngine\Textures\SubTexture2D.cpp" />
     <ClCompile Include="src\MABEngine\Textures\Texture2D.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLEngineRenderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLFrameBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicCardInfo.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLGraphicContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\Renderer\OpenGLRendererAPI.cpp" />

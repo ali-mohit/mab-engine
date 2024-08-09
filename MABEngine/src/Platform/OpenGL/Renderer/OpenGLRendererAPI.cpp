@@ -23,6 +23,14 @@ namespace MABEngine {
 			return maxTextureUnit;
 		}
 
+		uint32_t OpenGLRendererAPI::GetMaxFrameBufferSize()
+		{
+			GLint maxRenderbufferSize;
+			glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &maxRenderbufferSize);
+
+			return maxRenderbufferSize;
+		}
+
 		void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 		{
 			glClearColor(color.r, color.b, color.g, color.a);

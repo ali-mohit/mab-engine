@@ -4,6 +4,8 @@
 
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
+#include "MABEngine/Camera/PerspectiveCamera.h"
+
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Textures/Texture2D.h"
@@ -22,7 +24,9 @@ namespace MABEngine {
 			static void ShutDown();
 			static void OnWindowResize(uint32_t width, uint32_t height);
 
-			static void BeginScene(Camera::OrthographicCamera& camera);
+			static void BeginScene(const Camera::OrthographicCamera& camera);
+			static void BeginScene(const Camera::PerspectiveCamera& camera);
+
 			static void EndScene();
 
 			static void Flush();
@@ -49,6 +53,7 @@ namespace MABEngine {
 			static void ResetStats();
 			static EngineRenderer2dStorageStatistics GetStats();
 		private:
+			static void InnerBeginScene(const glm::mat4& viewProjectionMatrix);
 			static void InnerDrawQuad(
 				const glm::mat4& transform,
 				const glm::vec4& color,

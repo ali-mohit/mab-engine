@@ -39,7 +39,7 @@ namespace MABEngine {
 			
 			virtual void SetIntArray(const std::string& name, int* values, int count) = 0;
 			virtual void SetFloatArray(const std::string& name, float* values, int count) = 0;
-
+			virtual void SetUIntArray(const std::string& name, uint32_t* values, int count) = 0;
 		};
 
 	}
