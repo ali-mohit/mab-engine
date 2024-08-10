@@ -3,7 +3,7 @@
 #include <MABEngine/Core/Base.h>
 #include <MABEngine.h>
 
-namespace LightAndShadows {
+namespace LightsAndShadows {
 	namespace Layers
 	{
 		class MABENGINE_API MainLayer : public MABEngine::Layers::Layer {

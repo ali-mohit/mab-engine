@@ -8,7 +8,7 @@
 
 #include "MainLayer.h"
 
-namespace LightAndShadows {
+namespace LightsAndShadows {
 	namespace Layers
 	{
 		MainLayer::MainLayer(uint32_t width, uint32_t height)

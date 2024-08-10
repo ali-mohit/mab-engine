@@ -50,6 +50,7 @@
 #include "MABEngine/Textures/Texture2D.h"
 #include "MABEngine/Textures/SubTexture2D.h"
 
+#include "MABEngine/Camera/CameraTypeEnum.h"
 #include "MABEngine/Camera/CameraSpecification.h"
 #include "MABEngine/Camera/OrthographicCamera.h"
 #include "MABEngine/Camera/OrthographicCameraBounds.h"
