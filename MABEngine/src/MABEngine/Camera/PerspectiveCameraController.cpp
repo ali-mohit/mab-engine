@@ -128,7 +128,9 @@ namespace MABEngine {
 				if (MABEngine::Inputs::Input::IsKeyPressed(Inputs::Mab_Key_F))
 				{
 					//Reset Scene
+					auto size = m_Camera.GetViewportSize();
 					m_Camera = PerspectiveCamera(m_Camera.GetCameraSetupSpecification());
+					m_Camera.Resize(size.first, size.second);
 				}
 			}
 
