@@ -155,6 +155,7 @@
     <ClInclude Include="src\MABEngine\Camera\PerspectiveCameraController.h" />
     <ClInclude Include="src\MABEngine\Camera\CameraSpecification.h" />
     <ClInclude Include="src\MABEngine\Camera\Utilities.h" />
+    <ClInclude Include="src\MABEngine\Components\SpriteRendererComponent.h" />
     <ClInclude Include="src\MABEngine\Core\Application.h" />
     <ClInclude Include="src\MABEngine\Core\ApplicationProps.h" />
     <ClInclude Include="src\MABEngine\Core\Base.h" />
@@ -205,7 +206,14 @@
     <ClInclude Include="src\MABEngine\Renderer\ShaderPackageFile.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexArray.h" />
     <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h" />
+    <ClInclude Include="src\MABEngine\Components\ComponentGroup.h" />
+    <ClInclude Include="src\MABEngine\Components\IDComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\TagComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\TextComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\TransformComponent.h" />
+    <ClInclude Include="src\MABEngine\Scene\Entity.h" />
     <ClInclude Include="src\MABEngine\Scene\SceneManagement.h" />
+    <ClInclude Include="src\MABEngine\Scene\Utilities.h" />
     <ClInclude Include="src\MABEngine\Textures\SubTexture2D.h" />
     <ClInclude Include="src\MABEngine\Textures\Texture.h" />
     <ClInclude Include="src\MABEngine\Textures\Texture2D.h" />
@@ -658,6 +666,7 @@
     <ClCompile Include="src\MABEngine\Camera\PerspectiveCameraController.cpp" />
     <ClCompile Include="src\MABEngine\Core\Application.cpp" />
     <ClCompile Include="src\MABEngine\Core\EngineTime.cpp" />
+    <ClCompile Include="src\MABEngine\Core\EngineUUID.cpp" />
     <ClCompile Include="src\MABEngine\Core\Settings.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MABEngine\Layers\ImGui\ImGuiLayer.cpp" />
@@ -679,6 +688,7 @@
     <ClCompile Include="src\MABEngine\Renderer\ShaderPackageFile.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp" />
+    <ClCompile Include="src\MABEngine\Scene\Entity.cpp" />
     <ClCompile Include="src\MABEngine\Scene\SceneManagement.cpp" />
     <ClCompile Include="src\MABEngine\Textures\SubTexture2D.cpp" />
     <ClCompile Include="src\MABEngine\Textures\Texture2D.cpp" />

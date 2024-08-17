@@ -3,7 +3,7 @@
 #include <MABEngine/Core/Base.h>
 #include <MABEngine.h>
 
-namespace LightAndShadows {
+namespace LightsAndShadows {
 	namespace Layers
 	{
 		class MABENGINE_API MainLayer : public MABEngine::Layers::Layer {
@@ -36,11 +36,16 @@ namespace LightAndShadows {
 			bool m_IsDockSapceActive = true;
 			bool m_ShowSettingBox = true;
 
-			MABEngine::Camera::OrthographicCameraController m_CameraController;
+			MABEngine::Camera::OrthographicCameraController m_OrthoCameraController;
+			MABEngine::Camera::PerspectiveCameraController m_PersCameraController;
 
 			MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_CheckerBoardTexture;
 			MABEngine::Core::Ref<MABEngine::Textures::Texture2D> m_SpriteSheet;
 			MABEngine::Core::Ref<MABEngine::Textures::SubTexture2D> m_Castle;
+
+			MABEngine::Core::Ref<MABEngine::Scene::SceneManagement> m_Scene;
+			MABEngine::Scene::Entity m_Square01;
+			MABEngine::Scene::Entity m_Square02;
 
 			MABEngine::Core::Ref<MABEngine::Renderer::FrameBuffer> m_FramBuffer;
 		};

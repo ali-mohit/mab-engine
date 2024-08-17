@@ -16,22 +16,22 @@ namespace SandBoxLayers
 		m_Height(height),
 		m_OrtogonalCameraController(1.5f, width, height)
 	{
-		m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
+		/*m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
 			MABEngine::Camera::CameraSpecification::CreateTargetCamera(
 				45.0f, 0.01, 100.0f,
 				width, height, 
 				{0.0f, 0.0f, 10.0f}, {0.0f, 0.0f, 0.0f}, MABEngine::Camera::PerspectiveCamera::WORLD_UP
 			)
-		);
+		);*/
 
-		/*m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
+		m_PerspectiveCameraController = MABEngine::Camera::PerspectiveCameraController(
 			MABEngine::Camera::CameraSpecification::CreateFreeCam(
 				45.0f, 0.01, 100.0f,
 				width, height,
 				{ 0.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, -1.0f }, MABEngine::Camera::PerspectiveCamera::WORLD_UP
 			)
 		);
-		*/
+		/**/
 	}
 
 	DockSpaceView::~DockSpaceView()

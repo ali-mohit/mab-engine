@@ -12,7 +12,7 @@ namespace MABEngine {
 			const std::string& ID() const { return m_ID; }
 			std::string ID() { return m_ID; }
 		private:
-			std::string m_ID = generateUUID();
+			std::string m_ID = EngineUUID::GenerateUUIDString();
 		};
 	}
 }

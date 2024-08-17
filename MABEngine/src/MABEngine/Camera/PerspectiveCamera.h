@@ -102,6 +102,10 @@ namespace MABEngine {
 			float GetVerticalFOV() { return m_VerticalFOV; }
 			float GetNearClip() { return m_NearClip; }
 			float GetFarClip() { return m_FarClip; }
+
+			uint32_t GetViewportWidth() { return m_ViewportWidth; }
+			uint32_t GetViewportHeight() { return m_ViewportHeight; }
+			std::pair<uint32_t, uint32_t> GetViewportSize() { return { m_ViewportWidth, m_ViewportHeight }; }
 		
 		private:
 			void InnerRotation(float pan, float tilt, float roll);

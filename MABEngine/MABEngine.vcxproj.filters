@@ -1593,6 +1593,14 @@
     <ClInclude Include="src\MABEngine\Camera\CameraSpecification.h" />
     <ClInclude Include="src\MABEngine\Camera\CameraTypeEnum.h" />
     <ClInclude Include="src\MABEngine\Camera\Utilities.h" />
+    <ClInclude Include="src\MABEngine\Scene\Entity.h" />
+    <ClInclude Include="src\MABEngine\Scene\Utilities.h" />
+    <ClInclude Include="src\MABEngine\Components\ComponentGroup.h" />
+    <ClInclude Include="src\MABEngine\Components\TextComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\TransformComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\IDComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\TagComponent.h" />
+    <ClInclude Include="src\MABEngine\Components\SpriteRendererComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1724,5 +1732,7 @@
     <ClCompile Include="src\MABEngine\Scene\SceneManagement.cpp" />
     <ClCompile Include="src\MABEngine\Camera\PerspectiveCameraController.cpp" />
     <ClCompile Include="src\MABEngine\Camera\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\MABEngine\Scene\Entity.cpp" />
+    <ClCompile Include="src\MABEngine\Core\EngineUUID.cpp" />
   </ItemGroup>
 </Project>
