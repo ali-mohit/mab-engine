@@ -15,11 +15,22 @@ namespace LightsAndShadows {
 			:Layer("MAB Light And Shadows"),
 			m_Width(width),
 			m_Height(height),
-			m_CameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
+			m_OrthoCameraController(height != 0 ? (float)width / (float)height : 1.0f, 1.0f)
 		{
-			m_CameraController.SetZRotationEnabled(true);
-			m_CameraController.SetZoomLevel(1.5f);
-			m_CameraController.SetHandleWindowResizeEnbaled(false);
+			m_OrthoCameraController.SetZRotationEnabled(true);
+			m_OrthoCameraController.SetZoomLevel(1.5f);
+			m_OrthoCameraController.SetHandleWindowResizeEnbaled(false);
+
+			m_Scene = MABEngine::Core::CreateRef<MABEngine::Scene::SceneManagement>("Main");
+			
+			m_PersCameraController = MABEngine::Camera::PerspectiveCameraController(
+				MABEngine::Camera::CameraSpecification::CreateTargetCamera(
+					45.0f, 0.01, 100.0f,
+					width, height,
+					{ 0.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, MABEngine::Camera::PerspectiveCamera::WORLD_UP
+				)
+			);
+
 		}
 
 		MainLayer::~MainLayer()
@@ -123,11 +134,32 @@ namespace LightsAndShadows {
 
 			MABEngine::Renderer::FrameBufferSpecification fbSpec(m_Width, m_Height);
 			m_FramBuffer = MABEngine::Renderer::FrameBuffer::Create(fbSpec);
+
+			{
+				m_Square01 = m_Scene->CreateEntity("square01");
+				m_Square01.AddComponent<MABEngine::Components::SpriteRendererComponent>(glm::vec4({ 0.0f, 0.0f, 0.0f, 1.0f }), nullptr, m_Castle);
+
+				auto& square01Translate = m_Square01.GetComponent<MABEngine::Components::TransformComponent>();
+				square01Translate.Translation = { 1.0f, 0.0f, 0.0f };
+				square01Translate.Scale = { 2.0f, 1.0f , 1.0f };
+			}
+
+			{
+				m_Square02 = m_Scene->CreateEntity("square02");
+				m_Square02.AddComponent<MABEngine::Components::SpriteRendererComponent>(glm::vec4({ m_SolidColor1, 1.0f }));
+
+				auto& square02Translate = m_Square02.GetComponent<MABEngine::Components::TransformComponent>();
+				square02Translate.Translation = { -1.0f , 0.0f, 0.0 };
+				square02Translate.Scale = { 2.0f, 1.0f, 1.0f };
+				square02Translate.Rotation = { 0.0f, 0.0f, glm::radians(m_rotationBox) };
+
+			}
 		}
 
 		void MainLayer::OnEvent(MABEngine::Events::Event& event)
 		{
-			m_CameraController.OnEvent(event);
+			//m_OrthoCameraController.OnEvent(event);
+			m_PersCameraController.OnEvent(event);
 		}
 
 		void MainLayer::MakeSettingWindow()
@@ -142,8 +174,17 @@ namespace LightsAndShadows {
 				ImGui::Text("Vertices: %d", statics.GetTotalVertexCount());
 				ImGui::Text("Edeges: %d", statics.GetTotalEdgetCount());
 
-				ImGui::ColorEdit3("Square Color1", glm::value_ptr(m_SolidColor1));
-				ImGui::DragFloat("Rotation Box Value", &m_rotationBox);
+				if (ImGui::ColorEdit3("Square Color1", glm::value_ptr(m_SolidColor1)))
+				{
+					auto& sprite = m_Square02.GetComponent<MABEngine::Components::SpriteRendererComponent>();
+					sprite.Color = glm::vec4({ m_SolidColor1, 1.0f });
+				}
+
+				if (ImGui::DragFloat("Rotation Box Value", &m_rotationBox))
+				{
+					auto& square02Translate = m_Square02.GetComponent<MABEngine::Components::TransformComponent>();
+					square02Translate.Rotation = { 0.0f, 0.0f, glm::radians(m_rotationBox) };
+				}
 
 				ImGui::End();
 			}
@@ -157,7 +198,9 @@ namespace LightsAndShadows {
 			m_IsViewFocused = ImGui::IsWindowFocused();
 			m_IsMouseHover = ImGui::IsWindowHovered();
 
-			m_CameraController.SetHandleKeyboardEventsFlag(m_IsViewFocused);
+			m_OrthoCameraController.SetHandleKeyboardEventsFlag(m_IsViewFocused);
+			m_PersCameraController.SetHandleKeyboardEventsFlag(m_IsViewFocused);
+
 			MABEngine::Core::Application::Get().GetImGuiLayer()->SetBlockMouseEvents(!m_IsMouseHover);
 			MABEngine::Core::Application::Get().GetImGuiLayer()->SetBlockKeyboardEvents(!m_IsViewFocused);
 			
@@ -171,7 +214,9 @@ namespace LightsAndShadows {
 				
 				m_FramBuffer->Resize((uint32_t)m_ViewportWidth, (uint32_t)m_ViewportHeight);
 
-				m_CameraController.Resize(m_ViewportWidth, m_ViewportHeight);
+				m_OrthoCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
+
+				m_PersCameraController.Resize(m_ViewportWidth, m_ViewportHeight);
 			}
 
 			uint32_t textureId = m_FramBuffer->GetColorAttachmentID();
@@ -189,7 +234,8 @@ namespace LightsAndShadows {
 		{
 			MAB_PROFILE_FUNCTION();
 
-			m_CameraController.OnUpdate(ts);
+			//m_OrthoCameraController.OnUpdate(ts);
+			m_PersCameraController.OnUpdate(ts);
 
 			MABEngine::Renderer::EngineRenderer2d::ResetStats();
 			// Rendering Pre
@@ -206,8 +252,10 @@ namespace LightsAndShadows {
 			// Rendering 
 			{
 				MAB_PROFILE_SCOPE("Rendering");
-				MABEngine::Renderer::EngineRenderer2d::BeginScene(m_CameraController.GetCamera());
+				//MABEngine::Renderer::EngineRenderer2d::BeginScene(m_OrthoCameraController.GetCamera());
+				MABEngine::Renderer::EngineRenderer2d::BeginScene(m_PersCameraController.GetCamera());
 
+				
 				//Background
 				MABEngine::Renderer::EngineRenderer2d::DrawQuad(
 					{ 0.0f , 0.0f, -0.2f },
@@ -216,21 +264,27 @@ namespace LightsAndShadows {
 					{ 10.0f, 10.0f }
 				);
 
-				//Box 01
+				//Box
+				auto squre02Sprite = m_Square02.GetComponent<MABEngine::Components::SpriteRendererComponent>();
+				auto squre02Translate = m_Square02.GetComponent<MABEngine::Components::TransformComponent>();
+
 				MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-					{ -1.0f , 0.0f, 0.0 },
-					{ 2.0f, 1.0f },
-					glm::radians(m_rotationBox),
-					{ m_SolidColor1, 1.0f }
+					squre02Translate.Translation,
+					squre02Translate.Scale,
+					squre02Translate.Rotation.z,
+					squre02Sprite.Color
 				);
+
+				auto squre01Sprite = m_Square01.GetComponent<MABEngine::Components::SpriteRendererComponent>();
+				auto squre01Translate = m_Square01.GetComponent<MABEngine::Components::TransformComponent>();
 
 				//Castle Texture
 				MABEngine::Renderer::EngineRenderer2d::DrawQuad(
-					{ 1.0f, 0.0f, 0.3f },
-					{ 2.0f, 1.0f },
-					glm::radians(45.0f),
-					m_Castle,
-					{ 0.0f, 0.0f, 0.0f , 1.0f }
+					squre01Translate.Translation,
+					squre01Translate.Scale,
+					glm::radians(0.0f),
+					squre01Sprite.SubTexture,
+					squre01Sprite.Color
 				);
 
 				MABEngine::Renderer::EngineRenderer2d::EndScene();

@@ -137,11 +137,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Layers\MainLayer.h" />
+    <ClInclude Include="src\LightsAndShadows\Layers\MainLayer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Layers\MainLayer.cpp" />
-    <ClCompile Include="src\LightAndShadows.cpp" />
+    <ClCompile Include="src\LightsAndShadows\Layers\MainLayer.cpp" />
+    <ClCompile Include="src\LightsAndShadowsApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MABEngine\MABEngine.vcxproj">
