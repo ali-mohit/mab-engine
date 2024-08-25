@@ -1601,6 +1601,8 @@
     <ClInclude Include="src\MABEngine\Components\IDComponent.h" />
     <ClInclude Include="src\MABEngine\Components\TagComponent.h" />
     <ClInclude Include="src\MABEngine\Components\SpriteRendererComponent.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RenderModeType.h" />
+    <ClInclude Include="src\MABEngine\Renderer\RenderFaceMode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">

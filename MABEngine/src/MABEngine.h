@@ -27,6 +27,8 @@
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/QuadVertexInfo.h"
 #include "MABEngine/Renderer/Shader.h"
+#include "MABEngine/Renderer/RenderModeType.h"
+#include "MABEngine/Renderer/RenderFaceMode.h"
 #include "MABEngine/Renderer/ShaderDataType.h"
 #include "MABEngine/Renderer/ShaderFileType.h"
 #include "MABEngine/Renderer/ShaderPackageFile.h"
@@ -66,3 +68,16 @@
 #include "MABEngine/Scene/Entity.h"
 #include "MABEngine/Scene/Utilities.h"
 #include "MABEngine/Scene/SceneManagement.h"
+
+
+namespace MABCore		= MABEngine::Core;
+namespace MABCamera		= MABEngine::Camera;
+namespace MABComponents = MABEngine::Components;
+namespace MABDeBugging	= MABEngine::Debugging;
+namespace MABEvents		= MABEngine::Events;
+namespace MABInputs		= MABEngine::Inputs;
+namespace MABLayers		= MABEngine::Layers;
+namespace MABLogging	= MABEngine::Logging;
+namespace MABRenderer	= MABEngine::Renderer;
+namespace MABScene		= MABEngine::Scene;
+namespace MABTextures	= MABEngine::Textures;

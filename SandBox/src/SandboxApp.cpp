@@ -7,6 +7,7 @@
 #include "SandBoxLayers/SandBox3DLayer.h"
 #include "SandBoxLayers/SandBox2DLayer.h"
 #include "SandBoxLayers/DockSpaceView.h"
+#include "SandBoxLayers/TranslationTestLayer.h"
 #include "SimpleGame/GameLayer.h"
 
 class SandBoxApp : public MABEngine::Core::Application {
@@ -19,7 +20,8 @@ public:
 		//PushLayer(new SimpleGame::GameLayer(w, h));
 		//PushLayer(new SandBoxLayers::SandBox3DLayer(w, h));
 		//PushLayer(new SandBoxLayers::SandBox2DLayer(w, h));
-		PushLayer(new SandBoxLayers::DockSpaceView(w, h));
+		//PushLayer(new SandBoxLayers::DockSpaceView(w, h));
+		PushLayer(new SandBoxLayers::TranslationTestLayer(w, h));
 	}
 	~SandBoxApp() {
 
