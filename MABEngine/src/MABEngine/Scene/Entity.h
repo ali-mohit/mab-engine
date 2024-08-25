@@ -77,6 +77,7 @@ namespace MABEngine {
 				}
 				return scopeName + GetComponent<Components::TagComponent>().Tag;
 			}
+
 		private:
 			entt::entity m_EntityHandle{ entt::null };
 			SceneManagement* m_Repo = nullptr;

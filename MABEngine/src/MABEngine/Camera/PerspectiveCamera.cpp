@@ -53,29 +53,30 @@ namespace MABEngine {
 				return;
 
 			delta = delta * m_FarDirection;
-
+			
 			if (m_CameraType == CameraTypeEnum::FreeCamera) {
 				m_Position = m_Position + (m_ForwardDirection * delta);
 				m_Target = m_Target + (m_ForwardDirection * delta);
 			}
 			else if (m_CameraType == CameraTypeEnum::TargetCamera) {
 
-				if (m_Distance <= std::abs(delta))
+				auto oldDirection = m_ForwardDirection;
+				if(m_Distance < std::abs(delta))
+					m_Position = m_Target + (m_ForwardDirection * delta);
+				else
+					m_Position = m_Position + (m_ForwardDirection * delta);
+
+				m_Distance = glm::distance(m_Target, m_Position);
+				
+				//Change The Direction
+				if (glm::dot((m_Target - m_Position), oldDirection) < 0)
 				{
-					m_Position = m_Position + (m_ForwardDirection * 2.0f * delta);
-					m_Distance = glm::distance(m_Target, m_Position);
 					m_ForwardDirection = -m_ForwardDirection;
 					m_Pan += 180.0f;
 					m_FarDirection *= -1;
-					//PanAndTiltRotation(m_Pan + 180.0f, 0.0f);
 				}
-				else {
-					m_Position = m_Position + (m_ForwardDirection * delta);
-					m_Distance = glm::distance(m_Target, m_Position);
-				}
-
 			}
-			
+
 			RecalculateView();
 			RecalculateViewProjection();
 		}
@@ -141,17 +142,18 @@ namespace MABEngine {
 				m_Roll += 360.0f;
 
 			// Create quaternion for pitch rotation
-			glm::quat pitchQuat = glm::angleAxis(glm::radians(m_Tilt), glm::vec3(1.0f, 0.0f, 0.0f));
+			//glm::quat pitchQuat = glm::angleAxis(glm::radians(m_Tilt), glm::vec3(1.0f, 0.0f, 0.0f));
 
 			// Create quaternion for yaw rotation
-			glm::quat yawQuat = glm::angleAxis(glm::radians(m_Pan), glm::vec3(0.0f, 1.0f, 0.0f));
+			//glm::quat yawQuat = glm::angleAxis(glm::radians(m_Pan), glm::vec3(0.0f, 1.0f, 0.0f));
 
 			// Create quaternion for yaw rotation
-			glm::quat rollQuat = glm::angleAxis(glm::radians(m_Roll), glm::vec3(0.0f, 0.0f, 1.0f));
+			//glm::quat rollQuat = glm::angleAxis(glm::radians(m_Roll), glm::vec3(0.0f, 0.0f, 1.0f));
 
 
-			// Combine the two rotations
-			auto orientation = glm::normalize(rollQuat * yawQuat * pitchQuat);
+			// Combine the three rotations
+			//auto orientation = glm::normalize(rollQuat * yawQuat * pitchQuat);
+			auto orientation = glm::quat(glm::vec3(glm::radians(m_Tilt), glm::radians(m_Pan), glm::radians(m_Roll)));
 
 			// Update the forward direction
 			m_ForwardDirection = glm::normalize(glm::rotate(orientation, glm::vec3(0.0f, 0.0f, -1.0f)));

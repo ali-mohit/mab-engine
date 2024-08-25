@@ -3,6 +3,8 @@
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/RendererAPI.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
+#include "MABEngine/Renderer/RenderFaceMode.h"
+#include "MABEngine/Renderer/RenderModeType.h"
 #include "MABEngine/Renderer/VertexArray.h"
 #include "MABEngine/Renderer/SceneDataType.h"
 #include "MABEngine/Renderer/Shader.h"
@@ -31,7 +33,18 @@ namespace MABEngine {
 				const Core::Ref<VertexArray>& vertexArray, 
 				const glm::mat4& transform= glm::mat4(1.0f)
 			);
+			static void SubmitLines(
+				const Core::Ref<Shader>& shader,
+				const Core::Ref<VertexArray>& vertexArray,
+				const glm::mat4& transform = glm::mat4(1.0f)
+			);
 
+			static void SetRenderMode(const RenderModeType& renderMode);
+			static const RenderModeType& GetRenderMode();
+
+			static void SetRenderFaceMode(const RenderFaceMode& faceMode);
+			static const RenderFaceMode& GetRenderFaceMode();
+		public:
 			inline static RendererAPIType GetCurrentAPI() { return RendererAPI::GetAPI(); }
 		private:
 			static SceneDataType* m_SceneData;

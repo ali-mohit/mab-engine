@@ -140,6 +140,7 @@
     <ClInclude Include="src\SandBoxLayers\DockSpaceView.h" />
     <ClInclude Include="src\SandBoxLayers\SandBox2DLayer.h" />
     <ClInclude Include="src\SandBoxLayers\SandBox3DLayer.h" />
+    <ClInclude Include="src\SandBoxLayers\TranslationTestLayer.h" />
     <ClInclude Include="src\SimpleGame\Color.h" />
     <ClInclude Include="src\SimpleGame\GameLayer.h" />
     <ClInclude Include="src\SimpleGame\Level.h" />
@@ -155,6 +156,7 @@
     <ClCompile Include="src\SandBoxLayers\SandBox2DLayer.cpp" />
     <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\SandBoxLayers\TranslationTestLayer.cpp" />
     <ClCompile Include="src\SimpleGame\GameLayer.cpp" />
     <ClCompile Include="src\SimpleGame\Level.cpp" />
     <ClCompile Include="src\SimpleGame\Player.cpp" />

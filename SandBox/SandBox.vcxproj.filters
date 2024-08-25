@@ -51,6 +51,7 @@
     <ClInclude Include="src\Utilities\Random.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="src\SandBoxLayers\TranslationTestLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SandBoxLayers\DockSpaceView.cpp">
@@ -81,5 +82,6 @@
     <ClCompile Include="src\Utilities\Random.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\SandBoxLayers\TranslationTestLayer.cpp" />
   </ItemGroup>
 </Project>

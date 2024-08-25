@@ -4,6 +4,8 @@
 #include "MABEngine/Core/Base.h"
 #include "MABEngine/Renderer/RenderAPIType.h"
 #include "MABEngine/Renderer/RendererAPI.h"
+#include "MABEngine/Renderer/SceneDataType.h"
+
 
 namespace MABEngine {
 
@@ -33,6 +35,15 @@ namespace MABEngine {
 			inline static void DrawIndexed(const Core::Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) {
 				s_RendererAPI->DrawIndexed(vertexArray, indexCount);
 			}
+
+			inline static void DrawLines(const Core::Ref<VertexArray>& vertexArray, uint32_t vertexCount = 0) {
+				s_RendererAPI->DrawLines(vertexArray, vertexCount);
+			}
+
+			inline static void SetPipelineConfig(const PipelineConfig& pipelineConfig) {
+				s_RendererAPI->SetPipelineConfig(pipelineConfig);
+			}
+
 		private:
 			static RendererAPI* s_RendererAPI;
 		};
