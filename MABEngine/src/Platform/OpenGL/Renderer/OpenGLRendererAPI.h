@@ -20,6 +20,9 @@ namespace MABEngine {
 
 			virtual void DrawIndexed(const Core::Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) override;
 			virtual void DrawLines(const Core::Ref<VertexArray>& vertextArray, uint32_t vertexCount = 0) override;
+
+			virtual void SetLineWidth(float width) override;
+			virtual void SetDepthTest(bool active) override;
 		};
 	}
 }

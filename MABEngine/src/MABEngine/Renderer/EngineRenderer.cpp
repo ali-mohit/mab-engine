@@ -74,6 +74,16 @@ namespace MABEngine {
 			RenderCommand::DrawLines(vertexArray);
 		}
 
+		void EngineRenderer::SetLineWidth(float width)
+		{
+			RenderCommand::SetLineWidth(width);
+		}
+
+		void EngineRenderer::SetDepthTest(bool active)
+		{
+			RenderCommand::SetDepthTest(active);
+		}
+
 		void EngineRenderer::SetRenderMode(const RenderModeType& renderMode)
 		{
 			m_SceneData->PipelineConfig.RenderMode = renderMode;

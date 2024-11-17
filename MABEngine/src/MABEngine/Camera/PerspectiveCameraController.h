@@ -50,8 +50,8 @@ namespace MABEngine {
 			uint32_t m_Width = 1280;
 			uint32_t m_Height = 720;
 
-			float m_RotationSensitivity = 0.2f;
-			float m_TranslationSensitivity = 0.02f;
+			float m_RotationSensitivity = 0.4f;
+			float m_TranslationSensitivity = 0.04f;
 			float m_ZoomSensitivity = 2.0f;
 
 			bool m_HandleWindowResizeEnabled = true;

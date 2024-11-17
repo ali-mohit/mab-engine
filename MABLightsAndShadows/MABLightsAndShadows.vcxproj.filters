@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Layers">
-      <UniqueIdentifier>{157446C0-0116-7196-EAD0-84EAD611F8E6}</UniqueIdentifier>
+    <Filter Include="LightsAndShadows">
+      <UniqueIdentifier>{BC54EACE-A84D-0921-D17F-EEA5BDD7E82C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LightsAndShadows\Layers">
+      <UniqueIdentifier>{FBBF3498-67F7-7C2F-7001-E152DCB7A328}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\LightsAndShadows\Layers\MainLayer.h">
-      <Filter>Layers</Filter>
+      <Filter>LightsAndShadows\Layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LightsAndShadows\Layers\MainLayer.cpp">
-      <Filter>Layers</Filter>
+      <Filter>LightsAndShadows\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\LightsAndShadowsApp.cpp" />
   </ItemGroup>

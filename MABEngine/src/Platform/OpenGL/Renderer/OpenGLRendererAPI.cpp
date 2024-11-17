@@ -18,6 +18,7 @@ namespace MABEngine {
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 			glEnable(GL_DEPTH_TEST);
+			glEnable(GL_MULTISAMPLE);
 		}
 		
 		uint32_t OpenGLRendererAPI::GetMaxNumberOfTextureImageUnit()
@@ -101,6 +102,15 @@ namespace MABEngine {
 
 			vertexArray->Bind();
 			glDrawElements(GL_LINES, count, GL_UNSIGNED_INT, nullptr);
+		}
+
+		void OpenGLRendererAPI::SetLineWidth(float width) {
+			glLineWidth(width);
+		}
+
+		void OpenGLRendererAPI::SetDepthTest(bool active)
+		{
+			active ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
 		}
 
 	}

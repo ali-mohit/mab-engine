@@ -44,6 +44,14 @@ namespace MABEngine {
 				s_RendererAPI->SetPipelineConfig(pipelineConfig);
 			}
 
+			inline static void SetLineWidth(float width) {
+				s_RendererAPI->SetLineWidth(width);
+			}
+
+			inline static void SetDepthTest(bool active) {
+				s_RendererAPI->SetDepthTest(active);
+			}
+
 		private:
 			static RendererAPI* s_RendererAPI;
 		};

@@ -41,6 +41,7 @@ namespace MABEngine {
 				std::string Title;
 				unsigned int Width;
 				unsigned int Height;
+				unsigned int Sampling = 0;
 
 				bool VSync;
 				EventCallBackFn EventCallBack;

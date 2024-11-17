@@ -148,6 +148,7 @@
     <ClInclude Include="src\SimpleGame\Player.h" />
     <ClInclude Include="src\Tools\ParticleProps.h" />
     <ClInclude Include="src\Tools\ParticleSystem.h" />
+    <ClInclude Include="src\Tools\TranslationModule.h" />
     <ClInclude Include="src\Utilities\HSV.h" />
     <ClInclude Include="src\Utilities\Random.h" />
   </ItemGroup>
@@ -155,12 +156,13 @@
     <ClCompile Include="src\SandBoxLayers\DockSpaceView.cpp" />
     <ClCompile Include="src\SandBoxLayers\SandBox2DLayer.cpp" />
     <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp" />
-    <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\SandBoxLayers\TranslationTestLayer.cpp" />
+    <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\SimpleGame\GameLayer.cpp" />
     <ClCompile Include="src\SimpleGame\Level.cpp" />
     <ClCompile Include="src\SimpleGame\Player.cpp" />
     <ClCompile Include="src\Tools\ParticleSystem.cpp" />
+    <ClCompile Include="src\Tools\TranslationModule.cpp" />
     <ClCompile Include="src\Utilities\HSV.cpp" />
     <ClCompile Include="src\Utilities\Random.cpp" />
   </ItemGroup>

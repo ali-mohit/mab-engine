@@ -39,6 +39,10 @@ namespace MABEngine {
 				const glm::mat4& transform = glm::mat4(1.0f)
 			);
 
+			static void SetLineWidth(float width);
+
+			static void SetDepthTest(bool active);
+
 			static void SetRenderMode(const RenderModeType& renderMode);
 			static const RenderModeType& GetRenderMode();
 

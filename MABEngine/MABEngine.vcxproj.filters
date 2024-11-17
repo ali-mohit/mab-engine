@@ -10,6 +10,9 @@
     <Filter Include="src\MABEngine\Camera">
       <UniqueIdentifier>{FAE97D53-E678-071D-8F97-1B187B0518C3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MABEngine\Components">
+      <UniqueIdentifier>{972BAAFB-8350-F97B-AC9B-DE0B981FF899}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\MABEngine\Core">
       <UniqueIdentifier>{5A31AC78-4615-6DCE-AF75-67219B785750}</UniqueIdentifier>
     </Filter>
@@ -33,6 +36,9 @@
     </Filter>
     <Filter Include="src\MABEngine\Renderer">
       <UniqueIdentifier>{A801A138-94FB-C98A-7D68-609B690130F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MABEngine\Scene">
+      <UniqueIdentifier>{5F1A4D8F-CB7B-2A9D-54E9-704FC049615C}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\MABEngine\Textures">
       <UniqueIdentifier>{D58FA229-C189-CB7B-AAF6-618C968F31E8}</UniqueIdentifier>
@@ -96,6 +102,12 @@
     <ClInclude Include="src\MABEngine.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\CameraSpecification.h">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\CameraTypeEnum.h">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Camera\OrthographicCamera.h">
       <Filter>src\MABEngine\Camera</Filter>
     </ClInclude>
@@ -104,6 +116,33 @@
     </ClInclude>
     <ClInclude Include="src\MABEngine\Camera\OrthographicCameraController.h">
       <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\PerspectiveCamera.h">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\PerspectiveCameraController.h">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Camera\Utilities.h">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Components\ComponentGroup.h">
+      <Filter>src\MABEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Components\IDComponent.h">
+      <Filter>src\MABEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Components\SpriteRendererComponent.h">
+      <Filter>src\MABEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Components\TagComponent.h">
+      <Filter>src\MABEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Components\TextComponent.h">
+      <Filter>src\MABEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Components\TransformComponent.h">
+      <Filter>src\MABEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Core\Application.h">
       <Filter>src\MABEngine\Core</Filter>
@@ -228,6 +267,12 @@
     <ClInclude Include="src\MABEngine\Renderer\RenderCommand.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\RenderFaceMode.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Renderer\RenderModeType.h">
+      <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\RendererAPI.h">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClInclude>
@@ -254,6 +299,15 @@
     </ClInclude>
     <ClInclude Include="src\MABEngine\Renderer\VertexBuffer.h">
       <Filter>src\MABEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Scene\Entity.h">
+      <Filter>src\MABEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Scene\SceneManagement.h">
+      <Filter>src\MABEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MABEngine\Scene\Utilities.h">
+      <Filter>src\MABEngine\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\MABEngine\Textures\SubTexture2D.h">
       <Filter>src\MABEngine\Textures</Filter>
@@ -1587,22 +1641,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MABEngine\Scene\SceneManagement.h" />
-    <ClInclude Include="src\MABEngine\Camera\PerspectiveCameraController.h" />
-    <ClInclude Include="src\MABEngine\Camera\PerspectiveCamera.h" />
-    <ClInclude Include="src\MABEngine\Camera\CameraSpecification.h" />
-    <ClInclude Include="src\MABEngine\Camera\CameraTypeEnum.h" />
-    <ClInclude Include="src\MABEngine\Camera\Utilities.h" />
-    <ClInclude Include="src\MABEngine\Scene\Entity.h" />
-    <ClInclude Include="src\MABEngine\Scene\Utilities.h" />
-    <ClInclude Include="src\MABEngine\Components\ComponentGroup.h" />
-    <ClInclude Include="src\MABEngine\Components\TextComponent.h" />
-    <ClInclude Include="src\MABEngine\Components\TransformComponent.h" />
-    <ClInclude Include="src\MABEngine\Components\IDComponent.h" />
-    <ClInclude Include="src\MABEngine\Components\TagComponent.h" />
-    <ClInclude Include="src\MABEngine\Components\SpriteRendererComponent.h" />
-    <ClInclude Include="src\MABEngine\Renderer\RenderModeType.h" />
-    <ClInclude Include="src\MABEngine\Renderer\RenderFaceMode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MABEngine\Camera\OrthographicCamera.cpp">
@@ -1611,10 +1649,19 @@
     <ClCompile Include="src\MABEngine\Camera\OrthographicCameraController.cpp">
       <Filter>src\MABEngine\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Camera\PerspectiveCamera.cpp">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Camera\PerspectiveCameraController.cpp">
+      <Filter>src\MABEngine\Camera</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Core\Application.cpp">
       <Filter>src\MABEngine\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Core\EngineTime.cpp">
+      <Filter>src\MABEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Core\EngineUUID.cpp">
       <Filter>src\MABEngine\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MABEngine\Core\Settings.cpp">
@@ -1680,6 +1727,12 @@
     <ClCompile Include="src\MABEngine\Renderer\VertexBuffer.cpp">
       <Filter>src\MABEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\MABEngine\Scene\Entity.cpp">
+      <Filter>src\MABEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MABEngine\Scene\SceneManagement.cpp">
+      <Filter>src\MABEngine\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\MABEngine\Textures\SubTexture2D.cpp">
       <Filter>src\MABEngine\Textures</Filter>
     </ClCompile>
@@ -1731,10 +1784,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MABEngine\Scene\SceneManagement.cpp" />
-    <ClCompile Include="src\MABEngine\Camera\PerspectiveCameraController.cpp" />
-    <ClCompile Include="src\MABEngine\Camera\PerspectiveCamera.cpp" />
-    <ClCompile Include="src\MABEngine\Scene\Entity.cpp" />
-    <ClCompile Include="src\MABEngine\Core\EngineUUID.cpp" />
   </ItemGroup>
 </Project>

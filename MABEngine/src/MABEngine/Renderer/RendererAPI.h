@@ -28,6 +28,9 @@ namespace MABEngine {
 			virtual void DrawIndexed(const Core::Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
 			virtual void DrawLines(const Core::Ref<VertexArray>& vertexArray, uint32_t vertexCount = 0) = 0;
 
+			virtual void SetLineWidth(float width) = 0;
+			virtual void SetDepthTest(bool active) = 0;
+
 			inline static RendererAPIType GetAPI() { return s_APIType; }
 		private:
 			static RendererAPIType s_APIType;

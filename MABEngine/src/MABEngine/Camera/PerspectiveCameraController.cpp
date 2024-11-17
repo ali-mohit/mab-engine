@@ -64,8 +64,8 @@ namespace MABEngine {
 			MAB_PROFILE_FUNCTION();
 
 			if (m_HandleKeyboardEventsFlag) {
-				auto isCtrlPressed = Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Left_Control) ||
-					Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Right_Control);
+				auto isCtrlPressed = Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Left_Alt) ||
+					Inputs::Input::IsKeyPressed(Inputs::Mab_Key_Right_Alt);
 
 				auto isXPressed = Inputs::Input::IsKeyPressed(Inputs::Mab_Key_X);
 
