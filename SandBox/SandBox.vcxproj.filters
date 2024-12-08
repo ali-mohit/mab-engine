@@ -24,6 +24,9 @@
     <ClInclude Include="src\SandBoxLayers\SandBox3DLayer.h">
       <Filter>SandBoxLayers</Filter>
     </ClInclude>
+    <ClInclude Include="src\SandBoxLayers\TranslationTestLayer.h">
+      <Filter>SandBoxLayers</Filter>
+    </ClInclude>
     <ClInclude Include="src\SimpleGame\Color.h">
       <Filter>SimpleGame</Filter>
     </ClInclude>
@@ -45,6 +48,9 @@
     <ClInclude Include="src\Tools\ParticleSystem.h">
       <Filter>Tools</Filter>
     </ClInclude>
+    <ClInclude Include="src\Tools\TranslationModule.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
     <ClInclude Include="src\Utilities\HSV.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -62,6 +68,9 @@
     <ClCompile Include="src\SandBoxLayers\SandBox3DLayer.cpp">
       <Filter>SandBoxLayers</Filter>
     </ClCompile>
+    <ClCompile Include="src\SandBoxLayers\TranslationTestLayer.cpp">
+      <Filter>SandBoxLayers</Filter>
+    </ClCompile>
     <ClCompile Include="src\SandboxApp.cpp" />
     <ClCompile Include="src\SimpleGame\GameLayer.cpp">
       <Filter>SimpleGame</Filter>
@@ -73,6 +82,9 @@
       <Filter>SimpleGame</Filter>
     </ClCompile>
     <ClCompile Include="src\Tools\ParticleSystem.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\TranslationModule.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
     <ClCompile Include="src\Utilities\HSV.cpp">

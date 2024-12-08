@@ -48,6 +48,7 @@ namespace MABEngine {
 			m_Data.Title = props.Title;
 			m_Data.Width = props.Width;
 			m_Data.Height = props.Height;
+			m_Data.Sampling = props.Sampling;
 
 			MAB_CORE_INFO("Creating Window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
@@ -59,9 +60,13 @@ namespace MABEngine {
 				glfwSetErrorCallback(GLFWErrorCallBack);
 			}
 
+			if (m_Data.Sampling > 0) {
+				glfwWindowHint(GLFW_SAMPLES, m_Data.Sampling); // Enable 4x multisampling
+			}
+
 			{
 				MAB_PROFILE_SCOPE("glfwCreateWindow");
-
+				
 				m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 				s_GLFWWindowCount++;
 			}

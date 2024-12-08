@@ -14,6 +14,7 @@ namespace MABEngine {
 			std::string Title;
 			unsigned int Width;
 			unsigned int Height;
+			unsigned int Sampling = 4;
 
 			WindowProps(const std::string& title = "MAB Engine",
 				unsigned int width = 1280,
@@ -23,7 +24,10 @@ namespace MABEngine {
 			}
 
 			WindowProps(const ApplicationProps& appProps) 
-				:Title(appProps.Title), Width(appProps.DefaultWidth), Height(appProps.DefaultHeight)
+				:Title(appProps.Title),
+				Width(appProps.DefaultWidth),
+				Height(appProps.DefaultHeight),
+				Sampling(appProps.DefaultSampling)
 			{
 			}
 		};
